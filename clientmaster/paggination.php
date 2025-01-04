@@ -1,16 +1,57 @@
 <?php
+include("../dbcon.php");
 
+// print_r($_POST);
 $output="";
 $limit='';
 $page='';
 $pages='';
 $sort='';
 $offset='';
-include("../dbcon.php");
+
+if(isset($_POST['id'])){
+$id=$_POST['id'];
+}
+else{
+$id="";
+}
+if(isset($_POST['name'])){
+$name=$_POST['name'];
+}
+else{
+$name="";
+}
+
+if(isset($_POST['phone'])){
+$phone=$_POST['phone'];
+}
+else{
+$phone="";
+}
+if(isset($_POST['email'])){
+$email=$_POST['email'];
+}
+else{
+$email="";
+}
+
+if(isset($_POST['state'])){
+$state_name=$_POST['state'];
+}
+else{
+$state_name="";
+}
+if(isset($_POST['district'])){
+$district_name=$_POST['district'];
+}
+else{
+$district_name="";
+}
 
 
-if(isset($_POST['limit'])){
-    $limit=$_POST['limit'];
+
+if(isset($_POST['row'])){
+    $limit=$_POST['row'];
 }
 else{
     $limit=2;
@@ -26,11 +67,19 @@ else{
 }
 
 
-$sql1="select * from client_master";
+$sql1="select *
+FROM client_master AS CM JOIN
+district_master AS DM ON CM.district_id=DM.district_id
+JOIN state_master AS SM ON CM.state_id=SM.state_id where id like '%$id%' && name like '%$name%' && email like '%$email%' && phone like '%$phone%' && state_name like '%$state_name%' && district_name like '%$district_name%'  ";
+
+
 
 $result1=$con->query($sql1);
 
+
 $total_page= ceil($result1->num_rows/$limit);
+
+
 
 
 
@@ -60,12 +109,12 @@ if (isset($_POST['colname'])) {
     }
 
 $sql="select *
-FROM client_master AS U JOIN
-district_master AS D ON U.district_id=D.district_id
-JOIN state_master AS S ON d.state_id=S.state_id {$sort} limit {$offset},{$limit}";
+FROM client_master AS CM JOIN
+district_master AS DM ON CM.district_id=DM.district_id
+JOIN state_master AS SM ON CM.state_id=SM.state_id where  id like '%$id%' && name like '%$name%' && email like '%$email%' && phone like '%$phone%' && state_name like '%$state_name%' && district_name like '%$district_name%'  {$sort} limit {$offset},{$limit}";
 
 
- 
+
 
 $result=$con->query($sql);
 

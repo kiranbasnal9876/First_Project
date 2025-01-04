@@ -365,6 +365,8 @@ span {
   gap: 20px;
 
   .input-div {
+    display: flex;
+    
     border-radius: 2px;
     height: 100px;
     color: #273A3A;
@@ -374,7 +376,11 @@ span {
     margin: 30px 20px;
     background-color: #f1f1f1;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-
+        .filter-div{
+          height: 100%;
+          display: inherit;
+          gap: 10px;
+        }
     button {
       text-align: center;
       color: aliceblue;

@@ -85,6 +85,7 @@ class User_master
             }
         } else  if (!empty($email && $password && $name && $phone)) {
             $sql = "insert into user_master(create_by,email,phone,password)values('$name','$email','$phone','$password')";
+            
             if (mysqli_query($this->con, $sql) == true) {
 
                 $status = 400;
@@ -125,10 +126,10 @@ class User_master
 
             $error = $this->con->error;
         } else {
-            $status = 400;
+            $status = 200;
         }
 
-        json_encode(['status' => $status, 'error' => $error]);
+        echo json_encode(['status' => $status, 'error' => $error]);
     }
 }
 

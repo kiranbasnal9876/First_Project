@@ -165,9 +165,10 @@ $(document).on("click", ".delete-btn", function () {
       type: "post",
       dataType: "json",
       success: function (data) {
-        if (data.status == 400) {
+        if (data.status == 200) {
           loaddata(page_no);
-        } else {
+        } 
+        else {
           alert(data.error);
         }
 

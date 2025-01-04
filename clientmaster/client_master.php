@@ -25,32 +25,44 @@
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <div class="client-master">
 
-                            <div class="row input-div ">
-                                <div class="col-2 ">
+                            <div class="row  input-div ">
+                                <form name="getformdata" class="filter-div" id="filter_form">
+                                <div class="col-1">
                                     <label for="id">Id:</label>
-                                    <input type="text" class="form-control numeric search">
+                                    <input type="text" class="form-control numeric" maxlength="3" name="id">
                                 </div>
-                                <div class="col-2">
+                                <div class="col-1.5">
                                     <label for="name">Name:</label>
-                                    <input type="text" class="form-control search">
+                                    <input type="text" class="form-control" Name='name'>
                                 </div>
-                                <div class="col-2">
+                                <div class="col-1.5">
                                     <label for="phone">Phone:</label>
-                                    <input type="text" class="form-control numeric search">
+                                    <input type="text" class="form-control numeric" name="phone">
                                 </div>
-                                <div class="col-2">
+                                <div class="col-1.5">
                                     <label for="email">Email:</label>
-                                    <input type="email" class="form-control search">
+                                    <input type="email" class="form-control " name="email">
+                                </div>
+                                <div class="col-1.5">
+                                    <label for="State_Input">State</label>
+                                    <input type="text" class="form-control " name="state" id='State_Input'>
+                                </div>
+                                <div class="col-1.5">
+                                    <label for="Dis_input">District:</label>
+                                    <input type="text" class="form-control" name="district">
                                 </div>
 
-                                <div class="col-2">
+                                <div class="col-1">
                                     <button type="button" class=" mt-3" id="reset">Reset</button>
                                 </div>
+                                <input type="hidden" id="page_no" value="1" name="page">
+                                <input type="hidden" id="row_no" value="2" name="row">
+                                </form>
                             </div>
 
 
                             <div class="getlist">
-                                <input type="hidden" id="page_no" value="1">
+                                
                                 <div class="pagination">
                                     <div class="selectrow">
 
@@ -78,7 +90,7 @@
                                                 <th ><img class='asc' id='email' src='../images/arrow-up (1).svg'><img class='desc' id='email' src='../images/arrow-down.svg'>Email</th>
                                                 <th>address</th>
                                                 <th ><img class='asc' id='state_name' src='../images/arrow-up (1).svg'><img class='desc' id='state_name' src='../images/arrow-down.svg'>Sate</th>
-                                                <th ><img class='asc' id='district_name' src='../images/arrow-up (1).svg'><img class='desc' id='district_name' src='../images/arrow-down.svg'>city</th>
+                                                <th ><img class='asc' id='district_name' src='../images/arrow-up (1).svg'><img class='desc' id='district_name' src='../images/arrow-down.svg'>District</th>
                                                 <th >pincode</th>
 
                                                 <th>Update</th>
@@ -152,8 +164,8 @@
                                 </div>
 
                                 <div class="col-md-3">
-                                    <label for="inputCity" class="form-label">District</label>
-                                    <select id="inputCity" class="form-select" name="district_id">
+                                    <label for="input_district" class="form-label">District</label>
+                                    <select id="input_district" class="form-select" name="district_id">
                                         <option id="option" name="district_name"  value="">select</option>
                                          
                                     </select>
