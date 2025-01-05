@@ -1,27 +1,3 @@
-$("#login-btn").on("click", function () {
-  let email = $("#inputemail").val().trim();
-
-  let password = $("#inputPassword").val().trim();
-
-  $.ajax({
-    url: "usermaster/user_backend.php",
-    type: "post",
-    data: {
-      email,
-      password,
-    },
-    success: function (data) {
-      if (data == 0) {
-        $("input").addClass("border-danger");
-
-        $("#log_er").text("password is required");
-        $("#log_er1").text("email is required");
-      } else if (data == 1) {
-        window.location.href = "http://localhost/First_Project/sidebar.php";
-      }
-    },
-  });
-});
 
 
 
@@ -96,6 +72,9 @@ $("select").on("change", function () {
   }
 });
 
+
+var formvalidate = true;
+
 function validate(e) {
   $("input[type!='hidden']").each(function () {
     if ($(this).val() == "") {
@@ -119,7 +98,6 @@ $(document).on("input", ".numeric", function () {
   this.value = this.value.replace(/\D/g, "");
 });
 
-var formvalidate = true;
 
 function validateClient() {
   $("#formdata")

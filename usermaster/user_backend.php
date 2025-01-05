@@ -22,28 +22,33 @@ class User_master
     {
 
         $status = '';
-        
+        $error="";
         $email = $_POST["email"];
         $password = $_POST["password"];
-        // include("validation.php");
+
+        if (!preg_match("/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,3}$/", trim($email))) {
+            $error=  "entered email is invalid"; die;
+         } else if (!preg_match("/^(?=.*[A-Z])(?=.*[^%!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,20}$/",trim( $password))) {
+             $error= "entered password is invalid"; die;}
+        
+
         $sql = "select * from user_master where email='$email' and password='$password'";
 
         $result = mysqli_query($this->con, $sql);
 
-        if ($result->num_rows > 0) {
+        if ($result->num_rows>0) {
             while ($row = $result->fetch_assoc()) {
                 $_SESSION['username'] = $row['create_by'];
 
-                $status = 400;
+                $status = 200;
             }
         } else {
 
-            $status = 200;
+            $status = 400;
         }
 
-        json_encode(['status' => $status]);
+        json_encode(['status' => $status,'error'=>$error]);
     }
-
 
     function adduser()
     {
@@ -143,4 +148,8 @@ if ($_POST['action'] == "add") {
 } else if ($_POST['action'] == "delete") {
 
     $user->deletedata();
+}
+else if ($_POST['action'] == "logIn") {
+
+    $user->logIn();
 }
