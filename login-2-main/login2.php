@@ -24,19 +24,21 @@ if (isset($_SESSION['username'])) {
             <form>
                 <div class="email-input">
                    
-                    <input type="email"  id="inputemail" maxlength="30" placeholder="Enter email" name="email">
+                    <input type="email"  class="" id="inputemail" maxlength="30" placeholder="Enter email" name="email" value="kiran@gmail.com">
                    <span></span>
                 </div>
                 <div>
-                    <input type="password" id="inputPassword"  placeholder="Enter password" name="password">
+                    <input type="password"  class="" id="inputPassword"  placeholder="Enter password" name="password" value="DRtr%67d">
                    <span></span>
                 </div>
-                <button type="button" id="login-btn">login</button>
                 <span id="log-wrong"></span>
+                <button type="button" id="login-btn">login</button>
+                
             </form>
             </div>
             <div>
                 <img src="../images/log-in2.jpg" alt="">
+                <!-- <img src="../logout.php" alt=""> -->
             </div>
             </div>
         </div>

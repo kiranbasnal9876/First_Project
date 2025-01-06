@@ -1,4 +1,10 @@
 <?php include("../header.php"); ?>
+<?php
+session_start();
+if (empty($_SESSION['username'])) {
+   header("Location:http://localhost/First_Project/login-2-main/login2.php");
+}
+?>
 <body>
 
     <div class="main-container-wrapper">
@@ -119,7 +125,7 @@
                             <form class="row g-3" id="formdata" name="form">
                                 <div class="col-3">
                                     <label for="inputAddress2" class="form-label">Client Name:</label>
-                                    <input type="text" class="form-control" name="name" id="inputAddress2">
+                                    <input type="text" class="form-control" name="name" id="inputAddress2" maxlength="15">
                                     <span></span>
                                 </div>
                                 <div class="col-md-3">

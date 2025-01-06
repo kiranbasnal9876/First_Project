@@ -73,12 +73,14 @@ $("select").on("change", function () {
 });
 
 
-var formvalidate = true;
+
+
 
 function validate(e) {
   $("input[type!='hidden']").each(function () {
     if ($(this).val() == "") {
       $(this).next().text("all field are required");
+      formvalidate=false;
     }
   });
 }
@@ -95,18 +97,37 @@ function updatevalidation(e) {
 
 // only numeric
 $(document).on("input", ".numeric", function () {
-  this.value = this.value.replace(/\D/g, "");
+  this.value = this.value.replace(/\D/g,"");
+});
+$(document).on("input", ".price", function () {
+  this.value = this.value.replace(/[^0-9\.]/g,"");
+ 
 });
 
 
-function validateClient() {
+var formvalidate = true;
+function validateClient(){
   $("#formdata")
-    .find("select,input")
+    .find("select,input:not([type='file'])")
     .each(function () {
       if ($(this).attr("type") !== "hidden" && $(this).val() == "") {
         $(this).next().text("all field are required");
-
         formvalidate = false;
       }
+      
     });
+}
+
+
+function NameValidate(){
+
+var Validname = /^[a-zA-Z\s.]+$/;
+ 
+if (Validname.test(value)) {
+  error.text("");
+} else if (value == "") {
+  error.text("");
+} else {
+  error.text("only charecter are allowed");
+}
 }

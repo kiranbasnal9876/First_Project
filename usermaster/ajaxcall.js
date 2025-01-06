@@ -2,6 +2,7 @@
 
 $("#update-btn").hide();
 
+
 // login//---------------
 
 
@@ -71,17 +72,21 @@ $(document).ready(function () {
 
 
 //data shorting.......................................................
+
 $(document).on("click",".asc",function(){
 
   var colname=$(this).attr("id");
    var page_no=$("#page_no").val();
+   $(".desc").hide();
+  $(this).show();
    var row= $("#row").val();
   loaddata(page_no,'',"ASC",colname,row);
   });
 
 
   $(document).on("click",".desc",function(){
-
+    $(".asc").hide();
+    $(this).show();
     var colname=$(this).attr("id");
      var page_no=$("#page_no").val();
      var row= $("#row").val();
@@ -130,7 +135,7 @@ $("#insert-btn").on("click", function () {
       type: "post",
       dataType: "json",
       success: function (data) {
-     
+        
         if (data.status == 400) {
           alert("successfully inserted");
           $("input").val("");

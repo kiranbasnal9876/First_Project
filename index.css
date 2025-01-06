@@ -180,7 +180,7 @@ span {
       padding: 2px;
     }
 
-    .active {
+    .active{
       background-color: #273A3A;
       color: white;
     }
@@ -217,13 +217,17 @@ span {
       padding: 10px 10px;
       border-bottom: 1px solid #c8c8c8;
       background-color: #273A3A;
-
+      color: white;
       .my-logo img {
         width: 158px;
       }
 
       .profile img {
         width: 20px;
+      }
+      span{
+        color: white; 
+        margin-right: 10px;
       }
     }
   }
@@ -281,13 +285,10 @@ span {
 
         >a:hover {
           background-color: #516163;
-
-
         }
 
-        button:active {
-          background-color: #EFF3EA;
-          color: black;
+        .active {
+          background-color: #516163;
         }
 
         .log-out {
@@ -440,3 +441,87 @@ span {
   }
 
 }
+
+.add-item{
+
+  height: 150px ;
+  padding: 30px;
+  #pic{
+    height: 57px;
+    width: 60px;
+    margin-left: 10px;
+    
+  }
+  button{
+    margin-top: 20px;
+    margin-left: 100px;
+  }
+  .price{
+    input{
+      text-align: right;
+    }
+  }
+}
+
+
+/* invoice css */
+
+.invoice_list{
+
+  table{
+    padding: 0;
+    margin: 0;
+    font-size: 12px;
+  }
+
+
+}
+
+.add-invoice{
+  height: auto;
+  border-radius: 2px;
+  display: flex;
+  justify-content: space-between;
+  color: #273A3A;
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 8px;
+  margin: 30px 20px;
+  background-color: #f1f1f1;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+input{
+  height: 30px;
+}
+  button {
+    text-align: center;
+    color: aliceblue;
+    background-color: #273A3A;
+    border-radius: 5px;
+    height: 35px;
+    border: none;
+    width: 65px;
+
+  }
+
+}
+
+.add-more{
+  display: flex;
+  justify-content: space-between;
+  input{
+    height: 35px;
+  }
+  button{
+    color: aliceblue;
+    background-color: #79a8a8;
+    border-radius: 5px;
+    height: 35px;
+    border: none;
+    width: 100px;
+
+    span{
+      color: white;
+    }
+  }
+}
+
