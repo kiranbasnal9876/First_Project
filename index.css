@@ -234,13 +234,13 @@ span {
 
   .detail-container {
     position: relative;
-    height: auto;
+    height: calc(100vh - 45px);
     display: flex;
 
     .sidebar {
       flex: 1.2;
       padding: 30px 10px;
-
+height: 100%;
       border-right: 1px solid #c8c8c8;
       background-image: url("images/back2.webp");
       background-repeat: no-repeat;
@@ -312,8 +312,8 @@ span {
     .content {
       flex: 8.8;
       padding: 10px 10px;
-      height: 92vh;
-      
+      height: calc(100vh - 45px);
+      overflow-y: auto;
 
       .btn {
         margin-right: 5px;
@@ -492,6 +492,7 @@ span {
 input{
   height: 30px;
 }
+
   button {
     text-align: center;
     color: aliceblue;
@@ -502,7 +503,15 @@ input{
     width: 65px;
 
   }
+ 
+}
 
+.append{
+  display: flex;
+  justify-content: space-between;}
+.next{
+  display: flex;
+  justify-content: space-between;
 }
 
 .add-more{
@@ -525,3 +534,9 @@ input{
   }
 }
 
+#clients{
+  background-color: white;
+  li{
+    text-decoration: none;
+  }
+}

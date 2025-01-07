@@ -162,7 +162,6 @@ if (empty($_SESSION['username'])) {
                                             echo "<option value='{$data[0]}'>{$data[1]}</option>";
                                         }
 
-
                                         ?>
                                     </select>
                                     <span></span>
