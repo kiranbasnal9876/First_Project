@@ -1,10 +1,10 @@
 <?php include("../header.php"); ?>
-<?php
-session_start();
-if (empty($_SESSION['username'])) {
-    header("Location:http://localhost/First_Project/login-2-main/login2.php");
-}
-?>
+<!-- <?php
+// session_start();
+// if (empty($_SESSION['username'])) {
+//     header("Location:http://localhost/First_Project/login-2-main/login2.php");
+// }
+?> -->
 
 <body>
 
@@ -126,12 +126,12 @@ if (empty($_SESSION['username'])) {
                                 <div class="row pt-3">
                                     <div class="col-2">
                                         <label for="invoice" class="form-label">Invoice No:</label>
-                                        <input type="text" class="form-control" name="invoice_no" id="invoice" maxlength="15">
+                                        <input type="text" class="form-control" name="invoice_no" id="invoice" maxlength="15" disabled>
                                         
                                     </div>
                                     <div class="col-md-2">
                                         <label for="invoice_date" class="form-label">Invoice Date:</label>
-                                        <input type="text" class="form-control" name="invoice_date" id="invoice_date">
+                                        <input type="text" class="form-control" name="invoice_date" id="invoice_date" disabled>
                                    
                                     </div>
                                 </div>

@@ -1,9 +1,9 @@
-<?php
+ <?php
 session_start();
 if (isset($_SESSION['username'])) {
    header("Location:http://localhost/First_Project/usermaster/usermaster.php");
 }
-?>
+?> 
 
 <?php include("../header.php"); ?>
 

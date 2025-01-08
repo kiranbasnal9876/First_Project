@@ -1,3 +1,4 @@
+$('a[id="invoice"]').addClass('active');
 $("#add-more").on("click", function () {
   $(".append").append(` <div class="next row">
                           <div class="col-2 ">
@@ -35,6 +36,8 @@ $("#add-more").on("click", function () {
   // clone.find('.append').removeClass('append');
   // clone.appendTo(".append");
   //  }
+  
+
 });
 
 $(document).on("click", "#delete-item", function () {
@@ -45,6 +48,9 @@ $(document).on("click", "#delete-item", function () {
 var date = new Date();
 
 $("#invoice_date").val(date);
+
+
+
 
 var url = "http://localhost/First_Project/invoice/";
 
@@ -160,3 +166,24 @@ $("#invoice_submit").on("click",function(){
     }
 )
 
+
+// $(document).ready(function () {
+//   // Autocomplete for .inputitem
+//   $(".inputitem").autocomplete({
+//       source: name, // Assuming 'name' is a predefined array of items
+//       select: function (event, ui) {
+//           // Set the price for the current element
+//           $(this).closest(".item-container").find(".price").val(ui.item.itemPrice);
+//       },
+//   });
+
+//   // Calculate Amount on .Item click
+//   $(".Item").on("click", function () {
+//       // Get the current item's value
+//       var item = $(this).val();
+      
+//       // Get the corresponding price and calculate the amount
+//       var price = $(this).closest(".item-container").find(".price").val();
+//       $(this).closest(".item-container").find(".Amount").val(item * price);
+//   });
+// });

@@ -1,3 +1,4 @@
+$('a[id="clientmaster"]').addClass('active');
 var url = "http://localhost/First_Project/clientmaster/";
 $("#update").hide();
 // selecting district.........................................
@@ -78,16 +79,17 @@ $("#reset").on("click", function () {
 });
 // data shorting...................................................
 
-$(document).on("click", ".asc", function () {
+$(document).on("click", "th", function () {
   var colname = $(this).attr("id");
-  
+  // $(".desc").hide();
   var page_no = $("#page_no").val();
   var row = $("#row").val();
   loaddata("ASC", colname);
 });
 
-$(document).on("click", ".desc", function () {
+$(document).on("click", "th", function () {
   var colname = $(this).attr("id");
+  // $(".asc").hide();
   var page_no = $("#page_no").val();
   var row = $("#row").val();
   loaddata("DESC", colname);
