@@ -533,10 +533,13 @@ input{
     }
   }
 }
-
 #clients{
   background-color: white;
   li{
     text-decoration: none;
   }
+}
+
+#invoice_submit{
+  width: 80px;
 }
