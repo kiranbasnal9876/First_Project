@@ -12,86 +12,99 @@ class invoice
         $this->con = $con;
     }
 
-   function getclient(){
-    $output="";
-    $name=$_POST['name'];
-    $sql="select name from client_master where name like '%$name%'";
-    $result=$this->con->query($sql);
-    
-     if($result->num_rows>0){
-        while($data = $result->fetch_assoc()){
-            $output .="<li>{$data['name']}</li>";
+    function getclient()
+    {
+        $name=$_POST['name'];
+        $option = [];
+        if($name!=""){
+        $sql = "select * from client_master where name like '%$name%'";
+
+        $result = $this->con->query($sql);
+        //    $data=$result->fetch_assoc();
+
+        if ($result->num_rows > 0) {
+            while ($data = $result->fetch_assoc()) {
+                $option[] = $data;
+            }
+        } else {
+
+            $option = ['no result found'];
         }
-     }
+    }
+        echo json_encode(['output' => $option]);
+    }
 
-     else{
-        $output .="no result found";
-     }
-
-     echo json_encode(['output'=>$output]);
-
-   }
-
-
-   function getdata(){
-    
-    $name=$_POST['name'];
-    $sql="select * from client_master where name = '$name'";
-//    echo $sql;
-    $result=$this->con->query($sql);
-    
-    $output=$result->fetch_assoc();
-    print_r(json_encode($output));
-   }
-
-   function getitem(){
+function invoice_no(){
+   $sql = "SELECT invoice_id FROM invoice_master ORDER BY invoice_id DESC LIMIT 1";
    
-    $sql="select itemName from item_master";
+   $result=$this->con->query($sql);
+   
+   echo json_encode($result->fetch_assoc());
+}
+   
+    function getitem()
+    {
+        $itemname=$_POST['value'];
+         $option = [];
+         if($itemname !=""){
+        $sql = "select * from item_master where itemName like '%$itemname%'";
 
-    $result=$this->con->query($sql);
-   $data=$result->fetch_assoc();
-   print_r($data);
-    //  if($result->num_rows> 0 ){
-    //     while($data = $result->fetch_assoc()){
-    //         $output .="<li>{$data['itemName']}</li>";
-    //     }
-    //  }
+        $result = $this->con->query($sql);
+        //    $data=$result->fetch_assoc();
 
-    //  else{
-    //     $output .="no result found";
-    //  }
+        if ($result->num_rows > 0) {
+         while($data = $result->fetch_assoc()){
+                $option[] = $data;
+            }}
+       
+        }
+        echo json_encode(['output' => $option]);
+    }
 
-    //  echo json_encode(['output'=>$output]);
 
-   }
+function insertdata(){
+    $status="";
+    $error="";
+    $columns = [];
+    $values = [];
 
-   function getitemdata(){
-    
-    $name=$_POST['name'];
-    $sql="select itemPrice from item_master where itemName = '$name'";
-//    echo $sql;
-    $result=$this->con->query($sql);
-    
-    $output=$result->fetch_assoc();
-    print_r(json_encode($output));
-   }
+    foreach ($_POST as $key => $value) {
+        if ($value != "") {
+            $columns[] = $key;
+            $values[] = $value;
+        }
+    }
 
+    array_pop($columns);
+    array_pop($values);
+    $colmnList = implode(",", $columns);
+    $valueList = "'" . implode("','", $values) . "'";
+
+    $sql = "insert into invoice_master( $colmnList) values ($valueList)";
+  
+    if ($this->con->query($sql)) {
+        $status = 400;
+    } else {
+        $error = $this->con->error;
+    }
+
+     echo  json_encode(['status' => $status, 'error' => $error]);
+}
 }
 
+
+
+
 $obj = new invoice();
- $obj->getitem();
 
-// if($_POST['action']=="getclientdata"){
-//     $obj->getclient();
-// }
-// else if($_POST['action']=="getdata"){
-//     $obj->getdata();
-// }
-// else if($_POST['action']=="getitemdata"){
-//     $obj->getitem();
-// }
-// else if($_POST['action']=="itemdata"){
-//     $obj->getitemdata();
-// }
 
-?>
+if (isset($_POST['action'])  && $_POST['action'] == "add") {
+     $obj->insertdata();
+} else if (isset($_POST['action'])  && $_POST['action'] == "getdata") {
+    $obj->getclient();
+} else if (isset($_POST['action'])  && $_POST['action'] == "getitemmane") {
+    $obj->getitem();
+} 
+else if (isset($_POST['action'])  && $_POST['action'] == "get_invoiceNo") {
+     $obj->invoice_no();
+}

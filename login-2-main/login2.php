@@ -25,13 +25,13 @@ if (isset($_SESSION['username'])) {
                 <div class="email-input">
                    
                     <input type="email"  class="" id="inputemail" maxlength="30" placeholder="Enter email" name="email" value="kiran@gmail.com">
-                   <span></span>
+                   
                 </div>
                 <div>
                     <input type="password"  class="" id="inputPassword"  placeholder="Enter password" name="password" value="DRtr%67d">
-                   <span></span>
+                 
                 </div>
-                <span id="log-wrong"></span>
+                <div id="log-wrong" style="color: red;"></div>
                 <button type="button" id="login-btn">login</button>
                 
             </form>

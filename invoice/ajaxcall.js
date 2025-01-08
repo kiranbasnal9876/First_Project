@@ -1,31 +1,40 @@
 $("#add-more").on("click", function () {
   $(".append").append(` <div class="next row">
-                           <div class="col-2 ">
-                                <label for="input" class="form-label">Item Name:</label>
-                                <input type="text" class="form-control inputitem" name="itemname" id="input" maxlength="20">
-                                
-                                <div id="items"></div>
-                            </div>
-                            <div class="col-md-2 price">
-                                <label for="inputprice" class="form-label ">Item Price:</label>
-                                <input type="text" class="form-control price" name="itemPrice" id="inputprice" maxlength="10">
-                                
-                            </div>
-                            <div class="col-2">
-                                <label for="item" class="form-label">Quantity:</label>
-                                <input type="number" class="form-control" name="itemName" id="item" maxlength="20">
-                               
-                            </div>
-                            <div class="col-md-2 price">
-                                <label for="amount" class="form-label  ">Amount:</label>
-                                <input type="text" class="form-control " name="itemPrice" id="amount" maxlength="20">
-                                
-                                </div>
-                              
-                               
+                          <div class="col-2 ">
+                                    <label for="input" class="form-label">Item Name:</label>
+                                    <input type="text" class="form-control inputitem" name="itemname" id="input" maxlength="20">
 
-                                    <button id="delete-item" class="m-4"><img src="../images/trash (1).svg"></button>
+
+                                </div>
+                                <div class="col-md-2 price">
+                                    <label for="inputprice" class="form-label ">Item Price:</label>
+                                    <input type="text" class="form-control price" name="itemPrice" id="inputprice" maxlength="10">
+
+                                </div>
+                                <div class="col-2">
+                                    <label for="item" class="form-label">Quantity:</label>
+                                    <input type="number" class="form-control Item" name="itemName" id="item" maxlength="20">
+
+                                </div>
+                                <div class="col-md-2 price">
+                                    <label for="amount" class="form-label  ">Amount:</label>
+                                    <input type="text" class="form-control Amount" name="itemPrice" id="amount" maxlength="20">
+
+                                </div>
+
+                                <button class="m-4" id=""><img src="../images/trash-2.svg"></button>
+
+
                                 </div>`);
+
+  //  if($(this).prev().attr("id")==append){
+  //   prev().clone().appendTo("#append");
+  //  }
+  //  else{
+  // var clone=$(".append").clone();
+  // clone.find('.append').removeClass('append');
+  // clone.appendTo(".append");
+  //  }
 });
 
 $(document).on("click", "#delete-item", function () {
@@ -39,98 +48,115 @@ $("#invoice_date").val(date);
 
 var url = "http://localhost/First_Project/invoice/";
 
-// $(document).on("keyup", "#client_name", function () {
-//   var name = $(this).val();
-//   if (name != "") {
-//     $.ajax({
-//       url: url + "invoice_backend.php",
-//       data: {
-//         name: name,
-//         action: "getclientdata",
-//       },
-//       type: "post",
-//       success: function (data) {
-//         var output = JSON.parse(data);
-//         $("#clients").html(output.output);
-//       },
-//     });
-//   }
-// });
+$(document).on("input", ".clients", function () {
+  var value = $(this).val();
 
-// $(document).on("click", "#clients li", function () {
-//   var value = $(this).text();
-//   $("#client_name").val(value);
-//   $("#clients").hide();
+  $.ajax({
+    url: url + "invoice_backend.php",
+    data: {
+      name: value,
+      action: "getdata",
+    },
+    type: "post",
+    success: function (data) {
+      var data = JSON.parse(data);
+      //   console.log(data.phone);
+      var name = [];
+      data.output.map((e) => {
+        name.push(e.name);
+      })
 
-//   if ($("#client_name").val() != "") var name = $("#client_name").val();
-//   if (name != "") {
-//     $.ajax({
-//       url: url + "invoice_backend.php",
-//       data: {
-//         name: name,
-//         action: "getdata",
-//       },
-//       type: "post",
-//       success: function (data) {
-//         data = JSON.parse(data);
-//         //   console.log(data.phone);
-//         $("#inputphone").val(data.phone);
-//         $("#inputemail").val(data.email);
-//         $("#inputAddress").val(data.address);
-//       },
-//     });
-//   }
-// });
-
-// //set item data
-
-// $(".inputitem").on("keyup", function () {
-//   var name = $(this).val();
-//   if (name != "") {
-//     $.ajax({
-//       url: url + "invoice_backend.php",
-//       data: {
-//         name: name,
-//         action: "getitemdata",
-//       },
-//       type: "post",
-//       success: function (data) {
-//         var output = JSON.parse(data);
-//         $("#items").html(output.output);
-//       },
-//     });
-//   }
-// });
-
-// $(document).on("click", "#items li", function () {
-//   var value = $(this).text();
-//   $("#inputitem").val(value);
-//   $("#items").hide();
-
-//   if ($("#inputitem").val() != "") var name = $("#inputitem").val();
-//   if (name != "") {
-//     $.ajax({
-//       url: url + "invoice_backend.php",
-//       data: {
-//         name: name,
-//         action: "itemdata",
-//       },
-//       type: "post",
-//       success: function (data) {
-//         data = JSON.parse(data);
-//         console.log(data);
-//         $("#inputprice").val(data.itemPrice);
-//       },
-//     });
-
-//     $("#item").on("click", function () {
-//       var item = $(this).val();
-//       var price = $("#inputprice").val();
-//       $("#amount").val(item * price);
-//     });
-//   }
-// });
-
-$( ".inputitem" ).autocomplete({
-    source:"invoice_backend.php",
+      $(".clients").autocomplete({
+        source: name,
+        select: function () {
+          $("#inputphone").val(data.output[0].phone);
+          $("#inputemail").val(data.output[0].email);
+          $("#inputAddress").val(data.output[0].address);
+        },
+      });
+    },
   });
+});
+
+$(document).on("keyup",".inputitem", function () {
+  var value = $(this).val();
+  $.ajax({
+    url: url +"invoice_backend.php",
+    data: {
+      value: value,
+      action: "getitemmane",
+    },
+    type: "post",
+    success: function (data) {
+      var value = JSON.parse(data);
+      var name = [];
+      value.output.map((e) => {
+        name.push(e.itemName);
+      });
+      //    $(document).on('focus', '.inputitem', function() {
+      //     $(this).autocomplete({
+      //         source: name,
+      //     });
+      // });
+     
+      $(".inputitem").autocomplete({
+        source: name,
+        select: function () {
+     $(".price").val(value.output[0].itemPrice);
+        },
+      });
+
+       $(".Item").on("click", function () {
+        var item = $(this).val();
+        var price = $(".price").val();
+       $(".Amount").val(item * price);
+       });
+    },
+})
+});
+
+$("#profile-tab").on("click",function(){
+$.ajax({
+  url: url +"invoice_backend.php",
+  type:"post",
+  data:{
+    action:"get_invoiceNo"
+  },
+  dataType:"json",
+  success:function(data){
+   $("#invoice").val(100+Number(data.invoice_id)+1);
+  }
+})
+
+});
+
+// insert data ........................
+$("#invoice_submit").on("click",function(){
+
+    var formdata = new FormData(form);
+    formdata.append("action","add");
+   
+      $.ajax({
+        url: url +"invoice_backend.php",
+        data: formdata,
+        type: "POST",
+        dataType: "json",
+        contentType: false,
+        processData: false,
+        success: function (data) {
+          if (data.status == 400) {
+            alert("data is successfully inserted");
+            $("#formdata").trigger("reset");
+            // loaddata("", "");
+            var editBtn = document.querySelector("#home-tab");
+            var tab = new bootstrap.Tab(editBtn);
+            tab.show();
+          }
+          else{
+            alert(data.error);
+          }
+        },
+      });
+    }
+)
+
