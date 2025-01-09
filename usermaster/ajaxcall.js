@@ -1,5 +1,5 @@
 
-
+$('a[id="usermaster"]').addClass('active');
 $("#update-btn").hide();
 
 

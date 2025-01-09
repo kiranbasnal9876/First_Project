@@ -1,3 +1,5 @@
+
+$('a[id="clientmaster"]').addClass('active');
 var url = "http://localhost/First_Project/clientmaster/";
 $("#update").hide();
 // selecting district.........................................
@@ -80,7 +82,7 @@ $("#reset").on("click", function () {
 
 $(document).on("click", ".asc", function () {
   var colname = $(this).attr("id");
-  
+ 
   var page_no = $("#page_no").val();
   var row = $("#row").val();
   loaddata("ASC", colname);

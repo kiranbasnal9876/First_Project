@@ -543,3 +543,7 @@ input{
 #invoice_submit{
   width: 80px;
 }
+
+.right{
+  text-align: right;
+}

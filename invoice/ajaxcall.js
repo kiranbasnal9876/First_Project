@@ -1,162 +1,209 @@
+$('a[id="invoice"]').addClass("active");
+
 $("#add-more").on("click", function () {
-  $(".append").append(` <div class="next row">
-                          <div class="col-2 ">
-                                    <label for="input" class="form-label">Item Name:</label>
-                                    <input type="text" class="form-control inputitem" name="itemname" id="input" maxlength="20">
 
+   $(this).parent().siblings('.add-new').find('.clone:first').clone().appendTo('.add-new').find("input[type='text'],select").val("");
 
-                                </div>
-                                <div class="col-md-2 price">
-                                    <label for="inputprice" class="form-label ">Item Price:</label>
-                                    <input type="text" class="form-control price" name="itemPrice" id="inputprice" maxlength="10">
-
-                                </div>
-                                <div class="col-2">
-                                    <label for="item" class="form-label">Quantity:</label>
-                                    <input type="number" class="form-control Item" name="itemName" id="item" maxlength="20">
-
-                                </div>
-                                <div class="col-md-2 price">
-                                    <label for="amount" class="form-label  ">Amount:</label>
-                                    <input type="text" class="form-control Amount" name="itemPrice" id="amount" maxlength="20">
-
-                                </div>
-
-                                <button class="m-4" id=""><img src="../images/trash-2.svg"></button>
-
-
-                                </div>`);
-
-  //  if($(this).prev().attr("id")==append){
-  //   prev().clone().appendTo("#append");
-  //  }
-  //  else{
-  // var clone=$(".append").clone();
-  // clone.find('.append').removeClass('append');
-  // clone.appendTo(".append");
-  //  }
 });
 
 $(document).on("click", "#delete-item", function () {
-  var div = $(this).parent("div");
-  div.remove();
+  if ($(this).prev() != "") {
+    var div = $(this).parent("div");
+    div.remove();
+  }
 });
 
-var date = new Date();
+var d = new Date();
 
-$("#invoice_date").val(date);
+$("#invoice_date").val(`${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`);
 
 var url = "http://localhost/First_Project/invoice/";
 
-$(document).on("input", ".clients", function () {
-  var value = $(this).val();
+$(document).on("keyup", ".clients", function () {
+  const value = $(this).val();
 
-  $.ajax({
-    url: url + "invoice_backend.php",
-    data: {
-      name: value,
-      action: "getdata",
-    },
-    type: "post",
-    success: function (data) {
-      var data = JSON.parse(data);
-      //   console.log(data.phone);
-      var name = [];
-      data.output.map((e) => {
-        name.push(e.name);
-      })
+  $(".clients").autocomplete({
+    minLength: 1,
+    source: function (request, response) {
+      $.ajax({
+        url: url + "invoice_backend.php",
+        data: {
+          name: request.term,
+          action: "getdata",
+        },
+        type: "post",
+        success: function (data) {
+          var parsedData = JSON.parse(data);
+          var suggestions = parsedData.output.map((item) => ({
+            label: item.name,
+            value: item.name,
+            phone: item.phone,
+            email: item.email,
+            address: item.address,
+          }));
 
-      $(".clients").autocomplete({
-        source: name,
-        select: function () {
-          $("#inputphone").val(data.output[0].phone);
-          $("#inputemail").val(data.output[0].email);
-          $("#inputAddress").val(data.output[0].address);
+          response(suggestions);
+        },
+        error: function (xhr, status, error) {
+          console.error("AJAX Error:", error);
+          response([]);
         },
       });
+    },
+    select: function (event, ui) {
+      $("#inputphone").val(ui.item.phone);
+      $("#inputemail").val(ui.item.email);
+      $("#inputAddress").val(ui.item.address);
     },
   });
 });
 
-$(document).on("keyup",".inputitem", function () {
+function total_amount() {
+  let Total_amount = 0;
+  $(".Amount").each(function () {
+    let amount = parseFloat($(this).val()) || 0;
+    Total_amount += amount;
+  });
+  $("#total-amount").val(Total_amount);
+}
+
+$(document).on("keyup", ".inputitem", function () {
   var value = $(this).val();
-  $.ajax({
-    url: url +"invoice_backend.php",
-    data: {
-      value: value,
-      action: "getitemmane",
-    },
-    type: "post",
-    success: function (data) {
-      var value = JSON.parse(data);
-      var name = [];
-      value.output.map((e) => {
-        name.push(e.itemName);
-      });
-      //    $(document).on('focus', '.inputitem', function() {
-      //     $(this).autocomplete({
-      //         source: name,
-      //     });
-      // });
-     
-      $(".inputitem").autocomplete({
-        source: name,
-        select: function () {
-     $(".price").val(value.output[0].itemPrice);
+
+  // $this=$(this)
+
+  $(".inputitem").autocomplete({
+    minLength: 1,
+    source: function (request, response) {
+      $.ajax({
+        url: url + "invoice_backend.php",
+        data: {
+          value: value,
+          action: "getitemmane",
+        },
+        type: "post",
+        success: function (data) {
+          var parsedData = JSON.parse(data);
+          var suggestions = parsedData.output.map((item) => ({
+            label: item.name,
+            value: item.itemName,
+            itemPrice: item.itemPrice,
+          }));
+
+          response(suggestions);
+        },
+        error: function (xhr, status, error) {
+          console.error("AJAX Error:", error);
+          response([]);
         },
       });
-
-       $(".Item").on("click", function () {
-        var item = $(this).val();
-        var price = $(".price").val();
-       $(".Amount").val(item * price);
-       });
     },
-})
+    select: function (event, ui) {
+      $(this).parents(".clone").find(".price").val(ui.item.itemPrice);
+    },
+  });
+
+  $(".Item").on("input", function () {
+    total_amount();
+    var item = $(this).val();
+
+    var price = $(this).parents(".clone").find(".price").val();
+
+    $(this)
+      .parents(".clone")
+      .find(".Amount")
+      .val(item * price);
+  });
 });
 
-$("#profile-tab").on("click",function(){
-$.ajax({
-  url: url +"invoice_backend.php",
-  type:"post",
-  data:{
-    action:"get_invoiceNo"
-  },
-  dataType:"json",
-  success:function(data){
-   $("#invoice").val(100+Number(data.invoice_id)+1);
-  }
-})
+// invoice number
+$("#profile-tab").on("click", function () {
+  $.ajax({
+    url: url + "invoice_backend.php",
+    type: "post",
+    data: {
+      action: "get_invoiceNo",
+    },
 
+    success: function (data) {
+      data = JSON.parse(data);
+      console.log(data);
+      $(".invoic").val(100 + data.invoice_id + 1);
+    },
+  });
 });
 
 // insert data ........................
-$("#invoice_submit").on("click",function(){
+$("#invoice_submit").on("click", function () {
+  var total_amount = $("#total-amount").val();
+  var formdata = new FormData(form);
+  var itemformdata = new FormData(client_invoice);
+ 
+  formdata.append("action", "add");
+  formdata.append("total", total_amount);
+  // formdata.append("itemdata", itemformdata);
+  $.ajax({
+    url: url + "invoice_backend.php",
+    data: formdata,
+    type: "POST",
+    dataType: "json",
+    contentType: false,
+    processData: false,
+    success: function (data) {
+      if (data.status == 400) {
+        alert("data is successfully inserted");
+        $("#formdata").trigger("reset");
+        // loaddata("", "");
+        var editBtn = document.querySelector("#home-tab");
+        var tab = new bootstrap.Tab(editBtn);
+        tab.show();
+      } else {
+        alert(data.error);
+      }
+    },
+  });
+});
 
-    var formdata = new FormData(form);
-    formdata.append("action","add");
-   
-      $.ajax({
-        url: url +"invoice_backend.php",
-        data: formdata,
-        type: "POST",
-        dataType: "json",
-        contentType: false,
-        processData: false,
-        success: function (data) {
-          if (data.status == 400) {
-            alert("data is successfully inserted");
-            $("#formdata").trigger("reset");
-            // loaddata("", "");
-            var editBtn = document.querySelector("#home-tab");
-            var tab = new bootstrap.Tab(editBtn);
-            tab.show();
-          }
-          else{
-            alert(data.error);
-          }
-        },
-      });
-    }
-)
+function loaddata(order, colname) {
+  var form = new FormData(getformdata);
 
+  form.append("order", order);
+  form.append("colname", colname);
+  $.ajax({
+    url: url + "paggination.php",
+    data: form,
+
+    processData: false,
+    contentType: false,
+    type: "post",
+    datatype: "json",
+
+    success: function (data) {
+      data = JSON.parse(data);
+
+      $("tbody").html(data.table);
+      $(".page").html(data.page);
+    },
+  });
+}
+
+loaddata("", "");
+
+// pagination code.................
+
+$(document).on("click", ".page li", function () {
+  page_id = $(this).attr("id");
+  $("#page_no").val(page_id);
+
+  // var row = $("#row").val();
+
+  loaddata("", "");
+});
+
+// selecting row.........................................
+$("#row").on("change", function () {
+  var row = $(this).val();
+  $("#row_no").val(row);
+
+  loaddata("", "");
+});

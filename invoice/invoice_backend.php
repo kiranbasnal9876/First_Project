@@ -15,6 +15,7 @@ class invoice
     function getclient()
     {
         $name=$_POST['name'];
+        // echo $name;die;
         $option = [];
         if($name!=""){
         $sql = "select * from client_master where name like '%$name%'";

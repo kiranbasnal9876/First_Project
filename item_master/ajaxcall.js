@@ -1,4 +1,5 @@
 
+$('a[id="itemmaster"]').addClass('active');
 $("#update").hide();
 let image = $("#pic");
       if (image.attr("src")==""&& $("#submit").text() =="Add") {
