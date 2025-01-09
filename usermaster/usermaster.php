@@ -2,10 +2,10 @@
  ?>
 
 <?php
-session_start();
-if (empty($_SESSION['username'])) {
-   header("Location:http://localhost/First_Project/login-2-main/login2.php");
-}
+// session_start();
+// if (empty($_SESSION['username'])) {
+//    header("Location:http://localhost/First_Project/login-2-main/login2.php");
+// }
 ?>
 <body>
 
@@ -82,7 +82,7 @@ if (empty($_SESSION['username'])) {
                                             <tr>
                                                 <th>S No.</th>
                                                 <th ><img class='asc' id='id' src='../images/arrow-up (1).svg'><img class='desc' id='id' src='../images/arrow-down.svg'>ID</th>
-                                                <th ><img class='asc' id='create_by' src='../images/arrow-up (1).svg'><img class='desc' id='create_by' src='../images/arrow-down.svg'>Name</th>
+                                                <th><img class='asc' id='create_by' src='../images/arrow-up (1).svg'><img class='desc' id='create_by' src='../images/arrow-down.svg'>Name</th>
                                                 <th ><img class='asc' id='create_by' src='../images/arrow-up (1).svg'><img class='desc' id='create_by' src='../images/arrow-down.svg'>Phone</th>
                                                 <th><img class='asc' id='email' src='../images/arrow-up (1).svg'><img class='desc' id='email' src='../images/arrow-down.svg'>Email</th>
                                                 <th>Update</th>

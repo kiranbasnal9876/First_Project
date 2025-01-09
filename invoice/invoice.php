@@ -1,9 +1,9 @@
 <?php include("../header.php"); ?>
 <?php
-session_start();
-if (empty($_SESSION['username'])) {
-    header("Location:http://localhost/First_Project/login-2-main/login2.php");
-}
+// session_start();
+// if (empty($_SESSION['username'])) {
+//     header("Location:http://localhost/First_Project/login-2-main/login2.php");
+// }
 ?>
 
 <body>
@@ -36,7 +36,7 @@ if (empty($_SESSION['username'])) {
                                 <form name="getformdata" class="filter-div" id="filter_form">
                                     <div class="col-1">
                                         <label for="id">Invoice No:</label>
-                                        <input type="text" class="form-control numeric" maxlength="3" name="id" >
+                                        <input type="text" class="form-control numeric" maxlength="3" name="id">
                                     </div>
                                     <div class="col-1.5">
                                         <label for="name">Client Name:</label>
@@ -103,7 +103,21 @@ if (empty($_SESSION['username'])) {
                                             </tr>
                                         </thead>
                                         <tbody id='tbody'>
-
+                                            <tr>
+                                                <td>{$offset}</td>
+                                                <td>{$row['invoice_id']}</td>
+                                                <td>{$row['invoice_no']}</td>
+                                                <td>{$row['invoice_date']}</td>
+                                                <td class='edit-btn' data-id={$row['invoice_id']}>{$row['client_name']}</td>
+                                                <td>{$row['address']}</td>
+                                                <td>{$row['email']}</td>
+                                                <td>{$row['phone']}</td>
+                                                <td>₹{$row['total']}</td>
+                                                <td><i class="bi bi-file-earmark-pdf-fill text-danger"></i></td>
+                                                <td><i class='bi bi-envelope-fill text-primary'></i></td>
+                                                <td><button class='btn edit-btn p-0' data-id={$row['invoice_id']}><img src='../images/edit (1).svg'></button></td>
+                                                <td><button class=' btn  p-0 delete-btn' data-id={$row['invoice_id']}><img src='../images/trash (1).svg'></button></td>
+                                            </tr>
                                         </tbody>
 
                                     </table>
@@ -120,100 +134,103 @@ if (empty($_SESSION['username'])) {
                     </div>
 
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="add-invoice">
+                        <form class="" id="formdata" name="form">
+                            <div class="add-invoice">
 
-                            <form class="row g-3" id="formdata" name="form">
-                                <div class="row pt-3">
+
+                                <div class="row mb-3">
                                     <div class="col-2">
                                         <label for="invoice" class="form-label">Invoice No:</label>
                                         <input type="text" class="form-control invoic" name="invoice_no" id="invoice" maxlength="15" disabled>
-                                        
+
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-2">
                                         <label for="invoice_date" class="form-label">Invoice Date:</label>
                                         <input type="text" class="form-control" name="invoice_date" id="invoice_date" disabled>
-                                   
+
                                     </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <label for="client_name" class="form-label ">Client Name:</label>
-                                    <input type="text" class="form-control clients " name="client_name" id="client_name" maxlength="12" autocomplete="off">
+                                <div class="row">
 
-                                    <!-- <div id="clients">
+                                    <div class="col-md-2">
+                                        <label for="client_name" class="form-label ">Client Name:</label>
+                                        <input type="text" class="form-control clients " name="client_name" id="client_name" maxlength="12" autocomplete="off">
 
-                                    </div> -->
+                                    </div>
 
+
+                                    <div class="col-md-2">
+                                        <label for="inputphone" class="form-label">Phone:</label>
+                                        <input type="text" class="form-control numeric" name="phone" id="inputphone" maxlength="12" disabled>
+
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <label for="inputemail" class="form-label ">Email:</label>
+                                        <input type="email" class="form-control " name="email" id="inputemail" maxlength="20" disabled>
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="inputAddress" class="form-label">Address:</label>
+                                        <input type="text" class="form-control" name="address" id="inputAddress" maxlength="50" disabled>
+
+                                    </div>
 
 
                                 </div>
-
-
-                                <div class="col-md-2">
-                                    <label for="inputphone" class="form-label">Phone:</label>
-                                    <input type="text" class="form-control numeric" name="phone" id="inputphone" maxlength="12" disabled>
-                                    
-                                </div>
-
-                                <div class="col-md-2">
-                                    <label for="inputemail" class="form-label ">Email:</label>
-                                    <input type="email" class="form-control " name="email" id="inputemail" maxlength="20" disabled>
-                                 
-                                </div>
-                                <div class="col-2">
-                                    <label for="inputAddress" class="form-label">Address:</label>
-                                    <input type="text" class="form-control" name="address" id="inputAddress" maxlength="50" disabled>
-                                   
-                                </div>
-
-
 
 
                                 <input type="hidden" name="id" value="">
 
-                        
 
 
 
-                        </div>
-                        <div class="add-invoice  add-new row">
-                            <div class="clone-row row clone" >
-                               <!-- <form action="" class="row" id="" name="client_invoice"> -->
-                                <div class="col-2 ">
-                                    <label for="input" class="form-label">Item Name:</label>
-                                    <input type="text" class="form-control inputitem" name="itemname" id="input" maxlength="20">
 
-
-                                </div>
-                                <div class="col-md-2 price">
-                                    <label for="inputprice" class="form-label">Item Price:</label>
-                                    <input type="text" class="form-control price right" name="itemPrice" id="inputprice" maxlength="10" disabled>
-
-                                </div>
-                                <div class="col-2">
-                                    <label for="item" class="form-label">Quantity:</label>
-                                    <input type="number" class="form-control Item" name="itemName" id="item" maxlength="20">
-                                </div>
-                                <div class="col-md-2 price">
-                                    <label for="amount" class="form-label">Amount:</label>
-                                    <input type="text" class="form-control Amount right" name="itemPrice" id="" maxlength="20" disabled>
-
-                                </div>
-                                <button type="button" class="m-4" id="delete-item2"><img src="../images/trash-2.svg"></button>
-                                
-                                 
-                                
                             </div>
-                     
-                        </div>
-                        <div class="add-more">
-                            <button class="btn" id="add-more"><span>Add More</span></button>
-                            <div>
-                                <label for="">Total Amount</label>
-                                <input type="text" class="form-control right" id="total-amount" name="total" disabled>
-                            </div>
-                        </div>
-                        <button type="button" class="col-1 m-3" id="invoice_submit">Submit</button>
+                            <div class="add-invoice  add-new row">
+
+
+                                    <div class="clone-row row clone">
+                                        <!-- <form action="" class="row" id="" name="client_invoice"> -->
+                                        <div class="col-2 ">
+                                            <label for="input" class="form-label">Item Name:</label>
+                                            <input type="text" class="form-control inputitem" name="itemname" id="input" maxlength="20">
+
+
+                                        </div>
+                                        <div class="col-md-2 price">
+                                            <label for="inputprice" class="form-label">Item Price:</label>
+                                            <input type="text" class="form-control price right" name="itemPrice" id="inputprice" maxlength="10" disabled>
+
+                                        </div>
+                                        <div class="col-2">
+                                            <label for="item" class="form-label">Quantity:</label>
+                                            <input type="number" class="form-control Item" name="itemName" id="item" maxlength="20">
+                                        </div>
+                                        <div class="col-md-2 price">
+                                            <label for="amount" class="form-label">Amount:</label>
+                                            <input type="text" class="form-control Amount right" name="itemPrice" id="" maxlength="20" disabled>
+
+                                        </div>
+                                        <button type="button" class="m-4 bg-danger delete-item"><i class="bi bi-x-lg text-light"></i></button>
+
+
+
+                                    </div>
+
+                                </div>
+                                <div class="add-more ">
+                                    <button type="button" class="btn bg-primary text-light" id="add-more">Add More</button>
+                                    <div>
+                                        <label for="">Total Amount</label>
+                                        <input type="text" class="form-control right" id="total-amount" name="total" disabled>
+                                    </div>
+                                </div>
+                                <button type="button" class=" btn bg-theme text-light" id="invoice_submit">Submit</button>
+
+                        </form>
                     </div>
+
                 </div>
 
 

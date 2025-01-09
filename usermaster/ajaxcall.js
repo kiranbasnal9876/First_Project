@@ -73,25 +73,54 @@ $(document).ready(function () {
 
 //data shorting.......................................................
 
-$(document).on("click",".asc",function(){
+// $(document).on("click","th",function(){
+//   console.log("click")
 
-  var colname=$(this).attr("id");
-   var page_no=$("#page_no").val();
-   $(".desc").hide();
-  $(this).show();
-   var row= $("#row").val();
-  loaddata(page_no,'',"ASC",colname,row);
-  });
+//   var colname=$(this).attr("id");
+//    var page_no=$("#page_no").val();
+
+//   $(this).find(".desc").hide();
+//   $(this).show();
+//    var row= $("#row").val();
+//   loaddata(page_no,'',"ASC",colname,row);
+
+//   });
 
 
-  $(document).on("click",".desc",function(){
-    $(".asc").hide();
-    $(this).show();
-    var colname=$(this).attr("id");
-     var page_no=$("#page_no").val();
-     var row= $("#row").val();
-    loaddata(page_no,'',"DESC",colname,row);
-    });
+//   $(document).on("click","th",function(){
+//    $(this).find(".asc").hide();
+//     $(this).show();
+//     var colname=$(this).attr("id");
+//      var page_no=$("#page_no").val();
+//      var row= $("#row").val();
+//     loaddata(page_no,'',"DESC",colname,row);
+//     });
+$(document).on("click", "th", function () {
+  console.log("click");
+
+  var colname = $(this).attr("id");
+  var page_no = $("#page_no").val();
+  var row = $("#row").val();
+  $("th").not(this).removeClass("ascending descending").find(".asc, .desc").hide();
+  // Check current state and toggle classes
+  var isAscending = $(this).hasClass("ascending"); // Check if currently ascending
+  $(this).toggleClass("ascending", !isAscending).toggleClass("descending", isAscending);
+
+  // Update UI based on the class
+  if (!isAscending) {
+      $(this).find(".asc").show();
+      $(this).find(".desc").hide();
+  } else {
+      $(this).find(".asc").hide();
+      $(this).find(".desc").show();
+  }
+
+  // Determine sorting order
+  var order = isAscending ? "DESC" : "ASC";
+
+  // Load data with the new order
+  loaddata(page_no, '', order, colname, row);
+});
 
 
 // reset data from live search.....................

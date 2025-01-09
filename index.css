@@ -13,6 +13,9 @@ html {
   font-family: "Poppins", "serif";
 }
 
+.bg-theme{
+  background-color: #273A3A;
+}
 
 
 span {
@@ -478,12 +481,7 @@ height: 100%;
 }
 
 .add-invoice{
-  height: auto;
-  border-radius: 2px;
-  display: flex;
-  justify-content: space-between;
-  color: #273A3A;
-  padding: 10px;
+  padding: 20px;
   font-size: 15px;
   border-radius: 8px;
   margin: 30px 20px;
@@ -517,21 +515,12 @@ input{
 .add-more{
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 0px 20px;
   input{
     height: 35px;
   }
-  button{
-    color: aliceblue;
-    background-color: #79a8a8;
-    border-radius: 5px;
-    height: 35px;
-    border: none;
-    width: 100px;
-
-    span{
-      color: white;
-    }
-  }
+  
 }
 #clients{
   background-color: white;
@@ -541,7 +530,8 @@ input{
 }
 
 #invoice_submit{
-  width: 80px;
+  padding: 5px 20px;
+  margin: 5px 20px;
 }
 
 .right{

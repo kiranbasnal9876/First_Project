@@ -111,7 +111,7 @@ $offset+=1;
     while($row=$result->fetch_assoc()){
 
         $output .= "<tr><td>{$offset}</td><td>{$row['invoice_id']}</td><td>{$row['invoice_no']}</td><td>{$row['invoice_date']}</td><td class='edit-btn' data-id={$row['invoice_id']}>{$row['client_name']}</td><td>{$row['address']}</td><td>{$row['email']}</td><td>{$row['phone']}</td>
-    <td>{$row['total']}</td><i class='bi bi-envelope'></i><td></td><td></td><td><button  class='btn  edit-btn p-0' data-id={$row['invoice_id']} ><img src='../images/edit (1).svg' ></button></td><td><button  class=' btn  p-0 delete-btn' data-id={$row['invoice_id']} ><img src='../images/trash (1).svg' ></button></td></tr>";
+    <td>₹{$row['total']}</td><i class='bi bi-envelope'></i><td></td><td></td><td><button  class='btn  edit-btn p-0' data-id={$row['invoice_id']} ><img src='../images/edit (1).svg' ></button></td><td><button  class=' btn  p-0 delete-btn' data-id={$row['invoice_id']} ><img src='../images/trash (1).svg' ></button></td></tr>";
              $offset++;
         }
     }

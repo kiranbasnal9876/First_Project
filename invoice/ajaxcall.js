@@ -2,14 +2,17 @@ $('a[id="invoice"]').addClass("active");
 
 $("#add-more").on("click", function () {
 
-   $(this).parent().siblings('.add-new').find('.clone:first').clone().appendTo('.add-new').find("input[type='text'],select").val("");
+   $(this).parent().siblings('.add-new').find('.clone:first').clone().appendTo('.add-new').find("input[type='text'],input[type='number']").val("");
 
 });
 
-$(document).on("click", "#delete-item", function () {
-  if ($(this).prev() != "") {
-    var div = $(this).parent("div");
-    div.remove();
+$(document).on("click", ".delete-item", function () {
+
+  if($(".clone").length>1){
+    if ($(this).prev() != "") {
+      var div = $(this).parent("div");
+      div.remove();
+    }
   }
 });
 
@@ -64,7 +67,7 @@ function total_amount() {
     let amount = parseFloat($(this).val()) || 0;
     Total_amount += amount;
   });
-  $("#total-amount").val(Total_amount);
+  $("#total-amount").val(Total_amount.toFixed(2));
 }
 
 $(document).on("keyup", ".inputitem", function () {
