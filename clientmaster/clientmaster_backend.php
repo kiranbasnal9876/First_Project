@@ -110,7 +110,6 @@ class client_master
     {
 
         $id = $_POST['id'];
-
         $sql = "select *
         FROM client_master AS CM JOIN
         district_master AS DM ON CM.district_id=DM.district_id
@@ -152,10 +151,13 @@ $obj = new client_master();
 if (isset($_POST['action']) && $_POST['action'] == 'getdestrict') {
 
     $obj->get_destrict();
-} else if (isset($_POST['action']) && $_POST['action'] == 'getdata') {
+} 
+else if (isset($_POST['action']) && $_POST['action'] == 'getdata') {
     $obj->getdata();
-} else if (isset($_POST['action']) && $_POST['action'] == 'delete') {
+} 
+else if (isset($_POST['action']) && $_POST['action'] == 'delete') {
     $obj->deletedata();
-} else if (isset($_POST['action']) && $_POST['action'] == 'add') {
+}
+ else if (isset($_POST['action']) && $_POST['action'] == 'add') {
     $obj->insertdata();
 }

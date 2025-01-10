@@ -23,10 +23,18 @@ function insertdata()
         $itemPrice = $_POST['itemPrice'];
 
         $itemD = $_POST['itemD'];
-
-       
+        
         $path=$_FILES['fileUpload']['name'];
+        $new_item="";
+    if(isset($path)){
+
         $file='folder/'.$path;
+        $new_item=", itemPath=".$file;
+    }
+    else{
+        $new_item="";
+    }
+       
 
         if ($_POST['id']!='') {
 
@@ -36,11 +44,11 @@ function insertdata()
             $sql = "update  item_master
              set itemName='$itemName',
              itemPrice='$itemPrice',
-             itemD='$itemD',
-             itemPath='$file'
+             itemD='$itemD'
+             $new_item
             
               where id='$id'";
-
+           
 
             if ($this->con->query($sql)) {
                 $status=400;
