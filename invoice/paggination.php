@@ -98,12 +98,12 @@ $result = $con->query($sql);
 if ($result->num_rows > 0) {
     $offset += 1;
     while ($row = $result->fetch_assoc()) {
-
- $output .= "<tr><td>{$offset}</td><td>{$row['invoice_no']}</td><td>{$row['invoice_date']}</td><td class='edit-btn' data-id={$row['invoice_id']}>{$row['name']}</td><td>{$row['address']}</td><td>{$row['email']}</td><td>{$row['phone']}</td>
+    $date=  date('d-m-Y', strtotime($row['invoice_date']));
+ $output .= "<tr><td>{$offset}</td><td>{$row['invoice_no']}</td><td>$date</td><td class='edit-btn' data-id={$row['invoice_id']}>{$row['name']}</td><td>{$row['address']}</td><td>{$row['email']}</td><td>{$row['phone']}</td>
 <td>₹{$row['total_amount']}</td> <td><i class='bi bi-file-earmark-pdf-fill text-danger'></i></td>
 <td><i class='bi bi-envelope-fill text-primary'></i></td><td><button  class='btn  edit-btn p-0' data-id={$row['invoice_id']} ><img src='../images/edit (1).svg'></button></td><td><button  class=' btn  p-0 delete-btn' data-id={$row['invoice_id']} ><img src='../images/trash (1).svg' ></button></td></tr>";
         $offset++;
     }
 }
 echo json_encode(['table' => $output, 'page' => $pages]);
-?>
+?> 
