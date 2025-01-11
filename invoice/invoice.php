@@ -128,11 +128,11 @@ if (empty($_SESSION['username'])) {
                                     <div class="col-3">
                                         <label for="invoice" class="form-label">Invoice No:</label>
                                         <input type="text" class="form-control invoic" name="invoice_no" id="invoice" maxlength="15" readonly>
-
+                                        <input type="hidden" class="invoice_id" name="invoice_id" value="">
                                     </div>
                                     <div class="col-3">
                                         <label for="invoice_date" class="form-label">Invoice Date:</label>
-                                        <input type="text" class="form-control" name="invoice_date" id="invoice_date" readonly>
+                                        <input type="text" class="form-control" name="invoice_date" id="invoice_date2" readonly>
 
                                     </div>
                                 </div>
@@ -182,7 +182,7 @@ if (empty($_SESSION['username'])) {
                                             <label for="input" class="form-label">Item Name:</label>
                         
                                             <input type="text" class="form-control inputitem"  id="input" maxlength="20">
-                                            <input type="hidden" class="item_id" name="item_id[]" value="">
+                                            <input type="hidden" class="item_id" name="item_id[]">
                                         </div>
                                         <div class="col-md-3 price">
                                             <label for="inputprice" class="form-label">Item Price:</label>
@@ -191,7 +191,7 @@ if (empty($_SESSION['username'])) {
                                         </div>
                                         <div class="col-2">
                                             <label for="item" class="form-label">Quantity:</label>
-                                            <input type="number" class="form-control Item right" name="quentity[]" id="item" maxlength="20" minlength="1" value="0">
+                                            <input type="number" class="form-control Item right" name="quantity[]" id="item" maxlength="20" minlength="1" value="0" >
                                         </div>
                                         <div class="col-md-2 price">
                                             <label for="amount" class="form-label">Amount:</label>

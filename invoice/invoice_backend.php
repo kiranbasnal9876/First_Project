@@ -15,7 +15,7 @@ class invoice
     function getclient()
     {
         $name = $_POST['name'];
-        // echo $name;die;
+       
         $option = [];
         if ($name != "") {
             $sql = "select * from client_master where name like '%$name%'";
@@ -43,10 +43,34 @@ class invoice
 
     function getitem()
     {
+        
         $itemname = $_POST['value'];
+
+        $strId = "";
+
+        if(isset($_POST['items_id'])){
+
+
+            $arrId = $_POST['items_id'];
+    
+            $strId = implode(" ," ,$arrId);
+    
+            if(empty(trim($strId))){
+                $strId ="";
+            }
+            else{
+                $strId = "and id not in ($strId)";
+            }
+
+        }
+
+
+
+        
         $option = [];
         if ($itemname != "") {
-            $sql = "select * from item_master where itemName like '%$itemname%'";
+            $sql = "select * from item_master where itemName like '%$itemname%' $strId";
+          
             $result = $this->con->query($sql);
             if ($result->num_rows > 0) {
                 while ($data = $result->fetch_assoc()) {
@@ -85,12 +109,12 @@ class invoice
         if($status==400){
             $last_id = $this->con->insert_id;
            $item_id=$_POST['item_id'];
-           $quentity=$_POST['quentity'];
+           $quantity=$_POST['quantity'];
            $amount=$_POST['amount'];
 
         for($i=0;$i<count($item_id);$i++){
-        if($quentity[$i]!=""){
-            $sql2="insert into invoive(invoice_id,item_id,quentity,amount)values($last_id,$item_id[$i],$quentity[$i],$amount[$i])";
+        if($quantity[$i]!="" && $item_id[$i]!=""){
+            $sql2="insert into invoive(invoice_id,item_id,quantity,amount)values($last_id,$item_id[$i],$quantity[$i],$amount[$i])";
             
             if($this->con->query($sql2)){
                 $status=400;
@@ -109,6 +133,58 @@ class invoice
     }
 
 
+//updating data//
+function update(){
+    $error = "";
+    $status="";
+    $client_id = $_POST['client_id'];
+    $invoice_id= $_POST['invoice_id'];
+    
+ $total_amount=$_POST['total_amount'];
+
+   
+    $sql ="update  invoice_master
+     set client_id='$client_id',
+      total_amount='$total_amount'
+      where invoice_id='$invoice_id'";
+
+
+    if ($this->con->query($sql)) {
+        $status=400;
+    } else {
+
+        $error = $this->con->error;
+    }
+    
+        if($status==400){
+            $sql1 = "delete from invoive  where invoice_id='$invoice_id'";
+          
+            if( $this->con->query($sql1)){
+                $invoice_id= $_POST['invoice_id'];
+                $item_id=$_POST['item_id'];
+                $quantity=$_POST['quantity'];
+                $amount=$_POST['amount'];
+     
+             for($i=0;$i<count($item_id);$i++){
+             if($quantity[$i]!="" && $item_id[$i]!=""){
+                 $sql2="insert into invoive(invoice_id,item_id,quantity,amount)values($invoice_id,$item_id[$i],$quantity[$i],$amount[$i])";
+                 
+                 if($this->con->query($sql2)){
+                     $status=400;
+                 }
+                 else{
+                    $error="items not updated";
+                 }
+                }
+            
+            }
+                  
+        }
+       }
+    
+
+    echo  json_encode(['status' => $status, 'error' => $error]);
+}
 
 //deleting data
     
@@ -137,8 +213,6 @@ class invoice
      echo   json_encode(['status' => $status, 'error' => $error]);
     }
 
-
-    
     function getdata()
     {
         $status = '';
@@ -193,4 +267,7 @@ else if (isset($_POST['action']) && $_POST['action'] == 'delete') {
 
 else if (isset($_POST['action']) && $_POST['action'] == 'getdata') {
     $obj->getdata();
+} 
+else if (isset($_POST['action']) && $_POST['action'] == 'update') {
+    $obj->update();
 } 
