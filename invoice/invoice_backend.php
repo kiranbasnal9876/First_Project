@@ -243,6 +243,7 @@ function update(){
     }
 
 
+
 }
 
 
@@ -271,3 +272,8 @@ else if (isset($_POST['action']) && $_POST['action'] == 'getdata') {
 else if (isset($_POST['action']) && $_POST['action'] == 'update') {
     $obj->update();
 } 
+// else if (isset($_POST['action']) && $_POST['action'] == 'invoice_details') {
+//     $obj->getInvoiceDetail();
+// } 
+
+

@@ -1,7 +1,6 @@
 $('a[id="invoice"]').addClass("active");
 $("#update").hide();
 
-
 var url = "http://localhost/First_Project/invoice/";
 
 // add new clone
@@ -80,12 +79,16 @@ $(document).on("keyup", ".clients", function () {
 });
 
 $(document).on("keyup", ".inputitem", function () {
-  var value = $(this).val();
+  var value = $(this).val().trim();
+  if(value==""){
+    $(this).parents(".clone").find(".price").val("");
+      $(this).parents(".clone").find(".item_id").val("");
+      amount(); 
+  }
 
   let items = [];
   $(".item_id").each(function () {
-    if(!$(this).val() == ""){
-
+    if (!$(this).val() == "") {
       items.push($(this).val());
     }
   });
@@ -96,6 +99,7 @@ $(document).on("keyup", ".inputitem", function () {
 
   $(".inputitem").autocomplete({
     minLength: 1,
+
     source: function (request, response) {
       $.ajax({
         url: url + "invoice_backend.php",
@@ -354,3 +358,5 @@ $("#home-tab").on("click", function () {
   $("#update").hide();
   $("#invoice_submit").show();
 });
+
+

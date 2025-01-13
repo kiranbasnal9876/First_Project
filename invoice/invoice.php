@@ -186,12 +186,12 @@ if (empty($_SESSION['username'])) {
                                         </div>
                                         <div class="col-md-3 price">
                                             <label for="inputprice" class="form-label">Item Price:</label>
-                                            <input type="text" class="form-control price right"  id="inputprice" maxlength="10" readonly>
+                                            <input type="text" class="form-control price right"  id="inputprice" maxlength="10" oninput="amount()" readonly >
 
                                         </div>
                                         <div class="col-2">
                                             <label for="item" class="form-label">Quantity:</label>
-                                            <input type="number" class="form-control Item right" name="quantity[]" id="item" maxlength="20" minlength="1" value="0" >
+                                            <input type="number" class="form-control Item right" name="quantity[]" id="item" maxlength="20" minlength="1" value="0"  >
                                         </div>
                                         <div class="col-md-2 price">
                                             <label for="amount" class="form-label">Amount:</label>
@@ -217,8 +217,9 @@ if (empty($_SESSION['username'])) {
 
                         </form>
                     </div>
-
+      
                 </div>
 
+             <!-- Button trigger modal -->
 
                 <?php include("../footer.php"); ?>
