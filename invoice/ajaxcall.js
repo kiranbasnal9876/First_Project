@@ -83,6 +83,7 @@ $(document).on("keyup", ".inputitem", function () {
   if(value==""){
     $(this).parents(".clone").find(".price").val("");
       $(this).parents(".clone").find(".item_id").val("");
+      $(this).parents(".clone").find(".Item").val("");
       amount(); 
   }
 
