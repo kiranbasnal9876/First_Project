@@ -314,6 +314,7 @@ height: 100%;
     /* content div css for all pages  */
     .content {
       flex: 8.8;
+      
       padding: 10px 10px;
       height: calc(100vh - 45px);
       overflow-y: auto;
@@ -330,6 +331,19 @@ height: 100%;
 
   }
 
+}
+
+.dashboard-container{
+  display: flex;
+  padding: 20px 0px;
+  gap: 20px;
+  
+  .card{
+    background-color: #4e6269;
+    color: white;
+    height: 100px;
+  }
+ 
 }
 
 
@@ -475,6 +489,7 @@ height: 100%;
     padding: 0;
     margin: 0;
     font-size: 12px;
+ 
   }
 
 
@@ -536,4 +551,23 @@ input{
 
 .right{
   text-align: right;
+}
+
+
+/* email model css */
+
+#email-model-form{
+  text-align: left;
+
+  
+}
+.main-container-wrapper {
+  & .detail-container {
+      & .content {
+          .btn {
+             
+               color: white;
+          }
+      }
+  }
 }

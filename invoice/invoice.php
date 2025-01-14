@@ -1,9 +1,9 @@
 <?php include("../header.php"); ?>
 <?php
-// session_start();
-// if (empty($_SESSION['username'])) {
-//     header("Location:http://localhost/First_Project/login-2-main/login2.php");
-// }
+session_start();
+if (empty($_SESSION['username'])) {
+    header("Location:http://localhost/First_Project/login-2-main/login2.php");
+}
 ?>
 
 <body>
@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="col-1.5">
                                         <label for="invoice_date">Invoice Date</label>
-                                        <input type="date" class="form-control " name="invoice_date" id='invoice_date'>
+                                        <input type="date" class="form-control " name="invoice_date" id=''>
                                     </div>
 
                                     <div class="col-1">
@@ -87,13 +87,13 @@
                                         <thead>
                                             <tr>
                                                 <th>S No.</th>
-                                                <!-- <th><img class='asc' id='id' src='../images/arrow-up (1).svg'><img class='desc' id='id' src='../images/arrow-down.svg'>Invoice Id</th> -->
-                                                <th><img class='asc' id='name' src='../images/arrow-up (1).svg'><img class='desc' id='name' src='../images/arrow-down.svg'>Invoice No</th>
-                                                <th><img class='asc' id='phone' src='../images/arrow-up (1).svg'><img class='desc' id='phone' src='../images/arrow-down.svg'>Invoice Date</th>
-                                                <th><img class='asc' id='email' src='../images/arrow-up (1).svg'><img class='desc' id='email' src='../images/arrow-down.svg'>client Name</th>
+                                               
+                                                <th><img class='asc' id='invoice_no' src='../images/arrow-up (1).svg'><img class='desc' id='invoice_no' src='../images/arrow-down.svg'>Invoice No</th>
+                                                <th><img class='asc' id='invoice_date' src='../images/arrow-up (1).svg'><img class='desc' id='invoice_date' src='../images/arrow-down.svg'>Invoice Date</th>
+                                                <th><img class='asc' id='name' src='../images/arrow-up (1).svg'><img class='desc' id='name' src='../images/arrow-down.svg'>client Name</th>
                                                 <th>address</th>
-                                                <th><img class='asc' id='state_name' src='../images/arrow-up (1).svg'><img class='desc' id='state_name' src='../images/arrow-down.svg'>Client Email</th>
-                                                <th><img class='asc' id='district_name' src='../images/arrow-up (1).svg'><img class='desc' id='district_name' src='../images/arrow-down.svg'>Client Phone</th>
+                                                <th><img class='asc' id='email' src='../images/arrow-up (1).svg'><img class='desc' id='email' src='../images/arrow-down.svg'>Client Email</th>
+                                                <th><img class='asc' id='phone' src='../images/arrow-up (1).svg'><img class='desc' id='phone' src='../images/arrow-down.svg'>Client Phone</th>
                                                 <th>Total</th>
                                                 <th>PDF</th>
                                                 <th>Email</th>
@@ -103,20 +103,7 @@
                                             </tr>
                                         </thead>
                                         <tbody id='tbody'>
-                                            <tr>
-                                                <td>{$offset}</td>
-                                                <td>{$row['invoice_no']}</td>
-                                                <td>$date</td>
-                                                <td class='edit-btn' data-id={$row['invoice_id']}>{$row['name']}</td>
-                                                <td>{$row['address']}</td>
-                                                <td>{$row['email']}</td>
-                                                <td>{$row['phone']}</td>
-                                                <td>₹{$row['total_amount']}</td>
-                                                <td><a href='http://localhost/First_Project/invoice/pdf.php?id={$row[' invoice_id']}'><i class='bi bi-file-earmark-pdf-fill text-danger pdf'></i></a></td>
-                                                <td data-bs-toggle='modal' data-bs-target='#staticBackdrop'><i data-bs-toggle="modal" data-bs-target="#exampleModal" class='bi bi-envelope-fill text-primary'></i></td>
-                                                <td><button class='btn  edit-btn p-0' data-id={$row['invoice_id']}><img src='../images/edit (1).svg'></button></td>
-                                                <td><button class=' btn  p-0 delete-btn' data-id={$row['invoice_id']}><img src='../images/trash (1).svg'></button></td>
-                                            </tr>
+
                                         </tbody>
 
                                     </table>
@@ -125,15 +112,38 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">Email</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    ...
+                                                    <form name="email_form" id="email-model-form">
+                                                        <div class="mb-3 ">
+                                                            <label for="sender-name" class="text-start">Sender:</label>
+                                                            <input type="text" class="form-control" id="sender-name" placeholder="dimpalbasnal0@gmail.com" readonly>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="recipient-name" class="col-form-label">Recipient:</label>
+                                                            <input type="text" class="form-control" id="recipient-name" name="send_to" required>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="recipient-name" class="col-form-label">Subject:</label>
+                                                            <input type="text" class="form-control" id="recipient-name" name="subject">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="message-text" class="col-form-label">Message:</label>
+                                                            <textarea class="form-control" id="message-text" name="content"></textarea>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                           <a href="" id="pdf_link">Pdf</a>
+                                                           <input type="hidden" value="" id="invoice_no_for_pdf" name='pdf_invoice'>
+                                                        </div>
+                                                        
+
+                                                    </form>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close">Close</button>
+                                                    <button type="button" class="btn btn-primary" id="send_email">Send message</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -195,12 +205,6 @@
                                 </div>
 
 
-
-
-
-
-
-
                             </div>
                             <div class="add-invoice  add-new row">
 
@@ -210,7 +214,7 @@
                                     <div class="col-3">
                                         <label for="input" class="form-label">Item Name:</label>
 
-                                        <input type="text" class="form-control inputitem" id="input" maxlength="20">
+                                        <input type="text" class="form-control inputitem" id="input" maxlength="20" required>
                                         <input type="hidden" class="item_id" name="item_id[]">
                                     </div>
                                     <div class="col-md-3 price">
@@ -220,7 +224,7 @@
                                     </div>
                                     <div class="col-2">
                                         <label for="item" class="form-label">Quantity:</label>
-                                        <input type="number" class="form-control Item right" name="quantity[]" id="item" maxlength="20" minlength="1" value="0">
+                                        <input type="number" class="form-control numeric Item right" name="quantity[]" id="item" maxlength="5" minlength="1" value="0" required>
                                     </div>
                                     <div class="col-md-2 price">
                                         <label for="amount" class="form-label">Amount:</label>

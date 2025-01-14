@@ -26,6 +26,7 @@ $(document).on("click", ".delete-item", function () {
   }
 });
 
+// geting current date...........................
 function invoice_date() {
   let d = new Date();
   $("#invoice_date2").val(
@@ -37,8 +38,15 @@ function invoice_date() {
 
 invoice_date();
 
+// geting client detail.............
 $(document).on("keyup", ".clients", function () {
   const value = $(this).val();
+  if(value==""){
+    $("#inputphone").val("");
+    $("#inputemail").val("");
+    $("#inputAddress").val("");
+    $(".clientId").val("");
+  }
 
   $(".clients").autocomplete({
     minLength: 1,
@@ -78,25 +86,29 @@ $(document).on("keyup", ".clients", function () {
   });
 });
 
+// geting items......................
 $(document).on("keyup", ".inputitem", function () {
   var value = $(this).val().trim();
   if(value==""){
     $(this).parents(".clone").find(".price").val("");
       $(this).parents(".clone").find(".item_id").val("");
       $(this).parents(".clone").find(".Item").val("");
-      amount(); 
+      $(this)
+      .parents(".clone")
+      .find(".Amount")
+      .val("");
+      total_amount();
+     
   }
 
   let items = [];
   $(".item_id").each(function () {
     if (!$(this).val() == "") {
-      items.push($(this).val());
+    items.push($(this).val());
     }
   });
   let set_of_items = new Set(items);
   let items_array = [...set_of_items];
-
-  console.log(items_array);
 
   $(".inputitem").autocomplete({
     minLength: 1,
@@ -135,6 +147,21 @@ $(document).on("keyup", ".inputitem", function () {
   });
 });
 
+
+
+
+
+// calculate total amount..................
+function total_amount() {
+  let Total_amount = 0;
+  $(".Amount").each(function () {
+    let amount = parseFloat($(this).val()) || 0;
+    Total_amount += amount;
+  });
+  $("#total-amount").val(Total_amount.toFixed(2));
+}
+
+// calculate amount...................
 function amount() {
   $(".Item").on("input", function () {
     var item = $(this).val();
@@ -150,15 +177,6 @@ function amount() {
 }
 
 amount();
-function total_amount() {
-  let Total_amount = 0;
-  $(".Amount").each(function () {
-    let amount = parseFloat($(this).val()) || 0;
-    Total_amount += amount;
-  });
-  $("#total-amount").val(Total_amount.toFixed(2));
-}
-
 // invoice number
 $("#profile-tab").on("click", function () {
   $.ajax({
@@ -180,6 +198,7 @@ $("#invoice_submit").on("click", function () {
   var formdata = new FormData(form);
 
   formdata.append("action", "add");
+  if($(".clients").val() != "" && $("#input").val() != "" &&$("#item").val() != 0){
   $.ajax({
     url: url + "invoice_backend.php",
     data: formdata,
@@ -200,6 +219,7 @@ $("#invoice_submit").on("click", function () {
       }
     },
   });
+}
 });
 
 //ahowing all records................
@@ -217,7 +237,10 @@ function loaddata(order, colname) {
     success: function (data) {
       data = JSON.parse(data);
       $("tbody").html(data.table);
+
       $(".page").html(data.page);
+     
+   $("#pdf_link").attr('href',($("#pdf_genrate a").attr('href')));
     },
   });
 }
@@ -243,6 +266,22 @@ $("#row").on("change", function () {
 // filter data.................
 $("#filter_form").on("input", function () {
   loaddata("", "");
+});
+
+//for sorting data
+$(document).on("click", ".asc", function () {
+  var colname = $(this).attr("id");
+ 
+  var page_no = $("#page_no").val();
+  var row = $("#row").val();
+  loaddata("ASC", colname);
+});
+
+$(document).on("click", ".desc", function () {
+  var colname = $(this).attr("id");
+  var page_no = $("#page_no").val();
+  var row = $("#row").val();
+  loaddata("DESC", colname);
 });
 
 // reset filter data
@@ -312,8 +351,9 @@ $(document).on("click", ".edit-btn", function () {
         currentClone.find(".price").val(data.output2[i].itemPrice);
         currentClone.find(".Amount").val(data.output2[i].amount);
         currentClone.find(".invoice_id").val(data.output2[i].invoice_id);
-      }
 
+      }
+      
       var editBtn = document.querySelector("#profile-tab");
       var tab = new bootstrap.Tab(editBtn);
       tab.show();
@@ -323,7 +363,7 @@ $(document).on("click", ".edit-btn", function () {
     },
   });
 });
-
+amount();
 // update data
 
 $("#update").on("click", function () {
@@ -342,6 +382,8 @@ $("#update").on("click", function () {
         alert("data is successfully updated");
         $("#formdata").trigger("reset");
         $(".delete-item").trigger("click");
+        $("#update").hide();
+        $("#invoice_submit").show();
         loaddata("", "");
         var editBtn = document.querySelector("#home-tab");
         var tab = new bootstrap.Tab(editBtn);
@@ -353,11 +395,52 @@ $("#update").on("click", function () {
   });
 });
 
+
 $("#home-tab").on("click", function () {
   $("#formdata").trigger("reset");
   $(".delete-item").trigger("click");
   $("#update").hide();
   $("#invoice_submit").show();
 });
+
+// open email model...........
+$(document).on("click",".email",function(){
+
+ $("#invoice_no_for_pdf").val($(this).attr('id')); 
+})
+
+// for sending mail.................
+$("#send_email").on("click",function(){
+
+  let emaildata = new FormData(email_form);
+
+  $.ajax({
+    url: url + "send_email.php",
+    data:emaildata,
+    type:"post",
+    processData: false,
+    contentType: false,
+    dataType: "json",
+//     beforeSend:function(){
+// $("#send_email").html(`<button class="btn btn-primary" type="button" disabled>
+//   <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+//   Loading...
+// </button>`);
+//     },
+    success: function(data){
+      if (data.success!=''){
+        $("#close").trigger("click");
+        
+      alert(data.success);
+      $("#email-model-form").trigger("reset");
+      
+      } else if(data.error !="") {
+        alert(data.error);
+      }
+    },
+
+  })
+})
+
 
 

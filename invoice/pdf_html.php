@@ -57,6 +57,7 @@ while ($data2=$result->fetch_assoc()) {
     .header {
       text-align: center;
       padding-bottom: 50px;
+
     }
 
     .items_table {
@@ -65,10 +66,13 @@ while ($data2=$result->fetch_assoc()) {
       margin-top: 20px;
     text-align: center;
     border: 2px solid black;
+    border-collapse: collapse;
   
     }
     .th{
-        background-color: gray; 
+        background-color: gray;
+        border: 1px solid black;
+       
       }
     .amount_details{
       margin-left: 500px;
@@ -81,6 +85,9 @@ while ($data2=$result->fetch_assoc()) {
     small{
       color: light gray;
       margin: 2px;
+    }
+    img{
+      height: 30px;
     }  
   </style>
 </head>
@@ -90,7 +97,7 @@ while ($data2=$result->fetch_assoc()) {
   <table>
     <tbody>
       <tr>
-        <td colspan="2" class="header">
+        <td colspan="2" class="header">          
           <img src="../images/sansoftwares_logo.png"><br>
           <b>SAN Software Pvt Ltd</b><br>
           <span>419, 4th Floor, M3M Urbana, Sector 67,

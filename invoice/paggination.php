@@ -45,9 +45,9 @@ if (isset($_POST['page'])) {
     $page = 1;
 }
 
-if (isset($_POST['invoicedate'])) {
+if (isset($_POST['invoice_date'])) {
 
-    $invoiceDate = $_POST['invoicedate'];
+    $invoiceDate = $_POST['invoice_date'];
 } else {
     $invoiceDate = "";
 }
@@ -99,9 +99,9 @@ if ($result->num_rows > 0) {
     $offset += 1;
     while ($row = $result->fetch_assoc()) {
         $date =  date('d-m-Y', strtotime($row['invoice_date']));
-        $output .= "<tr><td>{$offset}</td><td>{$row['invoice_no']}</td><td>$date</td><td class='edit-btn' data-id={$row['invoice_id']}>{$row['name']}</td><td>{$row['address']}</td><td>{$row['email']}</td><td>{$row['phone']}</td>
-<td>₹{$row['total_amount']}</td> <td><a href='http://localhost/First_Project/invoice/pdf.php?id={$row['invoice_id']}'><i class='bi bi-file-earmark-pdf-fill text-danger pdf'></i></a></td>
-<td data-bs-toggle='modal' data-bs-target='#staticBackdrop'><i class='bi bi-envelope-fill text-primary' ></i></td><td><button  class='btn  edit-btn p-0' data-id={$row['invoice_id']} ><img src='../images/edit (1).svg'></button></td><td><button  class=' btn  p-0 delete-btn' data-id={$row['invoice_id']} ><img src='../images/trash (1).svg' ></button></td></tr>";
+        $output .= "<tr><td>{$offset}</td><td class='invoice_no'>{$row['invoice_no']}</td><td>$date</td><td class='edit-btn' data-id={$row['invoice_id']}>{$row['name']}</td><td>{$row['address']}</td><td>{$row['email']}</td><td>{$row['phone']}</td>
+<td>₹{$row['total_amount']}</td> <td id='pdf_genrate'><a href='http://localhost/First_Project/invoice/pdf.php?id={$row['invoice_id']}'><i class='bi bi-file-earmark-pdf-fill text-danger pdf'></i></a></td>
+<td><i id='{$row['invoice_no']}' class='bi bi-envelope-fill text-primary email'data-bs-toggle='modal' data-bs-target='#exampleModal' data-bs-whatever='@fat'></i></td><td><button  class='btn  edit-btn p-0' data-id={$row['invoice_id']} ><img src='../images/edit (1).svg'></button></td><td><button  class=' btn  p-0 delete-btn' data-id={$row['invoice_id']} ><img src='../images/trash (1).svg' ></button></td></tr>";
         $offset++;
     }
 }

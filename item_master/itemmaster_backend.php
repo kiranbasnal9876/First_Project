@@ -23,13 +23,12 @@ function insertdata()
         $itemPrice = $_POST['itemPrice'];
 
         $itemD = $_POST['itemD'];
-        
-        $path=$_FILES['fileUpload']['name'];
-        $new_item="";
+      
     if(isset($path)){
 
         $file='folder/'.$path;
-        $new_item=", itemPath=".$file;
+        $new_item=",itemPath='$file'";
+       
     }
     else{
         $new_item="";
@@ -46,10 +45,9 @@ function insertdata()
              itemPrice='$itemPrice',
              itemD='$itemD'
              $new_item
-            
-              where id='$id'";
+            where id='$id'";
            
-
+    
             if ($this->con->query($sql)) {
                 $status=400;
             } else {
