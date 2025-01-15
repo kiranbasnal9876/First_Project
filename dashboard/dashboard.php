@@ -25,8 +25,8 @@ if (empty($_SESSION['username'])) {
                   <!-- <img src="..." class="card-img-top" alt="..."> -->
 
                   <a href="http://localhost/First_Project/usermaster/usermaster.php" class="btn ">
-                     <div class="card-body">
-                        <h5 class="card-title">USER MASTER</h5>
+                     <div class="card-body" id="users">
+                       
                      </div>
                   </a>
 
@@ -36,7 +36,7 @@ if (empty($_SESSION['username'])) {
                   <!-- <img src="..." class="card-img-top" alt="..."> -->
 
                   <a href="http://localhost/First_Project/clientmaster/client_master.php" class="btn ">
-                     <div class="card-body">
+                     <div class="card-body" id="client">
                         <h5 class="card-title">CLIENT MASTER</h5>
                      </div>
                   </a>
@@ -46,7 +46,7 @@ if (empty($_SESSION['username'])) {
                   <!-- <img src="..." class="card-img-top" alt="..."> -->
 
                   <a href="http://localhost/First_Project/item_master/item_master.php" class="btn">
-                     <div class="card-body">
+                     <div class="card-body" id="items">
                         <h5 class="card-title">ITEM MASTER</h5>
                      </div>
                   </a>
@@ -56,7 +56,7 @@ if (empty($_SESSION['username'])) {
                   <!-- <img src="..." class="card-img-top" alt="..."> -->
 
                   <a href="http://localhost/First_Project/invoice/invoice.php" class="btn ">
-                     <div class="card-body">
+                     <div class="card-body" id="invoice_detail">
                         <h5 class="card-title">INVOUICE MASTER</h5>
                      </div>
                   </a>

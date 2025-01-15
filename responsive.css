@@ -1,0 +1,13 @@
+@media only screen and (max-width: 768px) {
+    .sidebar-div a {
+        width: 20px;
+    }
+
+   .sidebar-div a span {
+        display: none;
+    }
+    .dasboaerd-img{
+        display: none;
+    }
+}
+

@@ -82,11 +82,13 @@ $(document).on("click", ".desc", function () {
 
     // insert data...............
     $("#submit").on("click", function () {
-      validateClient()
+      
+      validate();
+    
       var formdata = new FormData(form);
       formdata.append("action","add");
         
-      if (formvalidate) {
+      if (checkvalidate) {
         $.ajax({
          
           url: url +"itemmaster_backend.php",
@@ -96,9 +98,10 @@ $(document).on("click", ".desc", function () {
           contentType: false,
           processData: false,
           success: function (data) {
-            if (data.status == 400) {
+            if (data.status == 200) {
               alert("data is successfully inserted");
               $("#formdata").trigger("reset");
+              $("#inputd").val("");
               loaddata("", "");
               var editBtn = document.querySelector("#home-tab");
               var tab = new bootstrap.Tab(editBtn);
@@ -191,9 +194,10 @@ $("#update").on("click", function () {
       contentType: false,
       processData: false,
       success: function (data) {
-        if (data.status == 400) {
+        if (data.status == 200) {
           alert("data is successfully updated");
           $("#formdata").trigger("reset");
+          $("#inputd").val("");
           loaddata("","");
           var editBtn = document.querySelector("#home-tab");
           var tab = new bootstrap.Tab(editBtn);

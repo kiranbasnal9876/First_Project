@@ -49,8 +49,8 @@ span {
       /* border-radius: 10px; */
       /* background-color: #ffff; */
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-      padding: 30px 50px;
-
+      padding-top: 20px;
+      padding-left: 40px;
       .my-logo img {
         width: 60%;
       }
@@ -60,8 +60,8 @@ span {
         justify-content: space-between;
         padding-top: 10px;
         img{
-          height: 250px;
-          width: 190px;
+          height: 90%;
+          width: 90%
         }
       }
       form {
@@ -88,7 +88,7 @@ span {
           color: white;
           padding: 5px;
           font-weight: 500;
-          margin-top: 20px;
+          
         }
       }
       
@@ -243,7 +243,7 @@ span {
     .sidebar {
       flex: 1.2;
       padding: 30px 10px;
-height: 100%;
+      height: 100%;
       border-right: 1px solid #c8c8c8;
       background-image: url("images/back2.webp");
       background-repeat: no-repeat;
@@ -275,14 +275,17 @@ height: 100%;
           color: white;
           font-size: 13px;
 
-
+         
           text-align: left;
 
           img {
             width: 17px;
-            margin-right: 10px;
-          }
+            margin-right: 7px;
 
+          }
+span{
+  color: white;
+}
 
         }
 
@@ -295,7 +298,7 @@ height: 100%;
         }
 
         .log-out {
-          margin-top: 300px;
+          margin-top: 45vh;
 
           a {
             font-size: 12px;
@@ -337,13 +340,32 @@ height: 100%;
   display: flex;
   padding: 20px 0px;
   gap: 20px;
-  
+ 
   .card{
     background-color: #4e6269;
     color: white;
     height: 100px;
+    /* transition: box-shadow 0.5s;
+    transition: margin-top 0.5s; */
+    .card-body{
+      background-color: #64b0be;
+      margin: 10px;
+    }
+    #invoice_detail{
+      margin: 0;
+    }
   }
+
  
+}
+.dasboaerd-img{
+  display: flex;
+  justify-content: end;
+  img{
+    transform: scaleX(-1);
+    
+    width: 50%;
+  }
 }
 
 

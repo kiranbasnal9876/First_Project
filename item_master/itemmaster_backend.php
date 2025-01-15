@@ -23,11 +23,14 @@ function insertdata()
         $itemPrice = $_POST['itemPrice'];
 
         $itemD = $_POST['itemD'];
-      
-    if(isset($path)){
+        $path=$_FILES['fileUpload']['name'];
+          if($path !=""){
 
         $file='folder/'.$path;
+      
         $new_item=",itemPath='$file'";
+        move_uploaded_file($_FILES['fileUpload']['tmp_name'],$file);
+        
        
     }
     else{
@@ -47,9 +50,10 @@ function insertdata()
              $new_item
             where id='$id'";
            
+           
     
             if ($this->con->query($sql)) {
-                $status=400;
+                $status=200;
             } else {
 
                 $error = $this->con->error;
@@ -68,7 +72,7 @@ function insertdata()
       
           
             if ($this->con->query($sql)) {
-                $status = 400;
+                $status = 200;
             } else {
                 $error = $this->con->error;
             }

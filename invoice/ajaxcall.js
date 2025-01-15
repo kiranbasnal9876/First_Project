@@ -195,9 +195,11 @@ $("#profile-tab").on("click", function () {
 
 // insert data ........................
 $("#invoice_submit").on("click", function () {
+  debugger;
   var formdata = new FormData(form);
 
   formdata.append("action", "add");
+  validateClient();
   if($(".clients").val() != "" && $("#input").val() != "" &&$("#item").val() != 0){
   $.ajax({
     url: url + "invoice_backend.php",

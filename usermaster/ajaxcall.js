@@ -61,35 +61,29 @@ $(document).ready(function(){
 
 // live search.......................
 
-$(document).ready(function () {
   $(document).on("keyup", ".search", function () {
     var search = $(this).val();
     var page_no=$("#page_no").val();
     loaddata(page_no, search);
   });
-});
+
 
 
 
 //data shorting.......................................................
+$(document).on("click", ".asc", function () {
+  debugger;
+  var colname = $(this).attr("id");
+ 
+  var page_no = $("#page_no").val();
+  var row = $("#row").val();
+  loaddata(page_no,'', order, colname, row);
+});
 
-
-$(document).on("click", "th", function () {
-  console.log("click");
+$(document).on("click", ".desc", function () {
   var colname = $(this).attr("id");
   var page_no = $("#page_no").val();
   var row = $("#row").val();
-  $("th").not(this).removeClass("ascending descending").find(".asc, .desc").hide();
-  var isAscending = $(this).hasClass("ascending"); 
-  $(this).toggleClass("ascending", !isAscending).toggleClass("descending", isAscending);
-  if (!isAscending) {
-      $(this).find(".asc").show();
-      $(this).find(".desc").hide();
-  } else {
-      $(this).find(".asc").hide();
-      $(this).find(".desc").show();
-  }
-  var order = isAscending ? "DESC" : "ASC";
   loaddata(page_no, '', order, colname, row);
 });
 

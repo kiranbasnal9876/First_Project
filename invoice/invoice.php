@@ -180,7 +180,9 @@ if (empty($_SESSION['username'])) {
                                     <div class="col-md-3">
                                         <label for="client_name" class="form-label ">Client Name:</label>
                                         <input type="text" class="form-control clients" name="name" id="client_name" maxlength="12" autocomplete="off">
+                                        <span></span>
                                         <input type="hidden" class="clientId" name="client_id" value="">
+                                        
                                     </div>
 
 
@@ -215,7 +217,9 @@ if (empty($_SESSION['username'])) {
                                         <label for="input" class="form-label">Item Name:</label>
 
                                         <input type="text" class="form-control inputitem" id="input" maxlength="20" required>
+                                        <span></span>
                                         <input type="hidden" class="item_id" name="item_id[]">
+                                       
                                     </div>
                                     <div class="col-md-3 price">
                                         <label for="inputprice" class="form-label">Item Price:</label>
@@ -224,7 +228,7 @@ if (empty($_SESSION['username'])) {
                                     </div>
                                     <div class="col-2">
                                         <label for="item" class="form-label">Quantity:</label>
-                                        <input type="number" class="form-control numeric Item right" name="quantity[]" id="item" maxlength="5" minlength="1" value="0" required>
+                                        <input type="number" class="form-control numeric Item right" name="quantity[]" id="item" maxlength="5" minlength="1" value="0"  oninput="amount()" required>
                                     </div>
                                     <div class="col-md-2 price">
                                         <label for="amount" class="form-label">Amount:</label>

@@ -2,8 +2,11 @@
 $('a[id="clientmaster"]').addClass('active');
 var url = "http://localhost/First_Project/clientmaster/";
 $("#update").hide();
+
 // selecting district.........................................
+
 $("#inputState").on("change", function (e) {
+  $("#input_district option[value!='']").remove()
   var id = $(this).val();
 
   $.ajax({

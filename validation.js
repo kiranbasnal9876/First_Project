@@ -3,6 +3,7 @@
 
 $("input").on("input", function () {
   var value = $(this).val().trim();
+  
   var error = $(this).next();
 
   if ($(this).attr("type") === "email") {
@@ -74,13 +75,17 @@ $("select").on("change", function () {
 
 
 
+var checkvalidate=true;
 
+function validate() {
 
-function validate(e) {
   $("input[type!='hidden']").each(function () {
     if ($(this).val() == "") {
-      $(this).next().text("all field are required");
-      formvalidate=false;
+      $(this).next().text("this field is  required");
+      checkvalidate=false;
+    }
+    else{
+       checkvalidate=true;
     }
   });
 }
@@ -90,19 +95,25 @@ function validate(e) {
 function updatevalidation(e) {
   $("input:not([type='hidden']):not([type='password'])").each(function () {
     if ($(this).val() == "") {
-      $(this).next().text("all field are required");
+      $(this).next().text("this field is required");
     }
   });
 }
 
 // only numeric
 $(document).on("input", ".numeric", function () {
+ 
   this.value = this.value.replace(/\D/g,"");
 });
+
 $(document).on("input", ".price", function () {
-  this.value = this.value.replace(/[^0-9\.]/g,"");
+  if (this.value !== undefined && this.value !== null) {
  
+      this.value = this.value.replace(/[^0-9\.]/g, "")   
+    .replace(/(\..*)\./g, "$1"); 
+  }
 });
+
 
 
 var formvalidate = true;
@@ -111,23 +122,14 @@ function validateClient(){
     .find("select,input:not([type='file'])")
     .each(function () {
       if ($(this).attr("type") !== "hidden" && $(this).val() == "") {
-        $(this).next().text("all field are required");
+        $(this).next().text("this field is required");
         formvalidate = false;
+      }
+      else{
+        formvalidate = true;
       }
       
     });
 }
 
 
-function NameValidate(){
-
-var Validname = /^[a-zA-Z\s.]+$/;
- 
-if (Validname.test(value)) {
-  error.text("");
-} else if (value == "") {
-  error.text("");
-} else {
-  error.text("only charecter are allowed");
-}
-}

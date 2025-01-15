@@ -106,11 +106,11 @@ if (empty($_SESSION['username'])) {
                             <form class="row g-3" id="formdata" name="form" enctype="multipart/form-data">
                                 <div class="col-2">
                                     <label for="inputitem" class="form-label">Item Name:</label>
-                                    <input type="text" class="form-control" name="itemName" id="inputitem" maxlength="20" oninput="NameValidate()">
+                                    <input type="text" class="form-control" name="itemName" id="inputitem" maxlength="20">
                                     <span></span>
                                 </div>
                                 <div class="col-md-2 price" >
-                                    <label for="inputprice" class="form-label  ">Item Price:</label>
+                                    <label for="inputprice" class="form-label ">Item Price:</label>
                                     <input type="text" class="form-control price" name="itemPrice" id="inputprice" maxlength="10">
                                     <span></span>
                                 </div>
@@ -122,7 +122,7 @@ if (empty($_SESSION['username'])) {
                                 <div class="col-2">
                                     <label for="image" class="form-label">Item Image</label>
 
-                                    <input type="file" class="form-control" name="fileUpload" id="image" onChange="imgDicShow()" oninput="pic.src=window.URL.createObjectURL(this.files[0])">
+                                    <input type="file" class="form-control" name="fileUpload" id="image" onChange="imgDicShow()" oninput="pic.src=window.URL.createObjectURL(this.files[0]) " accept="image/png, image/gif, image/jpeg" />
                                     <span></span>
                                     
                                 </div>
