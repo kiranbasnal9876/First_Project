@@ -133,3 +133,20 @@ function validateClient(){
 }
 
 
+$(".sidebar_slide").click(function(){
+
+  if($(this).hasClass("slide")){
+
+      $(this).removeClass("slide").addClass("noSlide");
+      $(".sidebar-div").find("span").hide();
+      $(".sidebar").css("flex","0.2");
+  }
+  else{
+
+    $(this).removeClass('noSlide').addClass("slide");
+    $(".sidebar-div").find("span").show();
+    $(".sidebar").css("flex","1.2");
+  }
+
+})
+

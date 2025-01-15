@@ -1,9 +1,9 @@
 <?php include("../header.php"); ?>
 <?php
-session_start();
-if (empty($_SESSION['username'])) {
-   header("Location:http://localhost/First_Project/login-2-main/login2.php");
-}
+// session_start();
+// if (empty($_SESSION['username'])) {
+//    header("Location:http://localhost/First_Project/login-2-main/login2.php");
+// }
 ?>
 
 <body>
@@ -26,7 +26,7 @@ if (empty($_SESSION['username'])) {
 
                   <a href="http://localhost/First_Project/usermaster/usermaster.php" class="btn ">
                      <div class="card-body" id="users">
-                       
+
                      </div>
                   </a>
 
@@ -63,8 +63,30 @@ if (empty($_SESSION['username'])) {
 
                </div>
             </div>
-            <div class="dasboaerd-img">
-     <img src="../images/dashboard.avif" alt="">
+            <!-- <div class="dasboaerd-img">
+            <img src="../images/dashboard.png" alt="">
+            </div> -->
+            <div class="mt-4">
+               <div class="card flex-fill w-100 draggable">
+                  <div class="card-header">
+                     <h5 class="card-title mb-0">Sales chart</h5>
+                  </div>
+                  <div class="card-body py-3">
+                     <div class="chart chart-sm">
+                        <div class="chartjs-size-monitor">
+                           <div class="chartjs-size-monitor-expand">
+                              <div class=""></div>
+                           </div>
+                           <div class="chartjs-size-monitor-shrink">
+                              <div class=""></div>
+                           </div>
+                        </div>
+                        <canvas id="chartjs-dashboard-line" style="display: block; height: 252px; width: 428px;" width="856" height="504" class="chart-line chartjs-render-monitor"></canvas>
+                     </div>
+                  </div>
+               </div>
+
+
             </div>
          </div>
 
@@ -72,4 +94,5 @@ if (empty($_SESSION['username'])) {
 
    </div>
 
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
    <?php include("../footer.php"); ?>

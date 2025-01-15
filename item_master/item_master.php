@@ -1,10 +1,11 @@
 <?php include("../header.php"); ?>
 <?php
-session_start();
-if (empty($_SESSION['username'])) {
-   header("Location:http://localhost/First_Project/login-2-main/login2.php");
-}
+// session_start();
+// if (empty($_SESSION['username'])) {
+//    header("Location:http://localhost/First_Project/login-2-main/login2.php");
+// }
 ?>
+
 <body>
 
     <div class="main-container-wrapper">
@@ -32,26 +33,26 @@ if (empty($_SESSION['username'])) {
                         <div class="client-master">
 
                             <div class="row  input-div ">
-                                <form name="getformdata" class="filter-div" id="filter_form" >
-                               
-                                <div class="col-1.5">
-                                    <label for="name">Item Name:</label>
-                                    <input type="text" class="form-control" Name='itemName' maxlength="20">
-                                </div>
-                                
-                                <div class="col-1">
-                                    <button type="button" class=" mt-3" id="reset">Reset</button>
-                                </div>
-                                <input type="hidden" id="page_no" value="1" name="page">
-                                <input type="hidden" id="row_no" value="2" name="row">
-                                
+                                <form name="getformdata" class="filter-div" id="filter_form">
+
+                                    <div class="col-1.5">
+                                        <label for="name">Item Name:</label>
+                                        <input type="text" class="form-control" Name='itemName' maxlength="20">
+                                    </div>
+
+                                    <div class="col-1">
+                                        <button type="button" class=" mt-3" id="reset">Reset</button>
+                                    </div>
+                                    <input type="hidden" id="page_no" value="1" name="page">
+                                    <input type="hidden" id="row_no" value="2" name="row">
+
 
                                 </form>
                             </div>
 
 
                             <div class="getlist">
-                                
+
                                 <div class="pagination">
                                     <div class="selectrow">
 
@@ -63,29 +64,53 @@ if (empty($_SESSION['username'])) {
                                         </select>
                                     </div>
                                     <div class='page'>
-                                 </div>
+                                    </div>
                                 </div>
                                 <div class="list">
 
-                                
+
                                     <table class='table table-bordered'>
 
                                         <thead>
                                             <tr>
                                                 <th>S No.</th>
-                                                <th ><img class='asc' id='itemName' src='../images/arrow-up (1).svg'><img class='desc' id='itemName' src='../images/arrow-down.svg'>Item Name</th>
-                                                <th ><img class='asc' id='itemPrice' src='../images/arrow-up (1).svg'><img class='desc' id='itemPrice' src='../images/arrow-down.svg'> Item Price</th>
+                                                <th class="changeIcon">
+                                                    Item Name <i class="bi-arrow-down-up"></i>
+                                                </th>
+                                                <th class="changeIcon">
+                                                    Item Price <i class="bi-arrow-down-up"></i>
+                                                </th>
                                                 <th>Item Description</th>
-                                               
+
                                                 <th>Item image</th>
-                                               
+
 
                                                 <th>Update</th>
                                                 <th>Delete</th>
                                             </tr>
                                         </thead>
+                                        <!-- <thead>
+                                            <tr>
+                                                <th>S No.</th>
+                                                <th>
+                                                    <img class='asc' id='itemName' src='../images/arrow-up (1).svg'>
+                                                    <img class='desc' id='itemName' src='../images/arrow-down.svg'>Item Name
+                                                </th>
+                                                <th>
+                                                    <img class='asc' id='itemPrice' src='../images/arrow-up (1).svg'>
+                                                    <img class='desc' id='itemPrice' src='../images/arrow-down.svg'> Item Price
+                                                </th>
+                                                <th>Item Description</th>
+
+                                                <th>Item image</th>
+
+
+                                                <th>Update</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                        </thead> -->
                                         <tbody id='tbody'>
-                                            
+
                                         </tbody>
 
                                     </table>
@@ -109,14 +134,14 @@ if (empty($_SESSION['username'])) {
                                     <input type="text" class="form-control" name="itemName" id="inputitem" maxlength="20">
                                     <span></span>
                                 </div>
-                                <div class="col-md-2 price" >
+                                <div class="col-md-2 price">
                                     <label for="inputprice" class="form-label ">Item Price:</label>
                                     <input type="text" class="form-control price" name="itemPrice" id="inputprice" maxlength="10">
                                     <span></span>
                                 </div>
                                 <div class="col-md-2">
                                     <label for="inputd" class="form-label ">Item Description:</label>
-                                   <textarea class="form-control " name="itemD" id="inputd" maxlength="200" cols="50" rows="1"></textarea>
+                                    <textarea class="form-control " name="itemD" id="inputd" maxlength="200" cols="50" rows="1"></textarea>
                                     <span></span>
                                 </div>
                                 <div class="col-2">
@@ -124,23 +149,23 @@ if (empty($_SESSION['username'])) {
 
                                     <input type="file" class="form-control" name="fileUpload" id="image" onChange="imgDicShow()" oninput="pic.src=window.URL.createObjectURL(this.files[0]) " accept="image/png, image/gif, image/jpeg" />
                                     <span></span>
-                                    
+
                                 </div>
 
                                 <div class="col-1" id="show-img">
-                                <img src="" id="pic" alt="">
+                                    <img src="" id="pic" alt="">
 
                                 </div>
 
 
                                 <div class="col-2">
-                                <input type="hidden" name="id" value="">
+                                    <input type="hidden" name="id" value="">
                                     <button type="button" id="submit">Add</button>
                                     <button type="button" id="update">Update</button>
                                 </div>
-                               
+
                             </form>
-                           
+
                         </div>
                     </div>
 

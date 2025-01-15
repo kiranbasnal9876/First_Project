@@ -298,7 +298,7 @@ span{
         }
 
         .log-out {
-          margin-top: 45vh;
+          margin-top: auto;
 
           a {
             font-size: 12px;
