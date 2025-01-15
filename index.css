@@ -340,20 +340,22 @@ span{
   display: flex;
   padding: 20px 0px;
   gap: 20px;
+  
  
   .card{
     background-color: #4e6269;
     color: white;
-    height: 100px;
+    transition: top ease 0.5s;
     /* transition: box-shadow 0.5s;
     transition: margin-top 0.5s; */
     .card-body{
       background-color: #64b0be;
       margin: 10px;
     }
-    #invoice_detail{
-      margin: 0;
-    }
+  
+  }
+  .card:hover{
+    top: -5px;
   }
 
  

@@ -37,7 +37,7 @@
 
                   <a href="http://localhost/First_Project/clientmaster/client_master.php" class="btn ">
                      <div class="card-body" id="client">
-                        <h5 class="card-title">CLIENT MASTER</h5>
+                        <h6 class="card-title">CLIENT MASTER</h6>
                      </div>
                   </a>
 
