@@ -81,10 +81,10 @@ if (empty($_SESSION['username'])) {
                                         <thead>
                                             <tr>
                                                 <th>S No.</th>
-                                                <th ><img class='asc' id='id' src='../images/arrow-up (1).svg'><img class='desc' id='id' src='../images/arrow-down.svg'>ID</th>
-                                                <th><img class='asc' id='create_by' src='../images/arrow-up (1).svg'><img class='desc' id='create_by' src='../images/arrow-down.svg'>Name</th>
-                                                <th ><img class='asc' id='create_by' src='../images/arrow-up (1).svg'><img class='desc' id='create_by' src='../images/arrow-down.svg'>Phone</th>
-                                                <th><img class='asc' id='email' src='../images/arrow-up (1).svg'><img class='desc' id='email' src='../images/arrow-down.svg'>Email</th>
+                                                <th id="id" class="changeIcon"><i  class="bi-arrow-down-up"></i>ID</th>
+                                                <th id="create_by" class="changeIcon"><i  class="bi-arrow-down-up">Name</th>
+                                                <th id="phone" class="changeIcon" ><i  class="bi-arrow-down-up">Phone</th>
+                                                <th id='email' class="changeIcon"><i  class="bi-arrow-down-up">Email</th>
                                                 <th>Update</th>
                                                 <th>Delete</th>
                                             </tr>

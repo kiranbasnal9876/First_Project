@@ -88,12 +88,12 @@ if (empty($_SESSION['username'])) {
                                             <tr>
                                                 <th>S No.</th>
                                                
-                                                <th><img class='asc' id='invoice_no' src='../images/arrow-up (1).svg'><img class='desc' id='invoice_no' src='../images/arrow-down.svg'>Invoice No</th>
-                                                <th><img class='asc' id='invoice_date' src='../images/arrow-up (1).svg'><img class='desc' id='invoice_date' src='../images/arrow-down.svg'>Invoice Date</th>
-                                                <th><img class='asc' id='name' src='../images/arrow-up (1).svg'><img class='desc' id='name' src='../images/arrow-down.svg'>client Name</th>
+                                                <th class="changeIcon" id='invoice_no'> <i  class="bi-arrow-down-up"></i>Invoice No</th>
+                                                <th class="changeIcon"  id='invoice_date'> <i  class="bi-arrow-down-up"></i>Invoice Date</th>
+                                                <th class="changeIcon" id='name'> <i  class="bi-arrow-down-up"></i>client Name</th>
                                                 <th>address</th>
-                                                <th><img class='asc' id='email' src='../images/arrow-up (1).svg'><img class='desc' id='email' src='../images/arrow-down.svg'>Client Email</th>
-                                                <th><img class='asc' id='phone' src='../images/arrow-up (1).svg'><img class='desc' id='phone' src='../images/arrow-down.svg'>Client Phone</th>
+                                                <th class="changeIcon" id='email'> <i  class="bi-arrow-down-up"></i>Client Email</th>
+                                                <th class="changeIcon" id='phone'> <i  class="bi-arrow-down-up"></i>Client Phone</th>
                                                 <th>Total</th>
                                                 <th>PDF</th>
                                                 <th>Email</th>

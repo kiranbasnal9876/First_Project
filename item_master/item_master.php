@@ -74,10 +74,10 @@
                                         <thead>
                                             <tr>
                                                 <th>S No.</th>
-                                                <th class="changeIcon">
-                                                    Item Name <i class="bi-arrow-down-up"></i>
+                                                <th id='itemName' class="changeIcon">
+                                                    Item Name <i  class="bi-arrow-down-up"></i>
                                                 </th>
-                                                <th class="changeIcon">
+                                                <th id='itemPrice' class="changeIcon">
                                                     Item Price <i class="bi-arrow-down-up"></i>
                                                 </th>
                                                 <th>Item Description</th>

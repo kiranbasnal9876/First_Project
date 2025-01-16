@@ -71,23 +71,57 @@ $(document).ready(function(){
 
 
 //data shorting.......................................................
-$(document).on("click", ".asc", function () {
-  debugger;
+
+let sort = "ASC";
+$(document).on("click", ".changeIcon", function () {
+
+  if(sort == "ASC"){
+    sort = "DESC";
+  }
+  else{
+    sort = "ASC";
+  }
+
+  console.log(sort);
+
   var colname = $(this).attr("id");
- 
   var page_no = $("#page_no").val();
   var row = $("#row").val();
-  loaddata(page_no,'', order, colname, row);
+  loaddata(page_no, '', sort, colname, row);
 });
 
-$(document).on("click", ".desc", function () {
-  var colname = $(this).attr("id");
-  var page_no = $("#page_no").val();
-  var row = $("#row").val();
-  loaddata(page_no, '', order, colname, row);
-});
+// icon changind of sort
+
+$(document).on("click" , '.changeIcon' , function(){
 
 
+  let icon = $(this).find("i");
+
+    if ($(".changeIcon").find("i").hasClass('bi-arrow-up')) {
+
+      $(".changeIcon").find("i").removeClass('bi-arrow-up');
+      icon.addClass('bi-arrow-up')
+
+    }
+    else if ($(".changeIcon").find("i").hasClass('bi-arrow-down')) {
+
+      $(".changeIcon").find("i").removeClass('bi-arrow-down');
+      icon.addClass('bi-arrow-down')
+
+    }
+
+    if (icon.hasClass('')) {
+      icon.addClass('bi-arrow-up');
+    }
+    else if (icon.hasClass('bi-arrow-up')) {
+      icon.removeClass('bi-arrow-up').addClass('bi-arrow-down');
+    }
+    else {
+      icon.removeClass('bi-arrow-down').addClass('bi-arrow-up');
+    }
+  
+
+})
 // reset data from live search.....................
 
 $("#reset").on("click", function () {

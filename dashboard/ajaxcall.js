@@ -1,4 +1,5 @@
  let url='http://localhost/First_Project/dashboard/';
+//  var items=[];
 function getdata(){
 
     $.ajax({
@@ -8,11 +9,16 @@ function getdata(){
        datatype:"html",
         success:function(data){
             let records=JSON.parse(data);
-            console.log(data);
+            
          $("#users").html(records.userdata); 
          $("#client").html(records.clientdata); 
          $("#items").html(records.itemdata); 
-         $("#invoice_detail").html(records.total_invoice); 
+         $("#invoice_detail").html(records.total_invoice);
+        items=records.items;
+        items_sale=records.item_amount;
+
+        chartdata(items,items_sale);
+       
         },
 
     })
@@ -20,9 +26,8 @@ function getdata(){
 
 getdata();
 
-
-
-window.theme = window.theme || {};
+function chartdata(items_name,item_amount){
+    window.theme = window.theme || {};
     window.theme.primary = window.theme.primary || "rgba(0,123,255,1)";
 
     var chartsLine = document.querySelectorAll(".chart-line");
@@ -34,22 +39,22 @@ window.theme = window.theme || {};
             var gradient = ctx.createLinearGradient(0, 0, 0, 225);
             gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
             gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
-
+         
             // Line chart
             new Chart(ctx, {
                 type: "line",
                 data: {
-                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                    labels:items.map(element=>{
+                        return element;
+                    }),
                     datasets: [{
                         label: "Sales (₹)",
                         fill: true,
                         backgroundColor: gradient,
                         borderColor: window.theme.primary,
-                        data: [
-                            2115, 1562, 1584, 1892, 1587,
-                            1923, 2566, 2448, 2805, 3438,
-                            2917, 3327
-                        ]
+                        data:items_sale.map(element=>{
+                            return element
+                        })
                     }]
                 },
                 options: {
@@ -74,7 +79,7 @@ window.theme = window.theme || {};
                         },
                         y: {
                             ticks: {
-                                stepSize: 1000
+                                stepSize: 100
                             },
                             grid: {
                                 color: "rgba(0,0,0,0.0)",
@@ -88,3 +93,5 @@ window.theme = window.theme || {};
             chart.setAttribute("data-chart-initialized", "true");
         }
     });
+}
+

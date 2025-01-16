@@ -90,13 +90,13 @@ if (empty($_SESSION['username'])) {
                                         <thead>
                                             <tr>
                                                 <th>S No.</th>
-                                                <th ><img class='asc' id='id' src='../images/arrow-up (1).svg'><img class='desc' id='id' src='../images/arrow-down.svg'>ID</th>
-                                                <th ><img class='asc' id='name' src='../images/arrow-up (1).svg'><img class='desc' id='name' src='../images/arrow-down.svg'>Name</th>
-                                                <th ><img class='asc' id='phone' src='../images/arrow-up (1).svg'><img class='desc' id='phone' src='../images/arrow-down.svg'>Phone</th>
-                                                <th ><img class='asc' id='email' src='../images/arrow-up (1).svg'><img class='desc' id='email' src='../images/arrow-down.svg'>Email</th>
+                                                <th class="changeIcon" id='id'><i  class="bi-arrow-down-up"></i>ID</th>
+                                                <th class="changeIcon"  id='name'><i  class="bi-arrow-down-up"></i>Name</th>
+                                                <th class="changeIcon" id='phone'><i  class="bi-arrow-down-up"></i>Phone</th>
+                                                <th class="changeIcon" id='email'><i  class="bi-arrow-down-up"></i>Email</th>
                                                 <th>address</th>
-                                                <th ><img class='asc' id='state_name' src='../images/arrow-up (1).svg'><img class='desc' id='state_name' src='../images/arrow-down.svg'>Sate</th>
-                                                <th ><img class='asc' id='district_name' src='../images/arrow-up (1).svg'><img class='desc' id='district_name' src='../images/arrow-down.svg'>District</th>
+                                                <th class="changeIcon"  id='state_name'><i  class="bi-arrow-down-up"></i>Sate</th>
+                                                <th class="changeIcon" id='district_name'><i  class="bi-arrow-down-up"></i>District</th>
                                                 <th >pincode</th>
 
                                                 <th>Update</th>

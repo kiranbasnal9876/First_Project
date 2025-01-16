@@ -119,21 +119,6 @@ $(document).on("click" , '.changeIcon' , function(){
 })
 
 
-// $(document).on("click", ".asc", function () {
-
-//   var colname = $(this).attr("id");
-//   var page_no = $("#page_no").val();
-//   var row = $("#row").val();
-//   loaddata("ASC", colname);
-
-// });
-
-// $(document).on("click", ".desc", function () {
-//   var colname = $(this).attr("id");
-//   var page_no = $("#page_no").val();
-//   var row = $("#row").val();
-//   loaddata("DESC", colname);
-// });
 
     // insert data...............
     $("#submit").on("click", function () {
