@@ -39,7 +39,8 @@ class User_master
 
         if ($result->num_rows>0) {
             while ($row = $result->fetch_assoc()) {
-                $_SESSION['username'] = $row['create_by'];
+                $_SESSION['username'] = $row['name'];
+                $_SESSION['id'] = $row['id'];
                 
                 $status = 200;
             }
@@ -76,21 +77,21 @@ class User_master
 
             $id = $_POST['id'];
             $sql = "update  user_master
-        set create_by='$name',
+        set name='$name',
         email='$email',
         phone='$phone',
         password='$password' where id='$id'";
 
 
             if (!empty($email && $password && $name && $phone)) {
-                if (mysqli_query($this->con, $sql) == true) {
+                if (mysqli_query( $this->con, $sql) == true) {
 
 
                     $status = 400;
                 }
             }
         } else  if (!empty($email && $password && $name && $phone)) {
-            $sql = "insert into user_master(create_by,email,phone,password)values('$name','$email','$phone','$password')";
+            $sql = "insert into user_master(name,email,phone,password)values('$name','$email','$phone','$password')";
             
             if (mysqli_query($this->con, $sql) == true) {
 
@@ -125,15 +126,21 @@ class User_master
         $status='';
         $error='';
         $id = $_POST['id'];
-
-        $sql = "delete from user_master where id='$id'";
-
-        if (mysqli_query($this->con, $sql) == false) {
-
-            $error = $this->con->error;
-        } else {
-            $status = 200;
+        if( $_SESSION['id']==$id){
+          $error="you can not delete logged user";
         }
+        
+        else{
+            $sql = "delete from user_master where id='$id'";
+         
+            if (mysqli_query($this->con, $sql) == false) {
+    
+                $error = $this->con->error;
+            } else {
+                $status = 200;
+            }
+        }
+       
 
         echo json_encode(['status' => $status, 'error' => $error]);
     }

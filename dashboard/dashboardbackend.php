@@ -45,7 +45,7 @@
 
       $totalinvoice="<h6 class='card-title'>Total Invoice=$invoice</h6>";
 
-     $sql5="select itemName , sum(amount) as items_total_amount from item_master join invoive on item_master.id=invoive.item_id group by itemName";
+     $sql5="select itemName , sum(amount) as items_total_amount from item_master join invoice_itemlist on item_master.id=invoice_itemlist.item_id group by itemName";
      $items_amount=[];
      $items=[];
     $result2= $this->con->query($sql5);

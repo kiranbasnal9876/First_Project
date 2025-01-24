@@ -89,26 +89,7 @@
                                                 <th>Delete</th>
                                             </tr>
                                         </thead>
-                                        <!-- <thead>
-                                            <tr>
-                                                <th>S No.</th>
-                                                <th>
-                                                    <img class='asc' id='itemName' src='../images/arrow-up (1).svg'>
-                                                    <img class='desc' id='itemName' src='../images/arrow-down.svg'>Item Name
-                                                </th>
-                                                <th>
-                                                    <img class='asc' id='itemPrice' src='../images/arrow-up (1).svg'>
-                                                    <img class='desc' id='itemPrice' src='../images/arrow-down.svg'> Item Price
-                                                </th>
-                                                <th>Item Description</th>
-
-                                                <th>Item image</th>
-
-
-                                                <th>Update</th>
-                                                <th>Delete</th>
-                                            </tr>
-                                        </thead> -->
+                                      
                                         <tbody id='tbody'>
 
                                         </tbody>

@@ -9,7 +9,7 @@ $pages='';
 $sort='';
 $offset='';
 
-if(isset($_POST['id'])){
+if($_POST['id'] != ""){
 $id=$_POST['id'];
 }
 else{

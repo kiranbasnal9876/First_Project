@@ -20,7 +20,7 @@ function loaddata(page, search,order,colname,row) {
       row:row
     },
     type: "post",
-    datatype: "json",
+    
   
     success: function (data) {
       
@@ -64,7 +64,9 @@ $(document).ready(function(){
   $(document).on("keyup", ".search", function () {
     var search = $(this).val();
     var page_no=$("#page_no").val();
-    loaddata(page_no, search);
+    var row =$("#row").val();
+   
+    loaddata(page_no, search,'','',row);
   });
 
 
@@ -126,8 +128,9 @@ $(document).on("click" , '.changeIcon' , function(){
 
 $("#reset").on("click", function () {
   $("input").val("");
- 
-  loaddata();
+  var page_no=$("#page_no").val();
+  var row =$("#row").val();
+  loaddata(page_no,"","","",row);
 });
 
 
@@ -226,7 +229,7 @@ $(document).on("click", ".edit-btn", function () {
       action:'getdata'
     },
     success: function (data) {
-      $("#Name").val(data.create_by);
+      $("#Name").val(data.name);
       $("#Phone").val(data.phone);
       $("#inputemail").val(data.email);
       

@@ -1,6 +1,6 @@
 $("#login-btn").on("click", function () {
     validate();
-    if(formvalidate){
+    if(checkvalidate){
         
     let email = $("#inputemail").val().trim();
   
@@ -15,6 +15,7 @@ $("#login-btn").on("click", function () {
         password,
         action:"logIn"
       },
+
       success: function (data) {
         let dataNew = JSON.parse(data)
         if (dataNew.status == 400) {

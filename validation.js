@@ -1,7 +1,7 @@
 
 
 
-$("input").on("input", function () {
+$("input").on("input ", function () {
   var value = $(this).val().trim();
   
   var error = $(this).next();
@@ -79,8 +79,12 @@ var checkvalidate=true;
 
 function validate() {
 
-  $("input[type!='hidden']").each(function () {
+  $("input[type!='hidden'],textarea,select").each(function () {
+ 
     if ($(this).val() == "") {
+    // $name=  $(this).closest("label").text();
+    var $name = $(this).prev().find("label").text().trim();
+    console.log($name);
       $(this).next().text("this field is  required");
       checkvalidate=false;
     }
@@ -116,21 +120,6 @@ $(document).on("input", ".price", function () {
 
 
 
-var formvalidate = true;
-function validateClient(){
-  $("#formdata")
-    .find("select,input:not([type='file'])")
-    .each(function () {
-      if ($(this).attr("type") !== "hidden" && $(this).val() == "") {
-        $(this).next().text("this field is required");
-        formvalidate = false;
-      }
-      else{
-        formvalidate = true;
-      }
-      
-    });
-}
 
 
 $(".sidebar_slide").click(function(){

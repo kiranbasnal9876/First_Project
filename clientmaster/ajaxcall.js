@@ -71,7 +71,7 @@ $("#row").on("change", function () {
 
 // searching data from database
 
-$("#filter_form").on("input", function () {
+$("#filter_form").on("input", function (){
   loaddata("","");
 });
 
@@ -139,10 +139,10 @@ $(document).on("click" , '.changeIcon' , function(){
 
 //insert data in database.......................................
 $("#submit").on("click", function () {
-  validateClient();
+  validate();
   var formdata = new FormData(form);
   formdata.append("action","add");
-  if (formvalidate) {
+  if (checkvalidate) {
     $.ajax({
       url: url + "clientmaster_backend.php",
       data: formdata,

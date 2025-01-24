@@ -35,7 +35,7 @@ if (empty($_SESSION['username'])) {
                                 <form name="getformdata" class="filter-div" id="filter_form">
                                 <div class="col-1">
                                     <label for="id">Id:</label>
-                                    <input type="text" class="form-control numeric" maxlength="3" name="id">
+                                    <input type="text" class="form-control numeric" maxlength="3" name="id" id="client_id">
                                 </div>
                                 <div class="col-1.5">
                                     <label for="name">Name:</label>

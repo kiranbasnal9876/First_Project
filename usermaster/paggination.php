@@ -45,7 +45,7 @@ else{
     $limit = 2;
 }
 
-$sql1 = "select * from user_master where  id  like '%{$search}%' or create_by LIKE '%{$search}%' or phone like '%{$search}%' or email like '%{$search}%' '{$sort}' ";
+$sql1 = "select * from user_master where  id  like '%{$search}%' or name LIKE '%{$search}%' or phone like '%{$search}%' or email like '%{$search}%' '{$sort}' ";
 
 $records = mysqli_query($con, $sql1);
 
@@ -77,7 +77,7 @@ for ($i = 1; $i <= $total_page; $i++) {
 
 $offset = ($page - 1) * $limit;
 
-$sql = "select*from user_master  where  id  like '%{$search}%' or create_by LIKE '%{$search}%' or phone like '%{$search}%' or email like '%{$search}%'  $sort limit {$offset},{$limit}";
+$sql = "select*from user_master  where  id  like '%{$search}%' or name LIKE '%{$search}%' or phone like '%{$search}%' or email like '%{$search}%'  $sort limit {$offset},{$limit}";
 
 $result = mysqli_query($con, $sql);
 
@@ -86,7 +86,7 @@ $result = mysqli_query($con, $sql);
     if ($result->num_rows > 0) {
         $offset += 1;
         while ($row = $result->fetch_assoc()) {
-            $output .= "<tr><td>{$offset}</td><td>{$row['id']}</td><td class='edit-btn' data-id={$row['id']}>{$row['create_by']}</td><td>{$row['phone']}</td><td>{$row['email']}</td>
+            $output .= "<tr><td>{$offset}</td><td>{$row['id']}</td><td class='edit-btn' data-id={$row['id']}>{$row['name']}</td><td>{$row['phone']}</td><td>{$row['email']}</td>
     <td><button  class='btn  edit-btn p-0' data-id={$row['id']} ><img src='../images/edit (1).svg' ></button></td><td><button  class=' btn  p-0 delete-btn' data-id={$row['id']} ><img src='../images/trash (1).svg' ></button></td></tr>";
             $offset++;
         }
