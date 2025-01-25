@@ -36,7 +36,7 @@ if (empty($_SESSION['username'])) {
                                 <form name="getformdata" class="filter-div" id="filter_form">
                                     <div class="col-1">
                                         <label for="id">Invoice No:</label>
-                                        <input type="text" class="form-control numeric" name="invoice_no">
+                                        <input type="number" class="form-control numeric" name="invoice_no">
                                     </div>
                                     <div class="col-1.5">
                                         <label for="name">Client Name:</label>
@@ -56,7 +56,7 @@ if (empty($_SESSION['username'])) {
                                     </div>
 
                                     <div class="col-1">
-                                        <button type="button" class=" mt-3" id="reset">Reset</button>
+                                        <button type="reset" class=" mt-3" id="reset">Reset</button>
                                     </div>
                                     <input type="hidden" id="page_no" value="1" name="page">
                                     <input type="hidden" id="row_no" value="2" name="row">
@@ -166,12 +166,12 @@ if (empty($_SESSION['username'])) {
                                 <div class="row mb-3">
                                     <div class="col-3">
                                         <label for="invoice" class="form-label">Invoice No:</label>
-                                        <input type="text" class="form-control invoic" name="invoice_no" id="invoice" maxlength="15" readonly>
+                                        <input type="text" class="form-control invoic" name="invoice_no" id="invoice" maxlength="15" >
                                         <input type="hidden" class="invoice_id" name="invoice_id" value="">
                                     </div>
                                     <div class="col-3">
                                         <label for="invoice_date" class="form-label">Invoice Date:</label>
-                                        <input type="text" class="form-control" name="invoice_date" id="invoice_date2" readonly>
+                                        <input type="text" class="form-control" name="invoice_date" id="invoice_date2" >
 
                                     </div>
                                 </div>
@@ -216,7 +216,7 @@ if (empty($_SESSION['username'])) {
                                     <div class="col-3">
                                         <label for="input" class="form-label">Item Name:</label>
 
-                                        <input type="text" class="form-control inputitem" id="input" maxlength="20" required>
+                                        <input type="text" class="form-control inputitem" id="input" maxlength="20" onchange="amount()">
                                         <span></span>
                                         <input type="hidden" class="item_id" name="item_id[]">
                                        

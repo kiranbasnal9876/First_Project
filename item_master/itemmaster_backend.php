@@ -1,7 +1,7 @@
 <?php
 
 
-class client_master
+class item_master
 {
 
     private $con;
@@ -122,7 +122,7 @@ function insertdata()
 
 }
 
-    $obj = new client_master();
+    $obj = new item_master();
 
 
   if (isset($_POST['action']) && $_POST['action'] == 'getdata') {

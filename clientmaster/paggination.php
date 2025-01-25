@@ -123,8 +123,8 @@ if($result->num_rows>0){
 $offset+=1;
     while($row=$result->fetch_assoc()){
 
-        $output .= "<tr><td>{$offset}</td><td>{$row['id']}</td><td class='edit-btn' data-id={$row['id']}>{$row['name']}</td><td>{$row['phone']}</td><td>{$row['email']}</td><td>{$row['address']}</td>
-    <td>{$row['state_name']}</td><td>{$row['district_name']}</td><td>{$row['pincode']}</td><td><button  class='btn  edit-btn p-0' data-id={$row['id']} ><img src='../images/edit (1).svg' ></button></td><td><button  class=' btn  p-0 delete-btn' data-id={$row['id']} ><img src='../images/trash (1).svg' ></button></td></tr>";
+        $output .= "<tr><td>{$offset}</td><td>{$row['id']}</td><td class='edit-btn bold' data-id={$row['id']}>{$row['name']}</td><td>{$row['phone']}</td><td>{$row['email']}</td><td> {$row['state_name']},{$row['district_name']},{$row['address']},{$row['pincode']}</td>
+   <td><button  class='btn  edit-btn p-0' data-id={$row['id']} ><img src='../images/edit (1).svg' ></button></td><td><button  class=' btn  p-0 delete-btn' data-id={$row['id']} ><img src='../images/trash (1).svg' ></button></td></tr>";
              $offset++;
         }
     }

@@ -35,7 +35,7 @@ if (empty($_SESSION['username'])) {
                                 <form name="getformdata" class="filter-div" id="filter_form">
                                 <div class="col-1">
                                     <label for="id">Id:</label>
-                                    <input type="text" class="form-control numeric" maxlength="3" name="id" id="client_id">
+                                    <input type="number" class="form-control numeric" maxlength="3" name="id" id="client_id">
                                 </div>
                                 <div class="col-1.5">
                                     <label for="name">Name:</label>
@@ -43,23 +43,20 @@ if (empty($_SESSION['username'])) {
                                 </div>
                                 <div class="col-1.5">
                                     <label for="phone">Phone:</label>
-                                    <input type="text" class="form-control numeric" name="phone">
+                                    <input type="number" class="form-control numeric" name="phone">
                                 </div>
                                 <div class="col-1.5">
                                     <label for="email">Email:</label>
                                     <input type="email" class="form-control " name="email">
                                 </div>
+                              
                                 <div class="col-1.5">
-                                    <label for="State_Input">State</label>
-                                    <input type="text" class="form-control " name="state" id='State_Input'>
-                                </div>
-                                <div class="col-1.5">
-                                    <label for="Dis_input">District:</label>
+                                    <label for="Dis_input">Address:</label>
                                     <input type="text" class="form-control" name="district">
                                 </div>
 
                                 <div class="col-1">
-                                    <button type="button" class=" mt-3" id="reset">Reset</button>
+                                    <button type="reset" class=" mt-3" id="reset">Reset</button>
                                 </div>
                                 <input type="hidden" id="page_no" value="1" name="page">
                                 <input type="hidden" id="row_no" value="2" name="row">
@@ -94,10 +91,8 @@ if (empty($_SESSION['username'])) {
                                                 <th class="changeIcon"  id='name'><i  class="bi-arrow-down-up"></i>Name</th>
                                                 <th class="changeIcon" id='phone'><i  class="bi-arrow-down-up"></i>Phone</th>
                                                 <th class="changeIcon" id='email'><i  class="bi-arrow-down-up"></i>Email</th>
-                                                <th>address</th>
-                                                <th class="changeIcon"  id='state_name'><i  class="bi-arrow-down-up"></i>Sate</th>
-                                                <th class="changeIcon" id='district_name'><i  class="bi-arrow-down-up"></i>District</th>
-                                                <th >pincode</th>
+                                                <th >address</th>
+                                               
 
                                                 <th>Update</th>
                                                 <th>Delete</th>
@@ -124,22 +119,22 @@ if (empty($_SESSION['username'])) {
                         <div class="add-client">
                             <form class="row g-3" id="formdata" name="form">
                                 <div class="col-3">
-                                    <label for="inputAddress2" class="form-label">Client Name:</label>
+                                    <label for="inputAddress2" class="form-label">Client Name<span>*</span></label>
                                     <input type="text" class="form-control" name="name" id="inputAddress2" maxlength="15">
                                     <span></span>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="inputEmail4" class="form-label">Email:</label>
+                                    <label for="inputEmail4" class="form-label">Email<span>*</span></label>
                                     <input type="email" class="form-control" name="email" id="inputEmail4">
                                     <span></span>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="inputPassword4" class="form-label ">Phone:</label>
+                                    <label for="inputPassword4" class="form-label ">Phone<span>*</span></label>
                                     <input type="text" class="form-control numeric" name="phone" id="inputPassword4" maxlength="12">
                                     <span></span>
                                 </div>
                                 <div class="col-3">
-                                    <label for="inputAddress" class="form-label">Address</label>
+                                    <label for="inputAddress" class="form-label">Address<span>*</span></label>
 
                                     <input type="text" class="form-control" name="address" id="inputAddress" maxlength="50">
                                     <span></span>
@@ -148,7 +143,7 @@ if (empty($_SESSION['username'])) {
 
 
                                 <div class="col-md-3">
-                                    <label for="inputState" class="form-label">State</label>
+                                    <label for="inputState" class="form-label">State<span>*</span></label>
                                     <select id="inputState" class="form-select" name="state_id">
                                         <option name="state_name" value="">select</option>
 
@@ -169,7 +164,7 @@ if (empty($_SESSION['username'])) {
                                 </div>
 
                                 <div class="col-md-3">
-                                    <label for="input_district" class="form-label">District</label>
+                                    <label for="input_district" class="form-label">District<span>*</span></label>
                                     <select id="input_district" class="form-select" name="district_id">
                                         <option id="option" name="district_name"  value="">select</option>
                                          
@@ -177,7 +172,7 @@ if (empty($_SESSION['username'])) {
                                     <span></span>
                                 </div>
                                 <div class="col-md-2">
-                                    <label for="inputZip" class="form-label ">Pin Code</label>
+                                    <label for="inputZip" class="form-label ">Pin Code<span>*</span></label>
                                     <input type="text" class="form-control numeric" name="pincode" id="inputZip" maxlength="6">
                                     <span></span>
                                 </div>

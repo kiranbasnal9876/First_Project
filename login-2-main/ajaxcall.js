@@ -1,3 +1,4 @@
+var url="http://localhost/First_Project/";
 $("#login-btn").on("click", function () {
     validate();
     if(checkvalidate){
@@ -8,7 +9,7 @@ $("#login-btn").on("click", function () {
     
 
     $.ajax({
-      url: "http://localhost/First_Project/usermaster/user_backend.php",
+      url: url + "usermaster/user_backend.php",
       type: "post",
       data: {
         email,
@@ -25,7 +26,7 @@ $("#login-btn").on("click", function () {
         } 
         else if (dataNew.status == 200) {
           debugger
-          window.location.href="http://localhost/First_Project/usermaster/usermaster.php";
+          window.location.href=url+"dashboard/dashboard.php";
         }
       },
     });

@@ -5,22 +5,43 @@ include("../dbcon.php");
 $limit ="";
 $output = "";
 $page = "";
-$search = "";
+// $search = "";
 $sort = "";
 $pages="";
 
-if (isset($_POST['page_no'])) {
-    $page = $_POST['page_no'];
+if (isset($_POST['page'])) {
+    $page = $_POST['page'];
    
 } else {
     $page = 1;
 }
 
-if (isset($_POST['search'])) {
-    $search = $_POST['search'];
-} else {
-    $search = "";
-}
+if($_POST['id'] != ""){
+    $id=$_POST['id'];
+    }
+    else{
+    $id="";
+    }
+    if(isset($_POST['name'])){
+    $name=$_POST['name'];
+    }
+    else{
+    $name="";
+    }
+    
+    if(isset($_POST['phone'])){
+    $phone=$_POST['phone'];
+    }
+    else{
+    $phone="";
+    }
+    if(isset($_POST['email'])){
+    $email=$_POST['email'];
+    }
+    else{
+    $email="";
+    }
+    
 
 //  echo $_POST['colname'];
 //  echo $_POST['order'];
@@ -45,7 +66,7 @@ else{
     $limit = 2;
 }
 
-$sql1 = "select * from user_master where  id  like '%{$search}%' or name LIKE '%{$search}%' or phone like '%{$search}%' or email like '%{$search}%' '{$sort}' ";
+$sql1 = "select * from user_master where  id like '%{$id}%' && name LIKE '%{$name}%' && phone like'%{$phone}%' && email like '%{$email}%' '{$sort}' ";
 
 $records = mysqli_query($con, $sql1);
 
@@ -77,7 +98,7 @@ for ($i = 1; $i <= $total_page; $i++) {
 
 $offset = ($page - 1) * $limit;
 
-$sql = "select*from user_master  where  id  like '%{$search}%' or name LIKE '%{$search}%' or phone like '%{$search}%' or email like '%{$search}%'  $sort limit {$offset},{$limit}";
+$sql = "select*from user_master  where  id like '%{$id}%' && name LIKE '%{$name}%' && phone like '%{$phone}%' && email like '%{$email}%'  $sort limit {$offset},{$limit}";
 
 $result = mysqli_query($con, $sql);
 

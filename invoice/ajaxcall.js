@@ -142,9 +142,20 @@ $(document).on("keyup", ".inputitem", function () {
     select: function (event, ui) {
       $(this).parents(".clone").find(".price").val(ui.item.itemPrice);
       $(this).parents(".clone").find(".item_id").val(ui.item.id);
-      amount();
+      var quantity = 1;
+      // amount();
+      var price = $(this).parents(".clone").find(".price").val();
+      $(this).parents(".clone") .find(".Amount").val(quantity * price);
+      // console.log($("..Amount").val());
+       total_amount();
+     
     },
-  });
+
+ 
+  }
+ );
+  
+   
 });
 
 
@@ -161,9 +172,10 @@ function total_amount() {
   $("#total-amount").val(Total_amount.toFixed(2));
 }
 
+// total_amount();
 // calculate amount...................
 function amount() {
-  $(".Item").on("input", function () {
+  $(".Item ").on("input", function () {
     var item = $(this).val();
 
     var price = $(this).parents(".clone").find(".price").val();
@@ -172,11 +184,17 @@ function amount() {
       .parents(".clone")
       .find(".Amount")
       .val(item * price);
-    total_amount();
+      total_amount();
   });
 }
 
 amount();
+
+
+
+
+
+
 // invoice number
 $("#profile-tab").on("click", function () {
   $.ajax({
@@ -195,12 +213,12 @@ $("#profile-tab").on("click", function () {
 
 // insert data ........................
 $("#invoice_submit").on("click", function () {
-  debugger;
+  // debugger;
   var formdata = new FormData(form);
 
   formdata.append("action", "add");
-  validateClient();
-  if($(".clients").val() != "" && $("#input").val() != "" &&$("#item").val() != 0){
+  validate();
+  if(checkvalidate){
   $.ajax({
     url: url + "invoice_backend.php",
     data: formdata,
@@ -224,25 +242,27 @@ $("#invoice_submit").on("click", function () {
 }
 });
 
-//ahowing all records................
+// geting data from server.............................................
+
 function loaddata(order, colname) {
   var form = new FormData(getformdata);
+
   form.append("order", order);
   form.append("colname", colname);
   $.ajax({
     url: url + "paggination.php",
     data: form,
+
     processData: false,
     contentType: false,
     type: "post",
     datatype: "json",
+
     success: function (data) {
       data = JSON.parse(data);
-      $("tbody").html(data.table);
 
+      $("tbody").html(data.table);
       $(".page").html(data.page);
-     
-   $("#pdf_link").attr('href',($("#pdf_genrate a").attr('href')));
     },
   });
 }
@@ -254,6 +274,9 @@ loaddata("", "");
 $(document).on("click", ".page li", function () {
   page_id = $(this).attr("id");
   $("#page_no").val(page_id);
+
+  // var row = $("#row").val();
+
   loaddata("", "");
 });
 
@@ -261,16 +284,27 @@ $(document).on("click", ".page li", function () {
 $("#row").on("change", function () {
   var row = $(this).val();
   $("#row_no").val(row);
-
+  $("#page_no").val(1);
   loaddata("", "");
 });
 
-// filter data.................
-$("#filter_form").on("input", function () {
-  loaddata("", "");
+// searching data from database
+
+$("#filter_form").on("input", function (){
+  $("#page_no").val(1);
+  loaddata("","");
 });
 
-//for sorting data
+$("#reset").on("click", function (){
+
+setTimeout(function(){
+  loaddata("","");
+},100);
+   
+});
+// data shorting...................................................
+
+
 // sorting on click
 let sort = "ASC";
 $(document).on("click", ".changeIcon", function () {
@@ -282,7 +316,7 @@ $(document).on("click", ".changeIcon", function () {
     sort = "ASC";
   }
 
-  console.log(sort);
+  
 
   var colname = $(this).attr("id");
   var page_no = $("#page_no").val();
@@ -290,7 +324,6 @@ $(document).on("click", ".changeIcon", function () {
   loaddata(sort, colname);
 
 });
-
 
 // icon changind of sort
 
@@ -325,13 +358,8 @@ $(document).on("click" , '.changeIcon' , function(){
 
 })
 
-// reset filter data
-$("#reset").on("click", function () {
-  // $(".filter-div").trigger("reset");
 
-  $("[type!='hidden']").val("");
-  loaddata("", "");
-});
+
 
 //deleting data from database
 $(document).on("click", ".delete-btn", function () {

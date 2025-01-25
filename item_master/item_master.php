@@ -41,7 +41,7 @@
                                     </div>
 
                                     <div class="col-1">
-                                        <button type="button" class=" mt-3" id="reset">Reset</button>
+                                        <button type="reset" class=" mt-3" id="reset">Reset</button>
                                     </div>
                                     <input type="hidden" id="page_no" value="1" name="page">
                                     <input type="hidden" id="row_no" value="2" name="row">

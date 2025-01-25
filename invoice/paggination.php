@@ -1,6 +1,9 @@
 
 
 <?php
+
+use SebastianBergmann\Environment\Console;
+
 include("../dbcon.php");
 
 // print_r($_POST);
@@ -88,7 +91,6 @@ if (isset($_POST['colname'])) {
 
 $sql = "select * FROM invoice_master as IVM JOIN client_master as CM
  ON IVM.client_id=CM.id where invoice_no like '%$invoice_no%' && name like '%$name%' && email like '%$email%' && phone like '%$phone%'  && invoice_date like '%$invoiceDate%'  {$sort} limit {$offset},{$limit}";
-
 
 
 

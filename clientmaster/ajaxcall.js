@@ -65,21 +65,23 @@ $(document).on("click", ".page li", function () {
 $("#row").on("change", function () {
   var row = $(this).val();
   $("#row_no").val(row);
-
+  $("#page_no").val(1);
   loaddata("", "");
 });
 
 // searching data from database
 
 $("#filter_form").on("input", function (){
+  $("#page_no").val(1);
   loaddata("","");
 });
 
-$("#reset").on("click", function () {
-  // $(".filter-div").trigger("reset");
-  
-   $("[type!='hidden']").val("");
-   loaddata("","");
+$("#reset").on("click", function (){
+
+setTimeout(function(){
+  loaddata("","");
+},100);
+   
 });
 // data shorting...................................................
 
@@ -237,10 +239,10 @@ $(document).on("click", ".delete-btn", function () {
 
 //updating data ..........................
 $("#update").on("click", function () {
-  validateClient();
+  validate();
   var formdata = new FormData(form);
   formdata.append("action","add");
-  if (formvalidate) {
+  if (checkvalidate) {
     $.ajax({
       url: url + "clientmaster_backend.php",
       data: formdata,
@@ -268,6 +270,7 @@ $("#update").on("click", function () {
 
 $("#home-tab").on("click",function(){
   $("#formdata").trigger("reset");
+ 
   $("#update").hide();
         $("#submit").show();
 })

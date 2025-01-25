@@ -1,4 +1,5 @@
 
+url="http://localhost/First_Project/item_master/";
 $('a[id="itemmaster"]').addClass('active');
 $("#update").hide();
 
@@ -10,9 +11,11 @@ let image = $("#pic");
         $("#show-img").show();
       }
 
-url="http://localhost/First_Project/item_master/";
-function loaddata(order,colname) {
+// geting data from server.............................................
+
+function loaddata(order, colname) {
   var form = new FormData(getformdata);
+
   form.append("order", order);
   form.append("colname", colname);
   $.ajax({
@@ -50,21 +53,26 @@ $(document).on("click", ".page li", function () {
 $("#row").on("change", function () {
   var row = $(this).val();
   $("#row_no").val(row);
+  $("#page_no").val(1);
   loaddata("", "");
 });
 
 // searching data from database
 
-$("#filter_form").on("input", function () {
+$("#filter_form").on("input", function (){
+  $("#page_no").val(1);
   loaddata("","");
 });
 
-$("#reset").on("click", function () {
-  // $(".filter-div").trigger("reset");
-  
-   $("[type!='hidden']").val("");
-   loaddata("","");
+$("#reset").on("click", function (){
+
+setTimeout(function(){
+  loaddata("","");
+},100);
+   
 });
+// data shorting...................................................
+
 
 // sorting on click
 let sort = "ASC";
@@ -140,7 +148,9 @@ $(document).on("click" , '.changeIcon' , function(){
           processData: false,
           success: function (data) {
             if (data.status == 200) {
-              alert("data is successfully inserted");
+            //   <div class="alert alert-success" role="alert">
+            //   data inserted  successfully
+            //  </div>
               $("#formdata").trigger("reset");
               $("#inputd").val("");
               loaddata("", "");
@@ -149,7 +159,9 @@ $(document).on("click" , '.changeIcon' , function(){
               tab.show();
             }
             else{
-              alert(data.error);
+              // <div class="alert alert-danger" role="alert">
+              // data not inserted successfully
+              //  </div>
             }
           },
         });
@@ -223,10 +235,10 @@ $(document).on("click", ".edit-btn", function () {
 });
 //update data---------
 $("#update").on("click", function () {
-  validateClient();
+  validate();
   var formdata = new FormData(form);
   formdata.append("action","add");
-  if (formvalidate) {
+  if (checkvalidate) {
     $.ajax({
       url: url +"itemmaster_backend.php",
       data: formdata,
@@ -236,7 +248,9 @@ $("#update").on("click", function () {
       processData: false,
       success: function (data) {
         if (data.status == 200) {
-          alert("data is successfully updated");
+          // <div class="alert alert-success" role="alert">
+          //  values updated successfully
+          // </div>
           $("#formdata").trigger("reset");
           $("#inputd").val("");
           loaddata("","");
@@ -248,7 +262,7 @@ $("#update").on("click", function () {
           $("#update").hide();
         }
         else{
-          alert(data.error);
+     
         }
       },
     });
@@ -267,6 +281,8 @@ function imgDicShow(){
 
 $("#home-tab").on("click",function(){
   $("#formdata").trigger("reset");
+  $("textarea").val("");
+  $("#show-img").hide();
   $("#update").hide();
         $("#submit").show();
 })

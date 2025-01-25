@@ -1,79 +1,74 @@
 
 $('a[id="usermaster"]').addClass('active');
 $("#update-btn").hide();
-
+var url = "http://localhost/First_Project/usermaster/";
 
 // login//---------------
 
 
 
 //  getting data from database ...............................
+// $("#tbody").html(data.table);
+// $(".page").html(data.page);
 
-function loaddata(page, search,order,colname,row) {
+function loaddata(order, colname) {
+  var form = new FormData(getformdata);
+
+  form.append("order", order);
+  form.append("colname", colname);
   $.ajax({
-    url: "http://localhost/First_Project/usermaster/paggination.php",
-    data: {
-      page_no: page,
-      search: search,
-      colname:colname,
-      order:order,
-      row:row
-    },
+    url: url + "paggination.php",
+    data: form,
+
+    processData: false,
+    contentType: false,
     type: "post",
-    
-  
+    datatype: "html",
+
     success: function (data) {
-      
-      data=JSON.parse(data);
+      data = JSON.parse(data);
+
       $("#tbody").html(data.table);
       $(".page").html(data.page);
     },
   });
 }
 
-loaddata();
+loaddata("", "");
 
-//paggination code
+// pagination code.................
 
-$(document).ready(function () {
-  $(document).on("click", ".page li", function () {
-    page_id = $(this).attr("id");
-    $("#page_no").val(page_id);
-        
- var row= $("#row").val();
-  
-    loaddata(page_id,'','','',row);
-  });
+$(document).on("click", ".page li", function () {
+  page_id = $(this).attr("id");
+  $("#page_no").val(page_id);
 
+  loaddata("", "");
 });
 
-// selecting rows....................................................
-$(document).ready(function(){
-  $(document).on("click","#row",function(){
-    var row =$(this).val();
-   
-   
-    loaddata(1,'','','',row);
-  })
+// selecting row.........................................
+$("#row").on("change", function () {
+  var row = $(this).val();
+  $("#row_no").val(row);
+  $("#page_no").val(1);
+  loaddata("", "");
 });
 
+// searching data from database
 
+$("#filter_form").on("input", function (){
+  $("#page_no").val(1);
+  loaddata("","");
+});
 
-// live search.......................
+$("#reset").on("click", function (){
 
-  $(document).on("keyup", ".search", function () {
-    var search = $(this).val();
-    var page_no=$("#page_no").val();
-    var row =$("#row").val();
+setTimeout(function(){
+  loaddata("","");
+},100);
    
-    loaddata(page_no, search,'','',row);
-  });
+});
 
-
-
-
-//data shorting.......................................................
-
+// sorting on click
 let sort = "ASC";
 $(document).on("click", ".changeIcon", function () {
 
@@ -84,13 +79,18 @@ $(document).on("click", ".changeIcon", function () {
     sort = "ASC";
   }
 
-  console.log(sort);
+ 
 
   var colname = $(this).attr("id");
-  var page_no = $("#page_no").val();
-  var row = $("#row").val();
-  loaddata(page_no, '', sort, colname, row);
+  // var page_no = $("#page_no").val();
+  // var row = $("#row").val();
+  loaddata(sort, colname);
+
 });
+
+
+
+
 
 // icon changind of sort
 
@@ -124,14 +124,6 @@ $(document).on("click" , '.changeIcon' , function(){
   
 
 })
-// reset data from live search.....................
-
-$("#reset").on("click", function () {
-  $("input").val("");
-  var page_no=$("#page_no").val();
-  var row =$("#row").val();
-  loaddata(page_no,"","","",row);
-});
 
 
 
@@ -145,16 +137,11 @@ $("#insert-btn").on("click", function () {
   var email = document.getElementById("inputemail").value;
   var phone = document.getElementById("Phone").value;
 
-  if (
-    $("#log_er1").text()=="" &&
-    $("#log_er2").text()=="" &&
-    $("#log_er").text()=="" &&
-    $("#log_er3").text()==""
-  ) 
+  if (checkvalidate) 
   {
     
     $.ajax({
-      url: "http://localhost/First_Project/usermaster/user_backend.php",
+      url: url+"/user_backend.php",
 
       data: {
         password: password,
@@ -192,7 +179,7 @@ $(document).on("click", ".delete-btn", function () {
     var id = $(this).data("id");
     var page_no=$("#page_no").val();
     $.ajax({
-      url: "http://localhost/First_Project/usermaster/user_backend.php",
+      url: url+"user_backend.php",
       data: {
         id: id,
         action:'delete',
@@ -221,7 +208,7 @@ $(document).on("click", ".edit-btn", function () {
   let id = $(this).data("id");
 
   $.ajax({
-    url: "user_backend.php",
+    url: url+"user_backend.php",
     type: "post",
     dataType: "json",
     data: {
@@ -261,7 +248,7 @@ $("#update-btn").on("click", function () {
   var id = document.getElementById("id").value;
   
   $.ajax({
-    url: "http://localhost/First_Project/usermaster/user_backend.php",
+    url: url+"user_backend.php",
     type: "post",
     dataType: "json",
     data: {

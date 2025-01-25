@@ -596,3 +596,7 @@ input{
       }
   }
 }
+
+.bold{
+  font-weight: 600;
+}

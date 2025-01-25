@@ -1,3 +1,7 @@
+<?php 
+$url="http://localhost/First_Project/";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
