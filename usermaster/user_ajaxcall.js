@@ -3,13 +3,12 @@ $('a[id="usermaster"]').addClass('active');
 $("#update-btn").hide();
 var url = "http://localhost/First_Project/usermaster/";
 
-// login//---------------
+
 
 
 
 //  getting data from database ...............................
-// $("#tbody").html(data.table);
-// $(".page").html(data.page);
+
 
 function loaddata(order, colname) {
   var form = new FormData(getformdata);
@@ -130,7 +129,7 @@ $(document).on("click" , '.changeIcon' , function(){
 // insert data in databse........................
 
 $("#insert-btn").on("click", function () {
- 
+
   validate();
   var password = document.getElementById("inputPassword").value;
   var Name = document.getElementById("Name").value;
@@ -155,14 +154,26 @@ $("#insert-btn").on("click", function () {
       success: function (data) {
         
         if (data.status == 400) {
-          alert("successfully inserted");
           $("input").val("");
           loaddata();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "data is inserted successfully",
+            showConfirmButton: false,
+            timer: 1500
+          });
+         
           var editBtn = document.querySelector("#home-tab");
           var tab = new bootstrap.Tab(editBtn);
           tab.show();
         } else {
-          alert(data.error);
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: " Data is not inserted Something went wrong!",
+            
+          });
         }
       }
 
@@ -172,35 +183,54 @@ $("#insert-btn").on("click", function () {
 
 });
 
+
 // delete data from database........................................
 
 $(document).on("click", ".delete-btn", function () {
-  if (confirm("are u sure")) {
+ 
     var id = $(this).data("id");
     var page_no=$("#page_no").val();
-    $.ajax({
-      url: url+"user_backend.php",
-      data: {
-        id: id,
-        action:'delete',
 
-      },
-      type: "post",
-      dataType: "json",
-      success: function (data) {
-        if (data.status == 200) {
-          loaddata(page_no);
-        } 
-        else {
-          alert(data.error);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+    
+        $.ajax({
+          url: url+"user_backend.php",
+          data: {
+            id: id,
+            action:'delete',
+    
+          },
+          type: "post",
+          dataType: "json",
+          success: function (data) {
+            if (data.status == 200) {
+              loaddata(page_no);
+            }  
+          },
         }
-
-        
-      },
+      );
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your data has been deleted.",
+          icon: "success"
+        });
+      }
     });
+   
     
   }
-});
+);
+
+
 
 // edit data.............................
 
@@ -246,34 +276,42 @@ $("#update-btn").on("click", function () {
   var email = document.getElementById("inputemail").value;
   var phone = document.getElementById("Phone").value;
   var id = document.getElementById("id").value;
+  if(checkvalidate){
+
+    $.ajax({
+      url: url+"user_backend.php",
+      type: "post",
+      dataType: "json",
+      data: {
+        password: password,
+        Name: Name,
+        email: email,
+        phone: phone,
+        id: id,
+         action:'add'
+      },
   
-  $.ajax({
-    url: url+"user_backend.php",
-    type: "post",
-    dataType: "json",
-    data: {
-      password: password,
-      Name: Name,
-      email: email,
-      phone: phone,
-      id: id,
-       action:'add'
-    },
-
-    success: function (data) {
-      if (data.status == 400) {
-        alert("data is updated");
-        $("#update-btn").hide();
-        $("#insert-btn").show();
-        $("input").val("");
-        loaddata();
-        var editBtn = document.querySelector("#home-tab");
-        var tab = new bootstrap.Tab(editBtn);
-        tab.show();
-
-      }
-    },
-  });
+      success: function (data) {
+        if (data.status == 400) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "data is updated successfully",
+            showConfirmButton: false,
+            timer: 1500
+          });
+          $("#update-btn").hide();
+          $("#insert-btn").show();
+          $("input").val("");
+          loaddata();
+          var editBtn = document.querySelector("#home-tab");
+          var tab = new bootstrap.Tab(editBtn);
+          tab.show();
+  
+        }
+      },
+    });
+  }
 });
 
 

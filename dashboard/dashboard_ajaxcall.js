@@ -75,7 +75,11 @@ function chartdata(items_name,item_amount){
                             reverse: true,
                             grid: {
                                 color: "rgba(0,0,0,0.0)"
-                            }
+                            },
+                            title: {
+                                display: true,
+                                text: 'ITEMS' // Label for the y-axis
+                            },
                         },
                         y: {
                             ticks: {
@@ -84,7 +88,10 @@ function chartdata(items_name,item_amount){
                             grid: {
                                 color: "rgba(0,0,0,0.0)",
                                 borderDash: [3, 3]
-                            }
+                            }, title: {
+                                display: true,
+                                text: 'Sales (₹)' // Label for the y-axis
+                            },
                         }
                     }
                 }

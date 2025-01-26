@@ -1,10 +1,5 @@
 <?php include("../header.php"); ?>
-<?php
-session_start();
-if (empty($_SESSION['username'])) {
-   header("Location:http://localhost/First_Project/login-2-main/login2.php");
-}
-?>
+
 
 <body>
 
@@ -63,9 +58,7 @@ if (empty($_SESSION['username'])) {
 
                </div>
             </div>
-            <!-- <div class="dasboaerd-img">
-            <img src="../images/dashboard.png" alt="">
-            </div> -->
+          
             <div class="mt-4">
                <div class="card flex-fill w-100 draggable">
                   <div class="card-header">
@@ -94,5 +87,5 @@ if (empty($_SESSION['username'])) {
 
    </div>
 
-   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   <script src="../assetes/js/chart.js"></script>
    <?php include("../footer.php"); ?>

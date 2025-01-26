@@ -1,5 +1,9 @@
 <?php 
 $url="http://localhost/First_Project/";
+// session_start();
+// if (empty($_SESSION['username'])) {
+//     header("Location:".$url."login-2-main/login2.php");
+// }
 ?>
 
 <!DOCTYPE html>
@@ -9,8 +13,8 @@ $url="http://localhost/First_Project/";
     <title>Layout</title>
     <link rel="stylesheet" href="../assetes/css/bootstrap.min.css">
     <link rel="stylesheet" href="../index.css">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../assetes/css/jquery-ui.css">
+    <link rel="stylesheet" href="../assetes/css/bootstrap_icon.css">
     <link rel="stylesheet" href="../responsive.css">
 </head>
 

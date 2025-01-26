@@ -80,12 +80,12 @@ var checkvalidate=true;
 function validate() {
 
   $("input[type!='hidden'],textarea,select").each(function () {
- 
+    // debugger;
     if ($(this).val() == "") {
-    // $name=  $(this).closest("label").text();
-    var $name = $(this).prev().find("label").text().trim();
+    $name=  $(this).prev("label").text();
+    // var $name = $(this).prev().find("label").text().trim();
     console.log($name);
-      $(this).next().text("this field is  required");
+      $(this).next("span").text($name.slice(0,-1)+" is required");
       checkvalidate=false;
     }
     else{
@@ -100,6 +100,11 @@ function updatevalidation(e) {
   $("input:not([type='hidden']):not([type='password'])").each(function () {
     if ($(this).val() == "") {
       $(this).next().text("this field is required");
+      
+      checkvalidate=false;
+    }
+    else{
+      checkvalidate=true;
     }
   });
 }

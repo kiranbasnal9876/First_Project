@@ -1,10 +1,5 @@
 <?php include("../header.php"); ?>
-<?php
-// session_start();
-// if (empty($_SESSION['username'])) {
-//    header("Location:http://localhost/First_Project/login-2-main/login2.php");
-// }
-?>
+
 
 <body>
 
@@ -111,22 +106,22 @@
                         <div class="input-div add-item">
                             <form class="row g-3" id="formdata" name="form" enctype="multipart/form-data">
                                 <div class="col-2">
-                                    <label for="inputitem" class="form-label">Item Name:</label>
+                                    <label for="inputitem" class="form-label">Item Name<span>*</span></label>
                                     <input type="text" class="form-control" name="itemName" id="inputitem" maxlength="20">
                                     <span></span>
                                 </div>
                                 <div class="col-md-2 price">
-                                    <label for="inputprice" class="form-label ">Item Price:</label>
+                                    <label for="inputprice" class="form-label ">Item Price<span>*</span></label>
                                     <input type="text" class="form-control price" name="itemPrice" id="inputprice" maxlength="10">
                                     <span></span>
                                 </div>
                                 <div class="col-md-2">
-                                    <label for="inputd" class="form-label ">Item Description:</label>
+                                    <label for="inputd" class="form-label ">Item Description<span>*</span></label>
                                     <textarea class="form-control " name="itemD" id="inputd" maxlength="200" cols="50" rows="1"></textarea>
                                     <span></span>
                                 </div>
                                 <div class="col-2">
-                                    <label for="image" class="form-label">Item Image</label>
+                                    <label for="image" class="form-label">Item Image<span>*</span></label>
 
                                     <input type="file" class="form-control" name="fileUpload" id="image" onChange="imgDicShow()" oninput="pic.src=window.URL.createObjectURL(this.files[0]) " accept="image/png, image/gif, image/jpeg" />
                                     <span></span>

@@ -1,10 +1,5 @@
 <?php include("../header.php"); ?>
-<?php
-session_start();
-if (empty($_SESSION['username'])) {
-    header("Location:http://localhost/First_Project/login-2-main/login2.php");
-}
-?>
+
 
 <body>
 
@@ -165,20 +160,22 @@ if (empty($_SESSION['username'])) {
 
                                 <div class="row mb-3">
                                     <div class="col-3">
-                                        <label for="invoice" class="form-label">Invoice No:</label>
+                                        <label for="invoice" class="form-label">Invoice No<span>*</span></label>
                                         <input type="text" class="form-control invoic" name="invoice_no" id="invoice" maxlength="15" >
+                                        <span></span>
                                         <input type="hidden" class="invoice_id" name="invoice_id" value="">
+                                        
                                     </div>
                                     <div class="col-3">
-                                        <label for="invoice_date" class="form-label">Invoice Date:</label>
+                                        <label for="invoice_date" class="form-label">Invoice Date<span>*</span></label>
                                         <input type="text" class="form-control" name="invoice_date" id="invoice_date2" >
-
+                                        <span></span>
                                     </div>
                                 </div>
                                 <div class="row">
 
                                     <div class="col-md-3">
-                                        <label for="client_name" class="form-label ">Client Name:</label>
+                                        <label for="client_name" class="form-label ">Client Name<span>*</span></label>
                                         <input type="text" class="form-control clients" name="name" id="client_name" maxlength="12" autocomplete="off">
                                         <span></span>
                                         <input type="hidden" class="clientId" name="client_id" value="">
@@ -187,18 +184,18 @@ if (empty($_SESSION['username'])) {
 
 
                                     <div class="col-md-3">
-                                        <label for="inputphone" class="form-label">Phone:</label>
+                                        <label for="inputphone" class="form-label">Phone<span>*</span></label>
                                         <input type="text" class="form-control numeric" id="inputphone" maxlength="12" name="phone" readonly>
 
                                     </div>
 
                                     <div class="col-md-3">
-                                        <label for="inputemail" class="form-label ">Email:</label>
+                                        <label for="inputemail" class="form-label ">Email<span>*</span></label>
                                         <input type="email" class="form-control " id="inputemail" name="email" maxlength="20" readonly>
 
                                     </div>
                                     <div class="col-md-3">
-                                        <label for="inputAddress" class="form-label">Address:</label>
+                                        <label for="inputAddress" class="form-label">Address<span>*</span></label>
                                         <input type="text" class="form-control" id="inputAddress" name="address" maxlength="50" readonly>
 
                                     </div>
@@ -214,7 +211,7 @@ if (empty($_SESSION['username'])) {
                                 <div class="clone-row row clone">
                                     <!-- <form action="" class="row" id="" name="client_invoice"> -->
                                     <div class="col-3">
-                                        <label for="input" class="form-label">Item Name:</label>
+                                        <label for="input" class="form-label">Item Name<span>*</span></label>
 
                                         <input type="text" class="form-control inputitem" id="input" maxlength="20" onchange="amount()">
                                         <span></span>
@@ -222,16 +219,16 @@ if (empty($_SESSION['username'])) {
                                        
                                     </div>
                                     <div class="col-md-3 price">
-                                        <label for="inputprice" class="form-label">Item Price:</label>
+                                        <label for="inputprice" class="form-label">Item Price<span>*</span></label>
                                         <input type="text" class="form-control price right" id="inputprice" maxlength="10" oninput="amount()" readonly>
 
                                     </div>
                                     <div class="col-2">
-                                        <label for="item" class="form-label">Quantity:</label>
-                                        <input type="number" class="form-control numeric Item right" name="quantity[]" id="item" maxlength="5" minlength="1" value="0"  oninput="amount()" required>
+                                        <label for="item" class="form-label">Quantity<span>*</span></label>
+                                        <input type="number" class="form-control numeric Item right" name="quantity[]" id="item" maxlength="5" minlength="1"  min="1"  oninput="amount()" required>
                                     </div>
                                     <div class="col-md-2 price">
-                                        <label for="amount" class="form-label">Amount:</label>
+                                        <label for="amount" class="form-label">Amount<span>*</span></label>
                                         <input type="text" class="form-control Amount right" name="amount[]" id="" readonly>
 
                                     </div>

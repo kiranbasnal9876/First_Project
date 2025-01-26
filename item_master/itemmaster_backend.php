@@ -12,36 +12,32 @@ class item_master
         $this->con = $con;
     }
 
-function insertdata()
+    function insertdata()
     {
 
         $status = "";
         $error = "";
-        
+
         $itemName = $_POST['itemName'];
 
         $itemPrice = $_POST['itemPrice'];
 
         $itemD = $_POST['itemD'];
-        $path=$_FILES['fileUpload']['name'];
-          if($path !=""){
+        $path = $_FILES['fileUpload']['name'];
+        $new_item ="";
+        if ($path != "") {
+            $file = 'folder/' . $path;
+            $new_item = ",itemPath='$file'";
+            move_uploaded_file($_FILES['fileUpload']['tmp_name'], $file);
+        } else {
+            $new_item = "";
+        }
 
-        $file='folder/'.$path;
-      
-        $new_item=",itemPath='$file'";
-        move_uploaded_file($_FILES['fileUpload']['tmp_name'],$file);
-        
-       
-    }
-    else{
-        $new_item="";
-    }
-       
 
-        if ($_POST['id']!='') {
+        if ($_POST['id'] != '') {
 
             $id = $_POST['id'];
-           
+
 
             $sql = "update  item_master
              set itemName='$itemName',
@@ -49,38 +45,33 @@ function insertdata()
              itemD='$itemD'
              $new_item
             where id='$id'";
-           
-           
-    
+
+
+
             if ($this->con->query($sql)) {
-                $status=200;
+                $status = 200;
             } else {
 
                 $error = $this->con->error;
             }
 
             echo  json_encode(['status' => $status, 'error' => $error]);
-     } 
+        } else {
 
 
-        else {
+            move_uploaded_file($_FILES['fileUpload']['tmp_name'], $file);
 
-           
-            move_uploaded_file($_FILES['fileUpload']['tmp_name'],$file);
-           
             $sql = "insert into item_master( itemName,itemPrice,itemD,itemPath) values ( '{$itemName}','{$itemPrice}','{$itemD}','{$file}')";
-      
-          
+
+
             if ($this->con->query($sql)) {
                 $status = 200;
             } else {
                 $error = $this->con->error;
             }
 
-             echo  json_encode(['status' => $status, 'error' => $error]);
+            echo  json_encode(['status' => $status, 'error' => $error]);
         }
-
-      
     }
 
 
@@ -99,7 +90,7 @@ function insertdata()
         print_r(json_encode($data));
     }
 
-    
+
     function deletedata()
     {
         $status = '';
@@ -110,22 +101,20 @@ function insertdata()
 
         $this->con->query($sql);
 
-        if ($this->con->error){
+        if ($this->con->error) {
             $error = $this->con->error;
         } else {
             $status = 200;
         }
 
-     echo   json_encode(['status' => $status, 'error' => $error]);
+        echo   json_encode(['status' => $status, 'error' => $error]);
     }
-
-
 }
 
-    $obj = new item_master();
+$obj = new item_master();
 
 
-  if (isset($_POST['action']) && $_POST['action'] == 'getdata') {
+if (isset($_POST['action']) && $_POST['action'] == 'getdata') {
     $obj->getdata();
 } else if (isset($_POST['action']) && $_POST['action'] == 'delete') {
     $obj->deletedata();
