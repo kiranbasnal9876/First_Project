@@ -1,0 +1,39 @@
+
+select * FROM invoice_master as IVM JOIN client_master as CM
+ ON IVM.client_id=CM.id where invoice_no like '%%' && name like '%%' && email like '%%' && phone like '%%'  && invoice_date like '%%'   limit 0,2
+ 
+ 
+ select * from invoive JOIN item_master ON invoive.item_id=item_master.id where invoive.invoice_id='14'
+ 
+ 
+ 
+ CREATE table client_master(id INT PRIMARY KEY AUTO_INCREMENT,
+ name VARCHAR(50) ,
+ phone BIGINT(20),
+ address VARCHAR(100),
+ state_id int(4),
+ district_id INT(4),
+ pincode INT(10),
+ email VARCHAR(50)
+ );
+ 
+  CREATE table invoice_itemlist(id INT PRIMARY KEY AUTO_INCREMENT,
+  invoice_id INT,
+  item_id INT ,
+  amount DECIMAL,
+  FOREIGN KEY (invoice_id) REFERENCES invoice_master(id),
+  FOREIGN KEY (item_id) REFERENCES item_master(id));
+  
+    CREATE table invoice_master(id INT PRIMARY KEY AUTO_INCREMENT,
+  invoice_no INT(30),
+  invoice_date date ,
+  client_id INT,
+ total_amount DECIMAL,
+  FOREIGN KEY (client_id) REFERENCES client_master(id)
+);
+  
+   
+  invoice_master
+  
+  
+  insert into invoice_itemlist(invoice_id,item_id,quantity,amount)VALUES(1,1,1,4534.2);

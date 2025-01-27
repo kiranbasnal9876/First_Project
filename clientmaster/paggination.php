@@ -35,17 +35,11 @@ else{
 $email="";
 }
 
-if(isset($_POST['state'])){
-$state_name=$_POST['state'];
+if(isset($_POST['address'])){
+$address=$_POST['address'];
 }
 else{
-$state_name="";
-}
-if(isset($_POST['district'])){
-$district_name=$_POST['district'];
-}
-else{
-$district_name="";
+$address="";
 }
 
 
@@ -70,9 +64,9 @@ else{
 $sql1="select *
 FROM client_master AS CM JOIN
 district_master AS DM ON CM.district_id=DM.district_id
-JOIN state_master AS SM ON CM.state_id=SM.state_id where id like '%$id%' && name like '%$name%' && email like '%$email%' && phone like '%$phone%' && state_name like '%$state_name%' && district_name like '%$district_name%'  ";
+JOIN state_master AS SM ON CM.state_id=SM.state_id where id like '%$id%' && name like '%$name%' && email like '%$email%' && phone like '%$phone%' && concat(state_name,district_name,address,pincode)  like '%$address%'   ";
 
-
+// echo $sql1;
 
 $result1=$con->query($sql1);
 
@@ -111,7 +105,7 @@ if (isset($_POST['colname'])) {
 $sql="select *
 FROM client_master AS CM JOIN
 district_master AS DM ON CM.district_id=DM.district_id
-JOIN state_master AS SM ON CM.state_id=SM.state_id where  id like '%$id%' && name like '%$name%' && email like '%$email%' && phone like '%$phone%' && state_name like '%$state_name%' && district_name like '%$district_name%'  {$sort} limit {$offset},{$limit}";
+JOIN state_master AS SM ON CM.state_id=SM.state_id where  id like '%$id%' && name like '%$name%' && email like '%$email%' && phone like '%$phone%' &&  concat(state_name,district_name,address,pincode)  like '%$address%' {$sort} limit {$offset},{$limit}";
 
 
 

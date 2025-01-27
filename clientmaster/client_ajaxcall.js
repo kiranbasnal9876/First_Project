@@ -97,8 +97,7 @@ $(document).on("click", ".changeIcon", function () {
     sort = "ASC";
   }
 
-  console.log(sort);
-
+  
   var colname = $(this).attr("id");
   var page_no = $("#page_no").val();
   var row = $("#row").val();
@@ -153,8 +152,15 @@ $("#submit").on("click", function () {
       contentType: false,
       processData: false,
       success: function (data) {
-        if (data.status == 400) {
-          alert("data is successfully inserted");
+        if (data.status == 200) {
+          
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "data is inserted successfully",
+            showConfirmButton: false,
+            timer: 1500
+          });
           $("#formdata").trigger("reset");
           loaddata("", "");
           var editBtn = document.querySelector("#home-tab");
@@ -162,7 +168,12 @@ $("#submit").on("click", function () {
           tab.show();
         }
         else{
-          alert(data.error);
+          Swal.fire({
+            icon: "error",
+            title: "somthing wrong",
+            text: data.error,
+            
+          });
         }
       },
     });
@@ -211,7 +222,17 @@ $(document).on("click", ".edit-btn", function () {
 // deleting data.................................
 
 $(document).on("click", ".delete-btn", function () {
-  if (confirm("are u sure")) {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!"
+  }).then((result) => {
+    if (result.isConfirmed) {
+    
     var id = $(this).data("id");
     // var page_no = $("#page_no").val();
     $.ajax({
@@ -224,14 +245,30 @@ $(document).on("click", ".delete-btn", function () {
       dataType: "json",
       success: function(data) {
         if (data.status == 200){
+             
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your data has been deleted.",
+            icon: "success",
+           
+          });
           loaddata("","");
         } else {
-          alert(data.error);
+          Swal.fire({
+            title: "Not Deleted!",
+            text: "can't delete this client",
+            icon: "warning"
+          });
         }
         
       },
     });
+  
+
+  
   }
+});
+
 });
 
 
@@ -251,8 +288,14 @@ $("#update").on("click", function () {
       contentType: false,
       processData: false,
       success: function (data) {
-        if (data.status == 400) {
-          alert("data is successfully updated");
+        if (data.status == 200) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "data is updated successfully",
+            showConfirmButton: false,
+            timer: 1500
+          });
           $("#formdata").trigger("reset");
           loaddata("","");
           var editBtn = document.querySelector("#home-tab");
@@ -260,7 +303,11 @@ $("#update").on("click", function () {
           tab.show();
         }
         else{
-          alert(data.error);
+          Swal.fire({
+            title: "Not updated!",
+            text: "something wrong!",
+            icon: "warning"
+          });
         }
       },
     });
@@ -270,7 +317,12 @@ $("#update").on("click", function () {
 
 $("#home-tab").on("click",function(){
   $("#formdata").trigger("reset");
- 
+  $(" #formdata input,select").next("span").text("");
   $("#update").hide();
         $("#submit").show();
+})
+
+$("#profile-tab").on("click",function(){
+  $("#update").hide();
+  $("#submit").show();
 })

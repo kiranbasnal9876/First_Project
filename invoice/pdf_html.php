@@ -13,7 +13,7 @@ if(isset($_GET['id'])){
   $id = $_GET['id'];
   $items="";
 
-  $sql = "select * FROM invoice_master AS IVM JOIN client_master as CM on IVM.client_id=CM.id WHERE  invoice_id='$id'";
+  $sql = "select * FROM invoice_master AS IVM JOIN client_master as CM on IVM.client_id=CM.id WHERE IVM.id='$id'";
  if($con->query($sql)){
     $result=$con->query($sql);
 
@@ -32,7 +32,7 @@ if(isset($_GET['id'])){
 
 
 
-$sql2="select * from invoive   JOIN item_master  ON invoive.item_id=item_master.id  where invoive.invoice_id='$id'";
+$sql2="select * from invoice_itemlist   JOIN item_master  ON invoice_itemlist.item_id=item_master.id  where invoice_itemlist.invoice_id='$id'";
 $result=$con->query($sql2);
 while ($data2=$result->fetch_assoc()) {
   $items.="<tr>
@@ -144,7 +144,7 @@ while ($data2=$result->fetch_assoc()) {
 
   <div class="amount_details">
   <span ><b class="Total-amount">subtotal amount:</b><small><?php echo $total_amount?></small></span><br>
-  <span><b>tax & Fees(8%):</b></span><br>
+
   <span><b  class="Total-amount">total amount:</b><small><?php echo $total_amount?></small></span>
   </div>
  <p>THANK YOU</p>

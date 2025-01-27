@@ -142,7 +142,9 @@ $(document).on("keyup", ".inputitem", function () {
     select: function (event, ui) {
       $(this).parents(".clone").find(".price").val(ui.item.itemPrice);
       $(this).parents(".clone").find(".item_id").val(ui.item.id);
-      var quantity = 1;
+      
+        $(this).parents(".clone").find(".Item").val(1);
+        var quantity = 1;
       // amount();
       var price = $(this).parents(".clone").find(".price").val();
       $(this).parents(".clone") .find(".Amount").val(quantity * price);
@@ -205,8 +207,9 @@ $("#profile-tab").on("click", function () {
     },
     success: function (data) {
       data = JSON.parse(data);
-      console.log(data);
-      $(".invoic").val("100" + (Number(data.invoice_id) + 1));
+    
+      $(".invoic").val("100" + (Number(data.id) + 1));
+      invoice_date();
     },
   });
 });
@@ -227,15 +230,28 @@ $("#invoice_submit").on("click", function () {
     contentType: false,
     processData: false,
     success: function (data) {
-      if (data.status == 400) {
-        alert("data is successfully inserted");
+      if (data.status == 200) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "data is inserted successfully",
+          showConfirmButton: false,
+          timer: 1500
+        });
         $("#formdata").trigger("reset");
+        $("#formdata input[type='hidden']").val("");
         loaddata("", "");
         var editBtn = document.querySelector("#home-tab");
         var tab = new bootstrap.Tab(editBtn);
         tab.show();
       } else {
-        alert(data.error);
+        Swal.fire({
+          icon: "error",
+          title: "somthing wrong",
+          text: data.error,
+          
+        });
+        
       }
     },
   });
@@ -363,7 +379,16 @@ $(document).on("click" , '.changeIcon' , function(){
 
 //deleting data from database
 $(document).on("click", ".delete-btn", function () {
-  if (confirm("are u sure")) {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!"
+  }).then((result) => {
+    if (result.isConfirmed) {
     var id = $(this).data("id");
     // var page_no = $("#page_no").val();
     $.ajax({
@@ -375,14 +400,27 @@ $(document).on("click", ".delete-btn", function () {
       type: "post",
       dataType: "json",
       success: function (data) {
-        if (data.status == 400) {
+        if (data.status == 200) {
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your data has been deleted.",
+            icon: "success",
+           
+          });
           loaddata("", "");
         } else if (data.error != "") {
-          alert(data.error);
+          
+          Swal.fire({
+            title: "Not Deleted!",
+            text: "not deleted",
+            icon: "warning"
+          });
         }
       },
     });
   }
+});
+
 });
 
 // geting data for edit
@@ -447,18 +485,29 @@ $("#update").on("click", function () {
     contentType: false,
     processData: false,
     success: function (data) {
-      if (data.status == 400) {
-        alert("data is successfully updated");
+      if (data.status == 200) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "data is updated successfully",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        loaddata("", "");
         $("#formdata").trigger("reset");
         $(".delete-item").trigger("click");
         $("#update").hide();
         $("#invoice_submit").show();
-        loaddata("", "");
+        
         var editBtn = document.querySelector("#home-tab");
         var tab = new bootstrap.Tab(editBtn);
         tab.show();
       } else {
-        alert(data.error);
+        Swal.fire({
+          title: "Not inserted",
+          text: data.error,
+          icon: "warning"
+        });
       }
     },
   });
@@ -470,6 +519,7 @@ $("#home-tab").on("click", function () {
   $(".delete-item").trigger("click");
   $("#update").hide();
   $("#invoice_submit").show();
+  $(" #formdata input,select").next("span").text("");
 });
 
 // open email model...........
@@ -499,12 +549,22 @@ $("#send_email").on("click",function(){
     success: function(data){
       if (data.success!=''){
         $("#close").trigger("click");
-        
-      alert(data.success);
+        Swal.fire({
+          title: "sent email!",
+          text: data.success,
+          icon: "success",
+         
+        });
+   
       $("#email-model-form").trigger("reset");
       
       } else if(data.error !="") {
-        alert(data.error);
+        Swal.fire({
+          title: "Not sent",
+          text: "something wrong",
+          icon: "warning"
+        });
+      
       }
     },
 

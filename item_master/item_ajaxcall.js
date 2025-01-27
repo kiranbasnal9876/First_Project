@@ -148,20 +148,29 @@ $(document).on("click" , '.changeIcon' , function(){
           processData: false,
           success: function (data) {
             if (data.status == 200) {
-            //   <div class="alert alert-success" role="alert">
-            //   data inserted  successfully
-            //  </div>
+            
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "data is inserted successfully",
+                showConfirmButton: false,
+                timer: 1500
+              });
               $("#formdata").trigger("reset");
               $("#inputd").val("");
+              $("#show-img").hide();
               loaddata("", "");
               var editBtn = document.querySelector("#home-tab");
               var tab = new bootstrap.Tab(editBtn);
               tab.show();
             }
             else{
-              // <div class="alert alert-danger" role="alert">
-              // data not inserted successfully
-              //  </div>
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: data.error,
+                
+              });
             }
           },
         });
@@ -172,7 +181,16 @@ $(document).on("click" , '.changeIcon' , function(){
 // delete btn..........
     
 $(document).on("click", ".delete-btn", function () {
-  if (confirm("are u sure")) {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!"
+  }).then((result) => {
+    if (result.isConfirmed) {
     var id = $(this).data("id");
     // var page_no = $("#page_no").val();
     $.ajax({
@@ -185,14 +203,26 @@ $(document).on("click", ".delete-btn", function () {
       dataType: "json",
       success: function(data) {
         if (data.status == 200){
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your data has been deleted.",
+            icon: "success",
+           
+          });
           loaddata("","");
         } else {
-          alert(data.error);
+          Swal.fire({
+            title: "Not Deleted!",
+            text: "you can't delete this item",
+            icon: "warning"
+          });
         }
         
       },
     });
   }
+});
+
 });
 
 
@@ -210,7 +240,7 @@ $(document).on("click", ".edit-btn", function () {
     },
     dataType: "json",
     success: function (data) {
-      var inputs = $("#formdata").find("input,select");
+      var inputs = $("#formdata").find("input,select,textarea");
       for (let i = 0; i < inputs.length; i++) {
         const input = inputs[i];
         const inputName = input.name;
@@ -235,7 +265,8 @@ $(document).on("click", ".edit-btn", function () {
 });
 //update data---------
 $("#update").on("click", function () {
-  validate();
+  updatevalidation(); 
+
   var formdata = new FormData(form);
   formdata.append("action","add");
   if (checkvalidate) {
@@ -248,9 +279,13 @@ $("#update").on("click", function () {
       processData: false,
       success: function (data) {
         if (data.status == 200) {
-          // <div class="alert alert-success" role="alert">
-          //  values updated successfully
-          // </div>
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "data is updated successfully",
+            showConfirmButton: false,
+            timer: 1500
+          });
           $("#formdata").trigger("reset");
           $("#inputd").val("");
           loaddata("","");
@@ -262,7 +297,11 @@ $("#update").on("click", function () {
           $("#update").hide();
         }
         else{
-     
+          Swal.fire({
+            title: "Not Deleted!",
+            text: "something wrong!",
+            icon: "warning"
+          });
         }
       },
     });
@@ -281,8 +320,15 @@ function imgDicShow(){
 
 $("#home-tab").on("click",function(){
   $("#formdata").trigger("reset");
+  $(" #formdata input,select").next("span").text("");
   $("textarea").val("");
   $("#show-img").hide();
   $("#update").hide();
-        $("#submit").show();
+  $("#submit").show();
+})
+
+
+$("#profile-tab").on("click",function(){
+  $("#update").hide();
+  $("#submit").show();
 })

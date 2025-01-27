@@ -64,7 +64,7 @@ class client_master
 
 
             if ($this->con->query($sql)) {
-                $status=400;
+                $status=200;
             } else {
 
                 $error = $this->con->error;
@@ -93,9 +93,9 @@ class client_master
             $sql = "insert into client_master( $colmnList) values ($valueList)";
           
             if ($this->con->query($sql)) {
-                $status = 400;
+                $status = 200;
             } else {
-                $error = $this->con->error;
+                $error = "plz fill your unique email and phone number";
             }
 
              echo  json_encode(['status' => $status, 'error' => $error]);

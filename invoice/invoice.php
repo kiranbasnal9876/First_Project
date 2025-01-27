@@ -129,7 +129,7 @@
                                                             <textarea class="form-control" id="message-text" name="content"></textarea>
                                                         </div>
                                                         <div class="mb-3">
-                                                           <a href="" id="pdf_link">Pdf</a>
+                                                         
                                                            <input type="hidden" value="" id="invoice_no_for_pdf" name='pdf_invoice'>
                                                         </div>
                                                         
@@ -163,7 +163,7 @@
                                         <label for="invoice" class="form-label">Invoice No<span>*</span></label>
                                         <input type="text" class="form-control invoic" name="invoice_no" id="invoice" maxlength="15" >
                                         <span></span>
-                                        <input type="hidden" class="invoice_id" name="invoice_id" value="">
+                                        <input type="hidden" class="invoice_id" name="id" value="">
                                         
                                     </div>
                                     <div class="col-3">

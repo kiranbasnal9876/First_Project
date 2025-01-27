@@ -154,8 +154,8 @@ $("#insert-btn").on("click", function () {
       success: function (data) {
         
         if (data.status == 400) {
-          $("input").val("");
-          loaddata();
+         
+          
           Swal.fire({
             position: "top-end",
             icon: "success",
@@ -163,7 +163,9 @@ $("#insert-btn").on("click", function () {
             showConfirmButton: false,
             timer: 1500
           });
-         
+          $("#user-form").trigger("reset");
+          loaddata("","");
+
           var editBtn = document.querySelector("#home-tab");
           var tab = new bootstrap.Tab(editBtn);
           tab.show();
@@ -171,7 +173,7 @@ $("#insert-btn").on("click", function () {
           Swal.fire({
             icon: "error",
             title: "Oops...",
-            text: " Data is not inserted Something went wrong!",
+            text: data.error,
             
           });
         }
@@ -189,7 +191,7 @@ $("#insert-btn").on("click", function () {
 $(document).on("click", ".delete-btn", function () {
  
     var id = $(this).data("id");
-    var page_no=$("#page_no").val();
+    // var page_no=$("#page_no").val();
 
     Swal.fire({
       title: "Are you sure?",
@@ -213,16 +215,26 @@ $(document).on("click", ".delete-btn", function () {
           dataType: "json",
           success: function (data) {
             if (data.status == 200) {
-              loaddata(page_no);
+              
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your data has been deleted.",
+                icon: "success",
+               
+              });
+              loaddata("","");
+            }
+            else{
+              Swal.fire({
+                title: "Not Deleted!",
+                text: "you can't delete logged user data",
+                icon: "warning"
+              });
             }  
           },
         }
       );
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your data has been deleted.",
-          icon: "success"
-        });
+        
       }
     });
    
@@ -302,8 +314,8 @@ $("#update-btn").on("click", function () {
           });
           $("#update-btn").hide();
           $("#insert-btn").show();
-          $("input").val("");
-          loaddata();
+          $("#user-form").trigger("reset");
+          loaddata("","");
           var editBtn = document.querySelector("#home-tab");
           var tab = new bootstrap.Tab(editBtn);
           tab.show();
@@ -316,7 +328,8 @@ $("#update-btn").on("click", function () {
 
 
 $("#home-tab").on("click",function(){
-  $("input").val("");
+  $("#user-form").trigger("reset");
+  $(" #user-form input").next("span").text("");
   $("#update-btn").hide();
         $("#insert-btn").show();
 })

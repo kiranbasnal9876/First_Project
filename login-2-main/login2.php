@@ -40,7 +40,7 @@ if (isset($_SESSION['username'])) {
                    
                 </div>
                 <div>
-                    <input type="password"  class="" id="inputPassword"  placeholder="Enter password" name="password" value="DRtr%67d">
+                    <input type="password"  class="" id="inputPassword"  placeholder="Enter password" name="password" value="12345">
                  
                 </div>
                 <div id="log-wrong" style="color: red;"></div>

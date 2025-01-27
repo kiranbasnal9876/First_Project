@@ -75,7 +75,7 @@
                                                 <th id='itemPrice' class="changeIcon">
                                                     Item Price <i class="bi-arrow-down-up"></i>
                                                 </th>
-                                                <th>Item Description</th>
+                                                <th class="formate">Item Description</th>
 
                                                 <th>Item image</th>
 
@@ -103,7 +103,7 @@
                     </div>
 
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="input-div add-item">
+                        <div class="input-div add-item all-details">
                             <form class="row g-3" id="formdata" name="form" enctype="multipart/form-data">
                                 <div class="col-2">
                                     <label for="inputitem" class="form-label">Item Name<span>*</span></label>

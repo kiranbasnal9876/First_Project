@@ -1,9 +1,9 @@
 <?php 
 $url="http://localhost/First_Project/";
-// session_start();
-// if (empty($_SESSION['username'])) {
-//     header("Location:".$url."login-2-main/login2.php");
-// }
+session_start();
+if (empty($_SESSION['username'])) {
+    header("Location:".$url."login-2-main/login2.php");
+}
 ?>
 
 <!DOCTYPE html>

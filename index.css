@@ -22,7 +22,13 @@ span {
   color: red;
   font-size: 13px;
 }
-
+.formate{
+  width: 20px;
+  
+}
+.formate-td{
+ word-break: break-all;
+}
 
 /* Login css  */
 
@@ -110,7 +116,8 @@ span {
 .usermaster {
   display: grid;
   gap: 20px;
-
+  padding: 30px;
+ 
 }
 
 .input-div {
@@ -120,9 +127,10 @@ span {
   padding: 10px;
   font-size: 13px;
   border-radius: 8px;
-  margin: 30px 30px;
   background-color: #f1f1f1;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin-left: 0px ;
+    margin-right: 0px;
 
   input {
     height: 30px;
@@ -145,7 +153,7 @@ span {
 
 .getlist {
   font-size: 13px;
-  margin: 0px 20px;
+  /* margin: 0px 20px; */
   border-radius: 8px;
   padding: 10px;
   /* height: 200px; */
@@ -448,6 +456,10 @@ span{
       height: 15px;
       cursor: pointer;
     }
+    .item-image{
+      height: auto;
+    }
+  
   }
 
 
@@ -485,7 +497,7 @@ span{
 }
 
 .add-item{
-
+ 
   height: 150px ;
   padding: 30px;
   #pic{

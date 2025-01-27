@@ -36,7 +36,7 @@ class invoice
     // geting last invoice number.......................................
     function invoice_no()
     {
-        $sql = "SELECT invoice_id FROM invoice_master ORDER BY invoice_id DESC LIMIT 1";
+        $sql = "SELECT id FROM invoice_master ORDER BY id DESC LIMIT 1";
         $result = $this->con->query($sql);
         echo json_encode($result->fetch_assoc());
     }
@@ -102,27 +102,27 @@ class invoice
 
             $sql = "insert into invoice_master(invoice_no,invoice_date,client_id,total_amount )values($valueList)";
             if ($this->con->query($sql)) {
-                $status = 400;
+                $status = 200;
             }
         } else {
             $error = "Client details are required";
         }
 
-        if ($status == 400) {
+        if ($status == 200) {
             $last_id = $this->con->insert_id;
             $item_id = $_POST['item_id'];
             $quantity = $_POST['quantity'];
             $amount = $_POST['amount'];
-
+            
             for ($i = 0; $i < count($item_id); $i++) {
                 if ($quantity[$i] != "" && $item_id[$i] != "") {
-                    $sql2 = "insert into invoive(invoice_id,item_id,quantity,amount)values($last_id,$item_id[$i],$quantity[$i],$amount[$i])";
+                    $sql2 = "insert into invoice_itemlist(invoice_id,item_id,quantity,amount)values($last_id,$item_id[$i],$quantity[$i],$amount[$i])";
 
                     if ($this->con->query($sql2)) {
-                        $status = 400;
+                        $status = 200;
                     }
                 } else {
-                    $error = "plz select Quentity";
+                    $error = "plz select Quantity";
                 }
             }
         }
@@ -136,7 +136,7 @@ class invoice
         $error = "";
         $status = "";
         $client_id = $_POST['client_id'];
-        $invoice_id = $_POST['invoice_id'];
+        $invoice_id = $_POST['id'];
 
         $total_amount = $_POST['total_amount'];
 
@@ -145,44 +145,46 @@ class invoice
             $sql = "update  invoice_master
          set client_id='$client_id',
           total_amount='$total_amount'
-          where invoice_id='$invoice_id'";
-
+          where id='$invoice_id'";
+          $this->con->query($sql);
+            $status = 200;
         }
+        
+        
         else{
             $error = "All fields are required";
         }
 
-
-
-        if ($this->con->query($sql)) {
-            $status = 400;
-        }
-
-        if ($status == 400) {
-            $sql1 = "delete from invoive  where invoice_id='$invoice_id'";
-
+        if ($status == 200) {
+            $sql1 = "delete from invoice_itemlist where invoice_id='$invoice_id'";
+        //    echo $sql1;
             if ($this->con->query($sql1)) {
-                $invoice_id = $_POST['invoice_id'];
+                $invoice_id = $_POST['id'];
+                
                 $item_id = $_POST['item_id'];
                 $quantity = $_POST['quantity'];
                 $amount = $_POST['amount'];
 
                 for ($i = 0; $i < count($item_id); $i++) {
-                    if ($quantity[$i] != "" && $item_id[$i] != "") {
-                        $sql2 = "insert into invoive(invoice_id,item_id,quantity,amount)values($invoice_id,$item_id[$i],$quantity[$i],$amount[$i])";
-
-                        if ($this->con->query($sql2)) {
-                            $status = 400;
-                        } else {
-                            $error = "items not updated";
-                        }
+                    if ($quantity[$i] == "" && $item_id[$i] == "") {
+                        $error = "all items field are required";
+                        echo  json_encode([ 'error' => $error]);
+                        die;
                     }
+                        $sql2 = "insert into invoice_itemlist(invoice_id,item_id,quantity,amount)values($invoice_id,$item_id[$i],$quantity[$i],$amount[$i])";
+              
+                        if ($this->con->query($sql2)){
+                            $status = 200;
+                        } 
+                    
                 }
+
+                echo  json_encode(['status' => $status, 'error' => $error]);
             }
         }
 
 
-        echo  json_encode(['status' => $status, 'error' => $error]);
+       
     }
 
     //deleting data
@@ -193,18 +195,18 @@ class invoice
         $error = '';
         $invoice_id = $_POST['invoice_no'];
 
-        $sql2 = "delete from invoive  where invoice_id='$invoice_id'";
+        $sql2 = "delete from invoice_itemlist  where id='$invoice_id'";
 
 
         if ($this->con->query($sql2)) {
-            $status = 400;
+            $status = 200;
         } else {
             $error = $this->con->error;
         }
 
-        if ($status == 400) {
+        if ($status == 200) {
 
-            $sql = "delete from invoice_master  where invoice_id='$invoice_id'";
+            $sql = "delete from invoice_master  where id='$invoice_id'";
             $this->con->query($sql);
         }
 
@@ -218,22 +220,25 @@ class invoice
         $error = '';
         $id = $_POST['id'];
         $items = [];
-        $sql = "select * FROM invoice_master AS IVM JOIN client_master as CM on IVM.client_id=CM.id WHERE  invoice_id='$id'";
+        $data="";
+        $sql = "select * FROM invoice_master AS IVM JOIN client_master as CM on IVM.client_id=CM.id WHERE IVM.id='$id'";
         if ($this->con->query($sql)) {
             $result = $this->con->query($sql);
 
             $data = $result->fetch_assoc();
-            $status = 400;
+            $status = 200;
         } else {
             $error = $this->con->error;
         }
-        if ($status == 400) {
+        if ($status == 200) {
 
-            $sql2 = "select * from invoive   JOIN item_master  ON invoive.item_id=item_master.id  where invoive.invoice_id='$id'";
+            $sql2 = "select * from invoice_itemlist   JOIN item_master  ON invoice_itemlist.item_id=item_master.id  where invoice_itemlist.invoice_id='$id'";
+            // echo $sql2;
             $result = $this->con->query($sql2);
             while ($data2 = $result->fetch_assoc()) {
                 $items[] = $data2;
             }
+            
         }
 
         echo   json_encode(['status' => $status, 'error' => $error, 'output1' => $data, 'output2' => $items]);

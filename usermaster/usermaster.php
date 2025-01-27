@@ -104,8 +104,8 @@
 
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
-                        <div class="row input-div">
-
+                        <div class="row input-div all-details ">
+                               <form class="row" id="user-form">
                             <div class="col-2">
                                 <label for="Name">Name<span>*</span></label>
                                 <input type="text" class="form-control" id="Name" name="name" maxlength="20">
@@ -135,7 +135,7 @@
                                 <button type="button" class=" mt-3" id="update-btn">Update</button>
 
                             </div>
-
+                               </form>
                         </div>
 
                     </div>

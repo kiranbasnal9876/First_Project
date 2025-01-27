@@ -47,7 +47,7 @@
                               
                                 <div class="col-1.5">
                                     <label for="Dis_input">Address:</label>
-                                    <input type="text" class="form-control" name="district">
+                                    <input type="text" class="form-control" name="address">
                                 </div>
 
                                 <div class="col-1">

@@ -97,7 +97,7 @@ class User_master
 
                 $status = 400;
             } else {
-                $error = $this->con->error;
+                $error ="plz fill your unique email and phone";
             }
         }
 
