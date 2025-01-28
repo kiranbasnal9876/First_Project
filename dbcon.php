@@ -17,24 +17,25 @@
     //   die("Connection failed: " . $con->connect_error);
     // }
 
- class dbcon {
+ class dbcon{
+public $con;
 
-   function __contruct($con){
+   function __construct(){
        
    $servername = "localhost"; 
    $username = "root";
    $password = "";
    $database = "Project_data";
  
-   $con = new mysqli($servername, $username, $password, $database);
+   $this->con = new mysqli($servername, $username, $password, $database);
  
  
-   if ($con->connect_error) {
+   if ($this->con->connect_error) {
      // exit(''); 
  
       // diff b/n exit or die 
       // die;
-     die("Connection failed: " . $con->connect_error);
+     die("Connection failed: " . $this->con->connect_error);
    }
  }
 

@@ -18,6 +18,8 @@ $file='C:\xampp\htdocs\First_Project\invoice_files/'.$invoice_no.'.pdf';
 
 $mpdf->Output($file,'I');
 
+$mpdf->Output($file,'D');
+
 
 
 ?>

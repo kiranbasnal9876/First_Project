@@ -2,7 +2,7 @@
 
 session_start();
 
-
+include("../dbcon.php");
 
 class User_master
 {
@@ -10,12 +10,11 @@ class User_master
     private $con;
 
    
-
     public function __construct()
     {
-        include("../dbcon.php");
-        $this->con = $con;
-        
+       
+            $connection = new dbcon();
+            $this->con=$connection->con;
 
     }
 
@@ -34,7 +33,7 @@ class User_master
         
 
         $sql = "select * from user_master where email='$email' and password='$password'";
-
+// echo $sql;
         $result = $this->con->query($sql);
 
         if ($result->num_rows>0) {

@@ -1,7 +1,16 @@
 <?php
-include("../dbcon.php");
+class client_paggination {
 
-// print_r($_POST);
+    private $con;
+      
+  function __construct()
+  {  
+      include("../dbcon.php");
+      $connection = new dbcon();
+      $this->con=$connection->con;
+  }
+  
+function data(){
 $output="";
 $limit='';
 $page='';
@@ -68,7 +77,7 @@ JOIN state_master AS SM ON CM.state_id=SM.state_id where id like '%$id%' && name
 
 // echo $sql1;
 
-$result1=$con->query($sql1);
+$result1=$this->con->query($sql1);
 
 
 $total_page= ceil($result1->num_rows/$limit);
@@ -110,7 +119,7 @@ JOIN state_master AS SM ON CM.state_id=SM.state_id where  id like '%$id%' && nam
 
 
 
-$result=$con->query($sql);
+$result=$this->con->query($sql);
 
 
 if($result->num_rows>0){
@@ -123,6 +132,12 @@ $offset+=1;
         }
     }
 
-    echo json_encode(['table'=>$output,'page'=>$pages]);
+    
 
+    echo json_encode(['table'=>$output,'page'=>$pages]);
+}
+
+}
+$obj = new client_paggination();
+$obj->data();
 ?>

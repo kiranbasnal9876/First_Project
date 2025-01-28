@@ -30,9 +30,9 @@ $(document).on("click", ".delete-item", function () {
 function invoice_date() {
   let d = new Date();
   $("#invoice_date2").val(
-    `${d.getDate() > 9 ? d.getDate() : "0" + d.getDate()}-${
+    `${d.getDate() > 9 ? d.getDate() : "0" + d.getDate()}/${
       d.getMonth() + 1 > 9 ? d.getMonth() + 1 : "0" + (d.getMonth() + 1)
-    }-${d.getFullYear()}`
+    }/${d.getFullYear()}`
   );
 }
 
@@ -58,6 +58,7 @@ $(document).on("keyup", ".clients", function () {
           action: "getclientdata",
         },
         type: "post",
+        
         success: function (data) {
           var parsedData = JSON.parse(data);
           var suggestions = parsedData.output.map((item) => ({
@@ -307,8 +308,10 @@ $("#row").on("change", function () {
 // searching data from database
 
 $("#filter_form").on("input", function (){
+  let cr_page= $("#page_no").val(); 
   $("#page_no").val(1);
-  loaddata("","");
+ loaddata("","");
+$("#page_no").val(cr_page);
 });
 
 $("#reset").on("click", function (){

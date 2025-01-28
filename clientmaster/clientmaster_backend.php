@@ -5,13 +5,14 @@ class client_master
 {
 
     private $con;
-    public function __construct()
-    {
-
+    
+    function __construct()
+    {  
         include("../dbcon.php");
-        $this->con = $con;
+        $connection = new dbcon();
+        $this->con=$connection->con;
     }
-
+    
 
     function get_destrict()
     {

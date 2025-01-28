@@ -1,7 +1,17 @@
 <?php
-include("../dbcon.php");
 
-// print_r($_POST);
+class item_paggination {
+
+    private $con;
+      
+  function __construct()
+  {  
+      include("../dbcon.php");
+      $connection = new dbcon();
+      $this->con=$connection->con;
+  }
+  
+      function data(){
 $output="";
 $limit='';
 $page='';
@@ -43,7 +53,7 @@ FROM item_master
 
 
 
-$result1=$con->query($sql1);
+$result1=$this->con->query($sql1);
 
 
 $total_page= ceil($result1->num_rows/$limit);
@@ -83,7 +93,7 @@ FROM item_master d where  itemName like '%$itemName%'    {$sort} limit {$offset}
 
 
 
-$result=$con->query($sql);
+$result=$this->con->query($sql);
 
 
 if($result->num_rows>0){
@@ -92,7 +102,7 @@ $offset+=1;
 
         $output .= "<tr><td>{$offset}</td>
         <td class='edit-btn bold' data-id={$row['id']}>{$row['itemName']}</td>
-        <td>{$row['itemPrice']}</td><td class='formate-td'>{$row['itemD']}</td>
+        <td class='right'>{$row['itemPrice']}</td><td class='formate-td'>{$row['itemD']}</td>
         <td><img class='item-image' src='{$row["itemPath"]}' width='60px' hight='800px' ></td>
         <td><button  class='btn  edit-btn p-0' data-id={$row['id']} ><img src='../images/edit (1).svg' ></button></td>
         <td><button  class=' btn  p-0 delete-btn' data-id={$row['id']} ><img src='../images/trash (1).svg' ></button></td>
@@ -102,5 +112,10 @@ $offset+=1;
     }
 
     echo json_encode(['table'=>$output,'page'=>$pages]);
+}
+}
 
+$obj = new item_paggination();
+
+$obj->data();
 ?>

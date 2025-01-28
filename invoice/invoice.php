@@ -39,7 +39,7 @@
                                     </div>
                                     <div class="col-1.5">
                                         <label for="phone">Phone:</label>
-                                        <input type="text" class="form-control numeric" name="phone">
+                                        <input type="number" class="form-control numeric" name="phone">
                                     </div>
                                     <div class="col-1.5">
                                         <label for="email">Email:</label>
@@ -161,7 +161,7 @@
                                 <div class="row mb-3">
                                     <div class="col-3">
                                         <label for="invoice" class="form-label">Invoice No<span>*</span></label>
-                                        <input type="text" class="form-control invoic" name="invoice_no" id="invoice" maxlength="15" >
+                                        <input type="number" class="form-control invoic" name="invoice_no" id="invoice" maxlength="15" min="100" >
                                         <span></span>
                                         <input type="hidden" class="invoice_id" name="id" value="">
                                         

@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="col-2">
                                     <label for="phone">Phone:</label>
-                                    <input type="text" class="form-control numeric search" maxlength="12" name="phone">
+                                    <input type="number" class="form-control numeric search" maxlength="12" name="phone">
                                 </div>
                                 <div class="col-2">
                                     <label for="email">Email:</label>

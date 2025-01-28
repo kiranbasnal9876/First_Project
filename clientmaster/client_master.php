@@ -143,15 +143,30 @@
                                         <option name="state_name" value="">select</option>
 
                                         <?php
-                                        require_once("../dbcon.php");
+                                      class get_states{
+
+                                        private $con;
+                                          
+                                      function __construct()
+                                      {  
+                                          include("../dbcon.php");
+                                          $connection = new dbcon();
+                                          $this->con=$connection->con;
+                                      }
+                                      function states(){
                                         $sql = "select * from state_master";
 
-                                        $result = $con->query($sql);
+                                        $result = $this->con->query($sql);
 
                                         while ($data = $result->fetch_array()) {
                                             echo "<option value='{$data[0]}'>{$data[1]}</option>";
                                         }
+                                      }
+                                       
+                                    }
 
+                                    $obj= new get_states();
+                                    $obj->states();
                                         ?>
                                     </select>
                                     <span></span>

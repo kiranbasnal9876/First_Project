@@ -1,13 +1,15 @@
 <?php
  class getdata{
     
-    private $con;
-    public function __construct()
-    {
-
-        include("../dbcon.php");
-        $this->con = $con;
-    }
+  private $con;
+    
+  function __construct()
+  {  
+      include("../dbcon.php");
+      $connection = new dbcon();
+      $this->con=$connection->con;
+  }
+  
  
   function get_records(){
 

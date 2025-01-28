@@ -55,8 +55,12 @@ $("#row").on("change", function () {
 // searching data from database
 
 $("#filter_form").on("input", function (){
-  $("#page_no").val(1);
+
+   let cr_page= $("#page_no").val(); 
+   $("#page_no").val(1);
   loaddata("","");
+
+$("#page_no").val(cr_page);
 });
 
 $("#reset").on("click", function (){

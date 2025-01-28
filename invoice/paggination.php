@@ -1,11 +1,18 @@
 
 
 <?php
+class invoice_paggination {
 
-use SebastianBergmann\Environment\Console;
-
-include("../dbcon.php");
-
+    private $con;
+      
+  function __construct()
+  {  
+      include("../dbcon.php");
+      $connection = new dbcon();
+      $this->con=$connection->con;
+  }
+  
+function data(){
 // print_r($_POST);
 $output = "";
 $limit = '';
@@ -62,7 +69,7 @@ $sql1 = "select * FROM invoice_master as IVM JOIN client_master as CM
 
 
 
-$result1 = $con->query($sql1);
+$result1 = $this->con->query($sql1);
 
 
 $total_page = ceil($result1->num_rows / $limit);
@@ -94,7 +101,7 @@ $sql = "select *, IVM.id as invoice_id FROM invoice_master as IVM JOIN client_ma
 
 
 
-$result = $con->query($sql);
+$result = $this->con->query($sql);
 
 
 if ($result->num_rows > 0) {
@@ -102,10 +109,16 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $date =  date('d-m-Y', strtotime($row['invoice_date']));
         $output .= "<tr><td>{$offset}</td><td class='invoice_no'>{$row['invoice_no']}</td><td>$date</td><td class='edit-btn bold' data-id={$row['invoice_id']}>{$row['name']}</td><td>{$row['address']}</td><td>{$row['email']}</td><td>{$row['phone']}</td>
-<td>₹{$row['total_amount']}</td> <td id='pdf_genrate'><a href='http://localhost/First_Project/invoice/pdf.php?id={$row['invoice_id']}' target='_blank'><i class='bi bi-file-earmark-pdf-fill text-danger pdf'></i></a></td>
+<td class='right'>₹{$row['total_amount']}</td> <td id='pdf_genrate'><a href='http://localhost/First_Project/invoice/pdf.php?id={$row['invoice_id']}' target='_blank'><i class='bi bi-file-earmark-pdf-fill text-danger pdf'></i></a></td>
 <td><i id='{$row['invoice_no']}' class='bi bi-envelope-fill text-primary email'data-bs-toggle='modal' data-bs-target='#exampleModal' data-bs-whatever='@fat'></i></td><td><button  class='btn  edit-btn p-0' data-id={$row['invoice_id']} ><img src='../images/edit (1).svg'></button></td><td><button  class=' btn  p-0 delete-btn' data-id={$row['invoice_id']} ><img src='../images/trash (1).svg' ></button></td></tr>";
         $offset++;
     }
 }
 echo json_encode(['table' => $output, 'page' => $pages]);
+
+
+}
+}
+$obj = new invoice_paggination();
+$obj->data();
 ?> 

@@ -18,6 +18,7 @@ html {
 }
 
 
+
 span {
   color: red;
   font-size: 13px;
@@ -29,6 +30,7 @@ span {
 .formate-td{
  word-break: break-all;
 }
+
 
 /* Login css  */
 

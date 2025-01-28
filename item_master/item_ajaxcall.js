@@ -60,8 +60,11 @@ $("#row").on("change", function () {
 // searching data from database
 
 $("#filter_form").on("input", function (){
+  let cr_page= $("#page_no").val(); 
   $("#page_no").val(1);
-  loaddata("","");
+ loaddata("","");
+
+$("#page_no").val(cr_page);
 });
 
 $("#reset").on("click", function (){
